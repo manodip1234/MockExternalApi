@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MockExternalApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2916194068e9ae28e1861aa7c70561273823ee5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8435c97f8b86dc66aff003e1abf1e2eef74230b4")]
 [assembly: System.Reflection.AssemblyProductAttribute("MockExternalApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MockExternalApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

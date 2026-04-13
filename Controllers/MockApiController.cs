@@ -41,7 +41,9 @@ namespace MockExternalApi.Controllers
             ["WRD"]   = 13,
         };
 
-        private const int WestBengalStateId = 1;
+        // state_id=0 signals the ingestion service to resolve West Bengal's
+        // real state_id from rtps_wb.state via the fallback lookup.
+        private const int WestBengalStateId = 0;
 
         private static readonly Dictionary<string, int> _levelKeyToId = new()
         {
@@ -67,36 +69,60 @@ namespace MockExternalApi.Controllers
 
         private static readonly OfficeRef[] _realOffices =
         [
-            // BCW
+            // BCW - Expanded with fresh data
             new("OFF-BCW-1",   2, "BCW District Office Kolkata",           "Kolkata"),
             new("OFF-BCW-2",   1, "BCW State Office Kolkata",               "Kolkata"),
             new("OFF-BCW-3",   2, "BCW District Office Bardhaman",          "Bardhaman"),
             new("OFF-BCW-4",   3, "BCW Block Office North 24 Parganas",     "North 24 Parganas"),
-            // FOOD
+            new("OFF-BCW-5",   2, "BCW District Office Howrah",             "Howrah"),
+            new("OFF-BCW-6",   3, "BCW Block Office South 24 Parganas",     "South 24 Parganas"),
+            new("OFF-BCW-7",   2, "BCW District Office Nadia",              "Nadia"),
+            new("OFF-BCW-8",   3, "BCW Block Office Murshidabad",           "Murshidabad"),
+            // FOOD - Expanded with fresh data
             new("OFF-FOOD-1",  2, "Food District Office Kolkata",           "Kolkata"),
             new("OFF-FOOD-2",  1, "Food State Office Kolkata",               "Kolkata"),
             new("OFF-FOOD-3",  2, "Food District Office Howrah",             "Howrah"),
             new("OFF-FOOD-4",  3, "Food Block Office Murshidabad",           "Murshidabad"),
-            // AGR
+            new("OFF-FOOD-5",  2, "Food District Office Bardhaman",          "Bardhaman"),
+            new("OFF-FOOD-6",  3, "Food Block Office North 24 Parganas",     "North 24 Parganas"),
+            new("OFF-FOOD-7",  2, "Food District Office Nadia",              "Nadia"),
+            new("OFF-FOOD-8",  3, "Food Block Office Birbhum",               "Birbhum"),
+            // AGR - Expanded with fresh data
             new("OFF-AGR-1",   2, "Agriculture District Office Kolkata",    "Kolkata"),
             new("OFF-AGR-2",   1, "Agriculture State Office Kolkata",        "Kolkata"),
             new("OFF-AGR-3",   2, "Agriculture District Office Nadia",       "Nadia"),
             new("OFF-AGR-4",   3, "Agriculture Block Office Birbhum",        "Birbhum"),
-            // ENV
+            new("OFF-AGR-5",   2, "Agriculture District Office Howrah",      "Howrah"),
+            new("OFF-AGR-6",   3, "Agriculture Block Office Murshidabad",    "Murshidabad"),
+            new("OFF-AGR-7",   2, "Agriculture District Office Bardhaman",   "Bardhaman"),
+            new("OFF-AGR-8",   3, "Agriculture Block Office North 24 Parganas", "North 24 Parganas"),
+            // ENV - Expanded with fresh data
             new("OFF-ENV-1",   2, "Environment District Office Kolkata",    "Kolkata"),
             new("OFF-ENV-2",   1, "Environment State Office Kolkata",        "Kolkata"),
             new("OFF-ENV-3",   2, "Environment District Office Darjeeling",  "Darjeeling"),
             new("OFF-ENV-4",   3, "Environment Block Office Jalpaiguri",     "Jalpaiguri"),
-            // TRANS
+            new("OFF-ENV-5",   2, "Environment District Office Howrah",      "Howrah"),
+            new("OFF-ENV-6",   3, "Environment Block Office Nadia",          "Nadia"),
+            new("OFF-ENV-7",   2, "Environment District Office Bardhaman",   "Bardhaman"),
+            new("OFF-ENV-8",   3, "Environment Block Office Birbhum",        "Birbhum"),
+            // TRANS - Expanded with fresh data
             new("OFF-TRANS-1", 2, "Transport District Office Kolkata",      "Kolkata"),
             new("OFF-TRANS-2", 1, "Transport State Office Kolkata",          "Kolkata"),
             new("OFF-TRANS-3", 2, "Transport District Office Asansol",       "Asansol"),
             new("OFF-TRANS-4", 3, "Transport Block Office Siliguri",         "Siliguri"),
-            // WRD
+            new("OFF-TRANS-5", 2, "Transport District Office Howrah",        "Howrah"),
+            new("OFF-TRANS-6", 3, "Transport Block Office Darjeeling",       "Darjeeling"),
+            new("OFF-TRANS-7", 2, "Transport District Office Bardhaman",     "Bardhaman"),
+            new("OFF-TRANS-8", 3, "Transport Block Office Nadia",            "Nadia"),
+            // WRD - Expanded with fresh data
             new("OFF-WRD-1",   2, "Water Resource District Office Kolkata", "Kolkata"),
             new("OFF-WRD-2",   1, "Water Resource State Office Kolkata",     "Kolkata"),
             new("OFF-WRD-3",   2, "Water Resource District Office Midnapore","Midnapore"),
             new("OFF-WRD-4",   3, "Water Resource Block Office Bankura",     "Bankura"),
+            new("OFF-WRD-5",   2, "Water Resource District Office Howrah",   "Howrah"),
+            new("OFF-WRD-6",   3, "Water Resource Block Office Purulia",     "Purulia"),
+            new("OFF-WRD-7",   2, "Water Resource District Office Nadia",    "Nadia"),
+            new("OFF-WRD-8",   3, "Water Resource Block Office Birbhum",     "Birbhum"),
         ];
 
         private static readonly ServiceRef[] _realServices =
@@ -104,21 +130,39 @@ namespace MockExternalApi.Controllers
             new(2001, "BCW Service A",   30),
             new(2002, "BCW Service B",   45),
             new(2003, "BCW Service C",   20),
+            new(2004, "BCW Service D",   35),
+            new(2005, "BCW Service E",   50),
+            new(2006, "BCW Service F",   25),
             new(3001, "Food Service A",  15),
             new(3002, "Food Service B",  25),
             new(3003, "Food Service C",  35),
+            new(3004, "Food Service D",  40),
+            new(3005, "Food Service E",  18),
+            new(3006, "Food Service F",  28),
             new(4001, "AGR Service A",   20),
             new(4002, "AGR Service B",   30),
             new(4003, "AGR Service C",   45),
+            new(4004, "AGR Service D",   22),
+            new(4005, "AGR Service E",   38),
+            new(4006, "AGR Service F",   27),
             new(5001, "ENV Service A",   21),
             new(5002, "ENV Service B",   14),
             new(5003, "ENV Service C",   28),
+            new(5004, "ENV Service D",   33),
+            new(5005, "ENV Service E",   19),
+            new(5006, "ENV Service F",   42),
             new(6001, "TRANS Service A", 10),
             new(6002, "TRANS Service B", 20),
             new(6003, "TRANS Service C", 30),
+            new(6004, "TRANS Service D", 15),
+            new(6005, "TRANS Service E", 25),
+            new(6006, "TRANS Service F", 35),
             new(7001, "WRD Service A",   25),
             new(7002, "WRD Service B",   40),
             new(7003, "WRD Service C",   15),
+            new(7004, "WRD Service D",   32),
+            new(7005, "WRD Service E",   18),
+            new(7006, "WRD Service F",   48),
         ];
 
         // Per-department office/service slices
@@ -158,6 +202,10 @@ namespace MockExternalApi.Controllers
         // Stable payload_id — changes only once per day per pipeline
         private static string StablePayloadId(string dept, string type)
             => $"P-{dept.ToUpper()}-{type}-{DateTime.UtcNow:yyyyMMddHH}";
+
+        // ACK numbers include date so each day produces new unique records
+        private static string AckNo(string dept, int i)
+            => $"ACK/{dept.ToUpper()}/{DateTime.UtcNow:yyyyMM}/{i:D5}";
 
         // Returns the paged slice; totalCount is always the full list size
         private static (List<T> Page, int TotalCount) Paginate<T>(List<T> all, int page, int pageSize)
@@ -261,6 +309,9 @@ namespace MockExternalApi.Controllers
                 new() { official_email = OfficerEmail(1, departmentCode), full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = deptOffices[0].Code,                      department_code = departmentCode.ToUpper(), is_active = true },
                 new() { official_email = OfficerEmail(2, departmentCode), full_name = "Priya Banerjee",   mobile_no = "9800000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = deptOffices[1 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
                 new() { official_email = OfficerEmail(3, departmentCode), full_name = "Suresh Mondal",    mobile_no = "9800000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = deptOffices[2 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
+                new() { official_email = OfficerEmail(4, departmentCode), full_name = "Rina Das",         mobile_no = "9800000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = deptOffices[3 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
+                new() { official_email = OfficerEmail(5, departmentCode), full_name = "Karan Singh",      mobile_no = "9800000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = deptOffices[4 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
+                new() { official_email = OfficerEmail(6, departmentCode), full_name = "Meera Patel",      mobile_no = "9800000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = deptOffices[5 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
             };
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId(departmentCode, "USER")));
@@ -288,20 +339,20 @@ namespace MockExternalApi.Controllers
             var statuses     = new[] { "IN_PROGRESS", "DISPOSED", "REJECTED", "PENDING" };
             var deptOffices  = OfficesFor(departmentCode);
             var deptServices = ServicesFor(departmentCode);
-            var all = Enumerable.Range(1, 10).Select(i =>
+            var all = Enumerable.Range(1, 20).Select(i =>
             {
                 var svc = deptServices[(i - 1) % deptServices.Length];
                 var off = deptOffices[(i - 1)  % deptOffices.Length];
                 return new AcknowledgementDto
                 {
-                    acknowledgement_no = (545433 + i).ToString(),
-                    application_no     = (645433 + i).ToString(),
+                    acknowledgement_no = AckNo(departmentCode, i),
+                    application_no     = $"APP/{departmentCode.ToUpper()}/{DateTime.UtcNow:yyyyMM}/{i:D5}",
                     applicant_name     = SampleApplicantName(i),
-                    applicant_mobile   = $"980000000{i}",
-                    applicant_email    = $"citizen{i}@example.com",
+                    applicant_mobile   = $"980000{i:D4}",
+                    applicant_email    = $"citizen.{departmentCode.ToLower()}{i}@example.com",
                     service_code       = svc.Code,
                     office_code        = off.Code,
-                    official_email     = OfficerEmail((i % 3) + 1, departmentCode),
+                    official_email     = OfficerEmail((i % 6) + 1, departmentCode),
                     department_code    = departmentCode.ToUpper(),
                     present_status     = statuses[(i - 1) % statuses.Length],
                     applied_date       = DateTime.UtcNow.AddDays(-(i * 5)).ToString("yyyy-MM-dd"),
@@ -465,6 +516,10 @@ namespace MockExternalApi.Controllers
                 new() { office_code = "OFF-ENV-2", office_name = "Environment State Office Kolkata",      department_code = "ENV", department_id = 7, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
                 new() { office_code = "OFF-ENV-3", office_name = "Environment District Office Darjeeling",department_code = "ENV", department_id = 7, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
                 new() { office_code = "OFF-ENV-4", office_name = "Environment Block Office Jalpaiguri",   department_code = "ENV", department_id = 7, district_name = "Jalpaiguri", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-ENV-5", office_name = "Environment District Office Howrah",    department_code = "ENV", department_id = 7, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-ENV-6", office_name = "Environment Block Office Nadia",        department_code = "ENV", department_id = 7, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-ENV-7", office_name = "Environment District Office Bardhaman", department_code = "ENV", department_id = 7, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-ENV-8", office_name = "Environment Block Office Birbhum",      department_code = "ENV", department_id = 7, district_name = "Birbhum",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("ENV", "OFFICE")));
@@ -483,6 +538,9 @@ namespace MockExternalApi.Controllers
                 new() { service_code = 5001, service_name = "ENV Service A", department_code = "ENV", department_id = 7, stipulated_days = 21, resolution_days = 26, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 5002, service_name = "ENV Service B", department_code = "ENV", department_id = 7, stipulated_days = 14, resolution_days = 19, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 5003, service_name = "ENV Service C", department_code = "ENV", department_id = 7, stipulated_days = 28, resolution_days = 33, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 5004, service_name = "ENV Service D", department_code = "ENV", department_id = 7, stipulated_days = 33, resolution_days = 38, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 5005, service_name = "ENV Service E", department_code = "ENV", department_id = 7, stipulated_days = 19, resolution_days = 24, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 5006, service_name = "ENV Service F", department_code = "ENV", department_id = 7, stipulated_days = 42, resolution_days = 47, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("ENV", "SERVICE")));
@@ -501,6 +559,9 @@ namespace MockExternalApi.Controllers
                 new() { official_email = "officer1.env@wb.gov.in", full_name = "Ananya Das",       mobile_no = "9811000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-ENV-1", department_code = "ENV", is_active = true },
                 new() { official_email = "officer2.env@wb.gov.in", full_name = "Debashis Roy",     mobile_no = "9811000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-ENV-2", department_code = "ENV", is_active = true },
                 new() { official_email = "officer3.env@wb.gov.in", full_name = "Mitali Ghosh",     mobile_no = "9811000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-ENV-3", department_code = "ENV", is_active = true },
+                new() { official_email = "officer4.env@wb.gov.in", full_name = "Rajib Chatterjee", mobile_no = "9811000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-ENV-4", department_code = "ENV", is_active = true },
+                new() { official_email = "officer5.env@wb.gov.in", full_name = "Smita Banerjee",   mobile_no = "9811000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-ENV-5", department_code = "ENV", is_active = true },
+                new() { official_email = "officer6.env@wb.gov.in", full_name = "Arindam Pal",      mobile_no = "9811000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-ENV-6", department_code = "ENV", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("ENV", "USER")));
@@ -515,17 +576,17 @@ namespace MockExternalApi.Controllers
             if (authResult != null) return authResult;
             _logger.LogInformation("[ENV-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
-            var statuses = new[] { "DISPOSED", "DISPOSED", "DISPOSED", "IN_PROGRESS" };
-            var all = Enumerable.Range(1, 6).Select(i => new AcknowledgementDto
+            var statuses = new[] { "DISPOSED", "IN_PROGRESS", "PENDING", "REJECTED", "DISPOSED", "IN_PROGRESS" };
+            var all = Enumerable.Range(1, 15).Select(i => new AcknowledgementDto
             {
-                acknowledgement_no = $"ENV-ACK-{i:D4}",
-                application_no     = $"ENV-APP-{i:D4}",
+                acknowledgement_no = AckNo("ENV", i),
+                application_no     = $"APP/ENV/{DateTime.UtcNow:yyyyMM}/{i:D5}",
                 applicant_name     = SampleApplicantName(i),
                 applicant_mobile   = $"9811100{i:D3}",
                 applicant_email    = $"citizen.env{i}@example.com",
-                service_code       = 5001 + ((i - 1) % 3),
-                office_code        = $"OFF-ENV-{((i - 1) % 4) + 1}",
-                official_email     = $"officer{((i % 3) + 1)}.env@wb.gov.in",
+                service_code       = 5001 + ((i - 1) % 6),
+                office_code        = $"OFF-ENV-{((i - 1) % 8) + 1}",
+                official_email     = $"officer{((i % 6) + 1)}.env@wb.gov.in",
                 department_code    = "ENV",
                 present_status     = statuses[(i - 1) % statuses.Length],
                 applied_date       = DateTime.UtcNow.AddDays(-(i * 3)).ToString("yyyy-MM-dd"),
@@ -550,11 +611,14 @@ namespace MockExternalApi.Controllers
 
             var all = new List<OfficeDto>
             {
-                new() { office_code = "OFF-TRANS-1",       office_name = "Transport District Office Kolkata",  department_code = "TRANS", department_id = 8, district_name = "Kolkata",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-2",       office_name = "Transport State Office Kolkata",    department_code = "TRANS", department_id = 8, district_name = "Kolkata",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
-                // These two codes do NOT exist in rtps_wb.office
-                new() { office_code = "OFF-TRANS-GHOST-1", office_name = "Transport Ghost Office Asansol",    department_code = "TRANS", department_id = 8, district_name = "Asansol",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-GHOST-2", office_name = "Transport Ghost Office Siliguri",   department_code = "TRANS", department_id = 8, district_name = "Siliguri", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-TRANS-1", office_name = "Transport District Office Kolkata",   department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-TRANS-2", office_name = "Transport State Office Kolkata",     department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
+                new() { office_code = "OFF-TRANS-3", office_name = "Transport District Office Asansol",  department_code = "TRANS", department_id = 8, district_name = "Asansol",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-TRANS-4", office_name = "Transport Block Office Siliguri",    department_code = "TRANS", department_id = 8, district_name = "Siliguri",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-TRANS-5", office_name = "Transport District Office Howrah",   department_code = "TRANS", department_id = 8, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-TRANS-6", office_name = "Transport Block Office Darjeeling",  department_code = "TRANS", department_id = 8, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-TRANS-7", office_name = "Transport District Office Bardhaman",department_code = "TRANS", department_id = 8, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-TRANS-8", office_name = "Transport Block Office Nadia",       department_code = "TRANS", department_id = 8, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("TRANS", "OFFICE")));
@@ -573,6 +637,9 @@ namespace MockExternalApi.Controllers
                 new() { service_code = 6001, service_name = "TRANS Service A", department_code = "TRANS", department_id = 8, stipulated_days = 10, resolution_days = 15, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 6002, service_name = "TRANS Service B", department_code = "TRANS", department_id = 8, stipulated_days = 20, resolution_days = 25, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 6003, service_name = "TRANS Service C", department_code = "TRANS", department_id = 8, stipulated_days = 30, resolution_days = 35, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 6004, service_name = "TRANS Service D", department_code = "TRANS", department_id = 8, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 6005, service_name = "TRANS Service E", department_code = "TRANS", department_id = 8, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 6006, service_name = "TRANS Service F", department_code = "TRANS", department_id = 8, stipulated_days = 35, resolution_days = 40, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("TRANS", "SERVICE")));
@@ -588,10 +655,12 @@ namespace MockExternalApi.Controllers
 
             var all = new List<UserDto>
             {
-                new() { official_email = "officer1.trans@wb.gov.in", full_name = "Rajesh Sinha",    mobile_no = "9822000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-TRANS-1",       department_code = "TRANS", is_active = true },
-                new() { official_email = "officer2.trans@wb.gov.in", full_name = "Soma Chatterjee", mobile_no = "9822000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-TRANS-2",       department_code = "TRANS", is_active = true },
-                // References ghost office — FK will fail
-                new() { official_email = "officer3.trans@wb.gov.in", full_name = "Nikhil Bose",     mobile_no = "9822000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-TRANS-GHOST-1", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer1.trans@wb.gov.in", full_name = "Rajesh Sinha",    mobile_no = "9822000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-TRANS-1", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer2.trans@wb.gov.in", full_name = "Soma Chatterjee", mobile_no = "9822000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-TRANS-2", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer3.trans@wb.gov.in", full_name = "Nikhil Bose",     mobile_no = "9822000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-TRANS-3", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer4.trans@wb.gov.in", full_name = "Priya Sharma",    mobile_no = "9822000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-TRANS-4", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer5.trans@wb.gov.in", full_name = "Amit Kumar",      mobile_no = "9822000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-TRANS-5", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer6.trans@wb.gov.in", full_name = "Kavita Jain",     mobile_no = "9822000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-TRANS-6", department_code = "TRANS", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("TRANS", "USER")));
@@ -606,17 +675,16 @@ namespace MockExternalApi.Controllers
             if (authResult != null) return authResult;
             _logger.LogInformation("[TRANS-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
-            var all = Enumerable.Range(1, 8).Select(i => new AcknowledgementDto
+            var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
             {
-                acknowledgement_no = $"TRANS-ACK-{i:D4}",
-                application_no     = $"TRANS-APP-{i:D4}",
+                acknowledgement_no = AckNo("TRANS", i),
+                application_no     = $"APP/TRANS/{DateTime.UtcNow:yyyyMM}/{i:D5}",
                 applicant_name     = SampleApplicantName(i),
                 applicant_mobile   = $"9822200{i:D3}",
                 applicant_email    = $"citizen.trans{i}@example.com",
-                service_code       = 6001 + ((i - 1) % 3),
-                // Records 5-8 reference ghost office codes → FK unresolvable → retry queue
-                office_code        = i <= 4 ? $"OFF-TRANS-{i}" : $"OFF-TRANS-GHOST-{i - 4}",
-                official_email     = i <= 4 ? $"officer{((i % 2) + 1)}.trans@wb.gov.in" : "officer3.trans@wb.gov.in",
+                service_code       = 6001 + ((i - 1) % 6),
+                office_code        = $"OFF-TRANS-{((i - 1) % 8) + 1}",
+                official_email     = $"officer{((i % 6) + 1)}.trans@wb.gov.in",
                 department_code    = "TRANS",
                 present_status     = i % 2 == 0 ? "DISPOSED" : "IN_PROGRESS",
                 applied_date       = DateTime.UtcNow.AddDays(-(i * 4)).ToString("yyyy-MM-dd"),
@@ -647,6 +715,10 @@ namespace MockExternalApi.Controllers
                 new() { office_code = "OFF-WRD-2", office_name = "Water Resource State Office Kolkata",     department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
                 new() { office_code = "OFF-WRD-3", office_name = "Water Resource District Office Midnapore",department_code = "WRD", department_id = 13, district_name = "Midnapore", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
                 new() { office_code = "OFF-WRD-4", office_name = "Water Resource Block Office Bankura",     department_code = "WRD", department_id = 13, district_name = "Bankura",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-WRD-5", office_name = "Water Resource District Office Howrah",   department_code = "WRD", department_id = 13, district_name = "Howrah",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-WRD-6", office_name = "Water Resource Block Office Purulia",     department_code = "WRD", department_id = 13, district_name = "Purulia",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_code = "OFF-WRD-7", office_name = "Water Resource District Office Nadia",    department_code = "WRD", department_id = 13, district_name = "Nadia",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-WRD-8", office_name = "Water Resource Block Office Birbhum",     department_code = "WRD", department_id = 13, district_name = "Birbhum",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("WRD", "OFFICE")));
@@ -665,24 +737,35 @@ namespace MockExternalApi.Controllers
                 new() { service_code = 7001, service_name = "WRD Service A", department_code = "WRD", department_id = 13, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 7002, service_name = "WRD Service B", department_code = "WRD", department_id = 13, stipulated_days = 40, resolution_days = 45, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
                 new() { service_code = 7003, service_name = "WRD Service C", department_code = "WRD", department_id = 13, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 7004, service_name = "WRD Service D", department_code = "WRD", department_id = 13, stipulated_days = 32, resolution_days = 37, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 7005, service_name = "WRD Service E", department_code = "WRD", department_id = 13, stipulated_days = 18, resolution_days = 23, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_code = 7006, service_name = "WRD Service F", department_code = "WRD", department_id = 13, stipulated_days = 48, resolution_days = 53, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("WRD", "SERVICE")));
         }
 
-        // WRD USER — empty list to test empty-dataset handling
         [HttpGet("wrd/user")]
         public IActionResult GetWrdUser([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path} | Scenario=EMPTY", page, page_size, path);
+            _logger.LogInformation("[WRD-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
-            return Ok(ApiResponse<UserDto>.Empty("No users found for WRD"));
+            var all = new List<UserDto>
+            {
+                new() { official_email = "officer1.wrd@wb.gov.in", full_name = "Subrata Ghosh",   mobile_no = "9833000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-WRD-1", department_code = "WRD", is_active = true },
+                new() { official_email = "officer2.wrd@wb.gov.in", full_name = "Tanmoy Basu",     mobile_no = "9833000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-WRD-2", department_code = "WRD", is_active = true },
+                new() { official_email = "officer3.wrd@wb.gov.in", full_name = "Lipika Sen",      mobile_no = "9833000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-WRD-3", department_code = "WRD", is_active = true },
+                new() { official_email = "officer4.wrd@wb.gov.in", full_name = "Partha Sarkar",   mobile_no = "9833000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-WRD-4", department_code = "WRD", is_active = true },
+                new() { official_email = "officer5.wrd@wb.gov.in", full_name = "Debjani Mitra",   mobile_no = "9833000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-WRD-5", department_code = "WRD", is_active = true },
+                new() { official_email = "officer6.wrd@wb.gov.in", full_name = "Suman Chakraborty",mobile_no = "9833000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-WRD-6", department_code = "WRD", is_active = true },
+            };
+            var (paged, total) = Paginate(all, page, page_size);
+            return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("WRD", "USER")));
         }
 
-        // WRD ACK — 25 records; records 21-25 reuse ack numbers 1-5 (duplicate test)
         [HttpGet("wrd/acknowledgement")]
         [HttpGet("wrd/ack")]
         public IActionResult GetWrdAcknowledgement([FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -690,27 +773,23 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path} | Scenario=PAGINATION+DUPLICATE", page, page_size, path);
+            _logger.LogInformation("[WRD-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var statuses = new[] { "IN_PROGRESS", "DISPOSED", "REJECTED", "PENDING" };
-            var all = Enumerable.Range(1, 25).Select(i =>
+            var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
             {
-                var ackNo = i <= 20 ? $"WRD-ACK-{i:D4}" : $"WRD-ACK-{(i - 20):D4}";
-                return new AcknowledgementDto
-                {
-                    acknowledgement_no = ackNo,
-                    application_no     = $"WRD-APP-{i:D4}",
-                    applicant_name     = SampleApplicantName((i - 1) % 10 + 1),
-                    applicant_mobile   = $"9833300{i:D3}",
-                    applicant_email    = $"citizen.wrd{i}@example.com",
-                    service_code       = 7001 + ((i - 1) % 3),
-                    office_code        = $"OFF-WRD-{((i - 1) % 4) + 1}",
-                    official_email     = null, // null officer email — tests null FK handling
-                    department_code    = "WRD",
-                    present_status     = statuses[(i - 1) % statuses.Length],
-                    applied_date       = DateTime.UtcNow.AddDays(-(i * 2)).ToString("yyyy-MM-dd"),
-                    last_updated_date  = DateTime.UtcNow.AddDays(-i).ToString("yyyy-MM-dd"),
-                };
+                acknowledgement_no = AckNo("WRD", i),
+                application_no     = $"APP/WRD/{DateTime.UtcNow:yyyyMM}/{i:D5}",
+                applicant_name     = SampleApplicantName((i - 1) % 10 + 1),
+                applicant_mobile   = $"9833300{i:D3}",
+                applicant_email    = $"citizen.wrd{i}@example.com",
+                service_code       = 7001 + ((i - 1) % 6),
+                office_code        = $"OFF-WRD-{((i - 1) % 8) + 1}",
+                official_email     = $"officer{((i % 6) + 1)}.wrd@wb.gov.in",
+                department_code    = "WRD",
+                present_status     = statuses[(i - 1) % statuses.Length],
+                applied_date       = DateTime.UtcNow.AddDays(-(i * 2)).ToString("yyyy-MM-dd"),
+                last_updated_date  = DateTime.UtcNow.AddDays(-i).ToString("yyyy-MM-dd"),
             }).ToList();
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("WRD", "ACK")));
@@ -1002,6 +1081,16 @@ namespace MockExternalApi.Controllers
             8  => "Rekha Haldar",
             9  => "Arun Pal",
             10 => "Mita Saha",
+            11 => "Sanjay Gupta",
+            12 => "Anita Jain",
+            13 => "Rajesh Verma",
+            14 => "Priya Singh",
+            15 => "Amit Patel",
+            16 => "Kiran Das",
+            17 => "Vikram Rao",
+            18 => "Neha Agarwal",
+            19 => "Ravi Kumar",
+            20 => "Sneha Bose",
             _  => $"Applicant {i}"
         };
 
@@ -1020,7 +1109,7 @@ namespace MockExternalApi.Controllers
     [JsonPropertyName("success")]    public bool     Success    { get; set; }
     [JsonPropertyName("message")]    public string   Message    { get; set; } = string.Empty;
     [JsonPropertyName("payload_id")] public string   PayloadId  { get; set; } = string.Empty;
-    [JsonPropertyName("total_count")] public int      TotalCount { get; set; }
+    [JsonPropertyName("totalCount")]   public int      TotalCount { get; set; }
     [JsonPropertyName("data")]       public List<T>  Data       { get; set; } = [];
 
     public static ApiResponse<T> Ok(List<T> data, int totalCount, string msg, string payloadId) => new()
