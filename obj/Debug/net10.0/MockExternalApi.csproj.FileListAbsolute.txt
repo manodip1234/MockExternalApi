@@ -34,3 +34,4 @@ D:\NIC\Modk api\MockExternalApi\obj\Debug\net10.0\refint\MockExternalApi.dll
 D:\NIC\Modk api\MockExternalApi\obj\Debug\net10.0\MockExternalApi.pdb
 D:\NIC\Modk api\MockExternalApi\obj\Debug\net10.0\MockExternalApi.genruntimeconfig.cache
 D:\NIC\Modk api\MockExternalApi\obj\Debug\net10.0\ref\MockExternalApi.dll
+D:\NIC\Modk api\MockExternalApi\obj\Debug\net10.0\MockExternalApi.sourcelink.json
