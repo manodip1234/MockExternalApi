@@ -27,7 +27,7 @@ namespace MockExternalApi.Controllers
 
         // ─────────────────────────────────────────────────────────────
         // OFFICES
-        // Names map via bcw_name_code_mapping → OFF-BCW-1..4 in rtps_wb.office
+        // Names MUST match bcw_name_code_mapping.ext_name exactly
         // ─────────────────────────────────────────────────────────────
         private static readonly List<BcwOfficeDto> _offices =
         [
@@ -39,32 +39,33 @@ namespace MockExternalApi.Controllers
 
         // ─────────────────────────────────────────────────────────────
         // SERVICES
-        // Names map via bcw_name_code_mapping → BCW-SVC-A/B/C in rtps_wb.service
+        // Names MUST match bcw_name_code_mapping.ext_name exactly
         // ─────────────────────────────────────────────────────────────
         private static readonly List<BcwServiceDto> _services =
         [
-            new() { service_name = "BCW Caste Certificate Service",  department_name = "BCW", stipulated_days = 30, stipulated_text = "30 days", resolution_days = 30, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Welfare Scheme Service",      department_name = "BCW", stipulated_days = 45, stipulated_text = "45 days", resolution_days = 45, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Scholarship Grant Service",   department_name = "BCW", stipulated_days = 20, stipulated_text = "20 days", resolution_days = 20, appeal_days = 30, reappeal_days = 60, is_active = true },
+            new() { service_name = "BCW Caste Certificate Service", department_name = "BCW", stipulated_days = 30, stipulated_text = "30 days", resolution_days = 30, appeal_days = 30, reappeal_days = 60, is_active = true },
+            new() { service_name = "BCW Welfare Scheme Service",    department_name = "BCW", stipulated_days = 45, stipulated_text = "45 days", resolution_days = 45, appeal_days = 30, reappeal_days = 60, is_active = true },
+            new() { service_name = "BCW Scholarship Grant Service", department_name = "BCW", stipulated_days = 20, stipulated_text = "20 days", resolution_days = 20, appeal_days = 30, reappeal_days = 60, is_active = true },
         ];
 
         // ─────────────────────────────────────────────────────────────
         // OFFICERS
-        // Emails map via bcw_name_code_mapping → officer id=8/7/6 in rtps_wb.officer
-        // (dotest@gmail.com=8, aotest@gmail.com=7, rotest@gmail.com=6)
+        // Emails MUST match bcw_name_code_mapping.ext_name exactly
+        // dotest@gmail.com → id=8 (DESIGNATED)
+        // aotest@gmail.com → id=7 (APPELLATE)
+        // rotest@gmail.com → id=6 (REVIEWING)
         // ─────────────────────────────────────────────────────────────
         private static readonly List<BcwOfficerDto> _officers =
         [
-            // dotest → office_id=13 (BCW Block Office North 24 Parganas), level=BLOCK,    designation_id=1 (Additional Chief Secretary), role=DESIGNATED_OFFICER
-            new() { officer_email = "dotest@gmail.com", full_name = "DO test",           mobile_no = "5566998877", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_name = "BCW Block Office North 24 Parganas", department_name = "BCW", is_active = true },
-            // aotest → office_id=12 (BCW District Office Bardhaman), level=DISTRICT, designation_id=1 (Additional Chief Secretary), role=APPELLATE_OFFICER
-            new() { officer_email = "aotest@gmail.com", full_name = "AO test",           mobile_no = "5566998877", designation = "Additional Chief Secretary", role_key = "APPELLATE_OFFICER",  office_name = "BCW District Office Bardhaman",      department_name = "BCW", is_active = true },
-            // rotest → office_id=10 (BCW District Office Kolkata),   level=STATE,     designation_id=1 (Additional Chief Secretary), role=REVIEWING_OFFICER
-            new() { officer_email = "rotest@gmail.com", full_name = "RO TEST",           mobile_no = "9903256390", designation = "Additional Chief Secretary", role_key = "REVIEWING_OFFICER",  office_name = "BCW District Office Kolkata",        department_name = "BCW", is_active = true },
+            new() { officer_email = "dotest@gmail.com", full_name = "DO BCW Officer", mobile_no = "9300100001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_name = "BCW Block Office North 24 Parganas", department_name = "BCW", is_active = true },
+            new() { officer_email = "aotest@gmail.com", full_name = "AO BCW Officer", mobile_no = "9300100002", designation = "Additional Chief Secretary", role_key = "APPELLATE_OFFICER",  office_name = "BCW District Office Bardhaman",      department_name = "BCW", is_active = true },
+            new() { officer_email = "rotest@gmail.com", full_name = "RO BCW Officer", mobile_no = "9300100003", designation = "Additional Chief Secretary", role_key = "REVIEWING_OFFICER",  office_name = "BCW District Office Kolkata",        department_name = "BCW", is_active = true },
         ];
 
         // ─────────────────────────────────────────────────────────────
-        // ACKNOWLEDGEMENTS — fresh new batch BCW/2026/*
+        // ACKNOWLEDGEMENTS
+        // service_name, office_name, officer_email MUST all match
+        // bcw_name_code_mapping.ext_name exactly
         // ─────────────────────────────────────────────────────────────
         private static readonly List<BcwAcknowledgementDto> _acknowledgements =
         [

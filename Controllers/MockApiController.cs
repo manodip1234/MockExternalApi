@@ -31,6 +31,10 @@ namespace MockExternalApi.Controllers
         // GROUND TRUTH — values that MUST exist in the DB before sync
         // ─────────────────────────────────────────────────────────────
 
+        // Department IDs are looked up by the ingestion service via department_code.
+        // These values are only used for the mock API response payload — the
+        // ingestion service ignores department_id from the payload and resolves
+        // it from rtps_wb.department by department_code.
         private static readonly Dictionary<string, int> _deptMap = new()
         {
             ["BCW"]   = 4,
@@ -42,7 +46,7 @@ namespace MockExternalApi.Controllers
         };
 
         // state_id=0 signals the ingestion service to resolve West Bengal's
-        // real state_id from rtps_wb.state via the fallback lookup.
+        // real state_id from rtps_master.state via the fallback lookup.
         private const int WestBengalStateId = 0;
 
         private static readonly Dictionary<string, int> _levelKeyToId = new()
@@ -114,15 +118,15 @@ namespace MockExternalApi.Controllers
             new("OFF-TRANS-6", 3, "Transport Block Office Darjeeling",       "Darjeeling"),
             new("OFF-TRANS-7", 2, "Transport District Office Bardhaman",     "Bardhaman"),
             new("OFF-TRANS-8", 3, "Transport Block Office Nadia",            "Nadia"),
-            // WRD - Expanded with fresh data
-            new("OFF-WRD-1",   2, "Water Resource District Office Kolkata", "Kolkata"),
-            new("OFF-WRD-2",   1, "Water Resource State Office Kolkata",     "Kolkata"),
-            new("OFF-WRD-3",   2, "Water Resource District Office Midnapore","Midnapore"),
-            new("OFF-WRD-4",   3, "Water Resource Block Office Bankura",     "Bankura"),
-            new("OFF-WRD-5",   2, "Water Resource District Office Howrah",   "Howrah"),
-            new("OFF-WRD-6",   3, "Water Resource Block Office Purulia",     "Purulia"),
-            new("OFF-WRD-7",   2, "Water Resource District Office Nadia",    "Nadia"),
-            new("OFF-WRD-8",   3, "Water Resource Block Office Birbhum",     "Birbhum"),
+            // WRD - use district names that exist in rtps_master.district
+            new("OFF-WRD-1",   2, "Water Resource District Office Kolkata",    "Kolkata"),
+            new("OFF-WRD-2",   1, "Water Resource State Office Kolkata",        "Kolkata"),
+            new("OFF-WRD-3",   2, "Water Resource District Office Paschim Medinipur", "Paschim Medinipur"),
+            new("OFF-WRD-4",   3, "Water Resource Block Office Bankura",        "Bankura"),
+            new("OFF-WRD-5",   2, "Water Resource District Office Howrah",      "Howrah"),
+            new("OFF-WRD-6",   3, "Water Resource Block Office Purulia",        "Purulia"),
+            new("OFF-WRD-7",   2, "Water Resource District Office Nadia",       "Nadia"),
+            new("OFF-WRD-8",   3, "Water Resource Block Office Birbhum",        "Birbhum"),
         ];
 
         private static readonly ServiceRef[] _realServices =
@@ -713,7 +717,7 @@ namespace MockExternalApi.Controllers
             {
                 new() { office_code = "OFF-WRD-1", office_name = "Water Resource District Office Kolkata",   department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
                 new() { office_code = "OFF-WRD-2", office_name = "Water Resource State Office Kolkata",     department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
-                new() { office_code = "OFF-WRD-3", office_name = "Water Resource District Office Midnapore",department_code = "WRD", department_id = 13, district_name = "Midnapore", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_code = "OFF-WRD-3", office_name = "Water Resource District Office Paschim Medinipur",department_code = "WRD", department_id = 13, district_name = "Paschim Medinipur", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
                 new() { office_code = "OFF-WRD-4", office_name = "Water Resource Block Office Bankura",     department_code = "WRD", department_id = 13, district_name = "Bankura",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
                 new() { office_code = "OFF-WRD-5", office_name = "Water Resource District Office Howrah",   department_code = "WRD", department_id = 13, district_name = "Howrah",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
                 new() { office_code = "OFF-WRD-6", office_name = "Water Resource Block Office Purulia",     department_code = "WRD", department_id = 13, district_name = "Purulia",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
