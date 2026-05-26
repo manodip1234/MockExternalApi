@@ -419,3 +419,7 @@ $RECYCLE.BIN/
 Rtpswb.Api/appsettings.json
 Rtpswb.Api/appsettings.*.json
 
+# Generated mock datasets (exported snapshots)
+Datasets/current/
+Datasets/archive/
+

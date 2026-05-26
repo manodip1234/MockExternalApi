@@ -1,25 +1,25 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Add controller support
-builder.Services.AddControllers();
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
 
-// Optional (Swagger if needed)
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "MockExternalApi v1");
+    c.RoutePrefix = "swagger";
+});
 
-app.UseHttpsRedirection();
+// Health probe — lets RTPSWB confirm the mock is alive
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", utc = DateTime.UtcNow }))
+   .WithTags("Health");
 
-app.UseAuthorization();
-
-// ✅ This is the MOST IMPORTANT line
 app.MapControllers();
 
 app.Run();

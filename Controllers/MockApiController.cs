@@ -38,9 +38,10 @@ namespace MockExternalApi.Controllers
         private static readonly Dictionary<string, int> _deptMap = new()
         {
             ["BCW"]   = 4,
-            ["FOOD"]  = 6,
+            ["FSD"]   = 1,
+            ["FOOD"]  = 1,
             ["AGR"]   = 5,
-            ["TRANS"] = 8,
+            ["TRANS"] = 6,
             ["ENV"]   = 7,
             ["WRD"]   = 13,
         };
@@ -172,22 +173,22 @@ namespace MockExternalApi.Controllers
         // Per-department office/service slices
         private static OfficeRef[] OfficesFor(string dept) => dept.ToUpper() switch
         {
-            "FOOD"  => _realOffices.Where(o => o.Code.StartsWith("OFF-FOOD")).ToArray(),
-            "AGR"   => _realOffices.Where(o => o.Code.StartsWith("OFF-AGR")).ToArray(),
-            "ENV"   => _realOffices.Where(o => o.Code.StartsWith("OFF-ENV")).ToArray(),
-            "TRANS" => _realOffices.Where(o => o.Code.StartsWith("OFF-TRANS")).ToArray(),
-            "WRD"   => _realOffices.Where(o => o.Code.StartsWith("OFF-WRD")).ToArray(),
-            _       => _realOffices.Where(o => o.Code.StartsWith("OFF-BCW")).ToArray(),
+            "FOOD" or "FSD" => _realOffices.Where(o => o.Code.StartsWith("OFF-FOOD")).ToArray(),
+            "AGR"           => _realOffices.Where(o => o.Code.StartsWith("OFF-AGR")).ToArray(),
+            "ENV"           => _realOffices.Where(o => o.Code.StartsWith("OFF-ENV")).ToArray(),
+            "TRANS"         => _realOffices.Where(o => o.Code.StartsWith("OFF-TRANS")).ToArray(),
+            "WRD"           => _realOffices.Where(o => o.Code.StartsWith("OFF-WRD")).ToArray(),
+            _               => _realOffices.Where(o => o.Code.StartsWith("OFF-BCW")).ToArray(),
         };
 
         private static ServiceRef[] ServicesFor(string dept) => dept.ToUpper() switch
         {
-            "FOOD"  => _realServices.Where(s => s.Code >= 3001 && s.Code <= 3999).ToArray(),
-            "AGR"   => _realServices.Where(s => s.Code >= 4001 && s.Code <= 4999).ToArray(),
-            "ENV"   => _realServices.Where(s => s.Code >= 5001 && s.Code <= 5999).ToArray(),
-            "TRANS" => _realServices.Where(s => s.Code >= 6001 && s.Code <= 6999).ToArray(),
-            "WRD"   => _realServices.Where(s => s.Code >= 7001 && s.Code <= 7999).ToArray(),
-            _       => _realServices.Where(s => s.Code >= 2001 && s.Code <= 2999).ToArray(),
+            "FOOD" or "FSD" => _realServices.Where(s => s.Code >= 3001 && s.Code <= 3999).ToArray(),
+            "AGR"           => _realServices.Where(s => s.Code >= 4001 && s.Code <= 4999).ToArray(),
+            "ENV"           => _realServices.Where(s => s.Code >= 5001 && s.Code <= 5999).ToArray(),
+            "TRANS"         => _realServices.Where(s => s.Code >= 6001 && s.Code <= 6999).ToArray(),
+            "WRD"           => _realServices.Where(s => s.Code >= 7001 && s.Code <= 7999).ToArray(),
+            _               => _realServices.Where(s => s.Code >= 2001 && s.Code <= 2999).ToArray(),
         };
 
         private readonly ILogger<MockApiController> _logger;
@@ -234,12 +235,13 @@ namespace MockExternalApi.Controllers
 
         private IActionResult BuildOfficeResponse(string departmentCode, int page, int pageSize)
         {
-            var deptId = ResolveDeptId(departmentCode);
-            var all = OfficesFor(departmentCode).Select(o => new OfficeDto
+            var normalizedDept = departmentCode.ToUpper() == "FOOD" ? "FSD" : departmentCode.ToUpper();
+            var deptId = ResolveDeptId(normalizedDept);
+            var all = OfficesFor(normalizedDept).Select(o => new OfficeDto
             {
                 office_code      = o.Code,
                 office_name      = o.Name,
-                department_code  = departmentCode.ToUpper(),
+                department_code  = normalizedDept,
                 department_id    = deptId,
                 district_name    = o.DistrictName,
                 state_name       = "West Bengal",
@@ -250,7 +252,7 @@ namespace MockExternalApi.Controllers
                 is_active        = true,
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
-            return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId(departmentCode, "OFFICE")));
+            return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId(normalizedDept, "OFFICE")));
         }
 
         // ─────────────────────────────────────────────────────────────
@@ -268,12 +270,13 @@ namespace MockExternalApi.Controllers
 
         private IActionResult BuildServiceResponse(string departmentCode, int page, int pageSize)
         {
-            var all = ServicesFor(departmentCode).Select(s => new ServiceDto
+            var normalizedDept = departmentCode.ToUpper() == "FOOD" ? "FSD" : departmentCode.ToUpper();
+            var all = ServicesFor(normalizedDept).Select(s => new ServiceDto
             {
                 service_code     = s.Code,
                 service_name     = s.Name,
-                department_code  = departmentCode.ToUpper(),
-                department_id    = ResolveDeptId(departmentCode),
+                department_code  = normalizedDept,
+                department_id    = ResolveDeptId(normalizedDept),
                 stipulated_days  = s.StimulateDays,
                 stipulated_text  = "Standard processing",
                 stipulated_hours = null,
@@ -286,7 +289,7 @@ namespace MockExternalApi.Controllers
                 is_active        = true,
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
-            return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId(departmentCode, "SERVICE")));
+            return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId(normalizedDept, "SERVICE")));
         }
 
         // ─────────────────────────────────────────────────────────────
@@ -304,21 +307,23 @@ namespace MockExternalApi.Controllers
 
         private IActionResult BuildUserResponse(string departmentCode, int page, int pageSize)
         {
-            if (departmentCode.Equals("EMPTY", StringComparison.OrdinalIgnoreCase))
+            var normalizedDept = departmentCode.ToUpper() == "FOOD" ? "FSD" : departmentCode.ToUpper();
+
+            if (normalizedDept.Equals("EMPTY", StringComparison.OrdinalIgnoreCase))
                 return Ok(ApiResponse<UserDto>.Empty("No users found"));
 
-            var deptOffices = OfficesFor(departmentCode);
+            var deptOffices = OfficesFor(normalizedDept);
             var all = new List<UserDto>
             {
-                new() { official_email = OfficerEmail(1, departmentCode), full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = deptOffices[0].Code,                      department_code = departmentCode.ToUpper(), is_active = true },
-                new() { official_email = OfficerEmail(2, departmentCode), full_name = "Priya Banerjee",   mobile_no = "9800000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = deptOffices[1 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
-                new() { official_email = OfficerEmail(3, departmentCode), full_name = "Suresh Mondal",    mobile_no = "9800000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = deptOffices[2 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
-                new() { official_email = OfficerEmail(4, departmentCode), full_name = "Rina Das",         mobile_no = "9800000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = deptOffices[3 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
-                new() { official_email = OfficerEmail(5, departmentCode), full_name = "Karan Singh",      mobile_no = "9800000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = deptOffices[4 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
-                new() { official_email = OfficerEmail(6, departmentCode), full_name = "Meera Patel",      mobile_no = "9800000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = deptOffices[5 % deptOffices.Length].Code, department_code = departmentCode.ToUpper(), is_active = true },
+                new() { official_email = OfficerEmail(1, normalizedDept), full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = deptOffices[0].Code,                         department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(2, normalizedDept), full_name = "Priya Banerjee",   mobile_no = "9800000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = deptOffices[1 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(3, normalizedDept), full_name = "Suresh Mondal",    mobile_no = "9800000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = deptOffices[2 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(4, normalizedDept), full_name = "Rina Das",         mobile_no = "9800000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = deptOffices[3 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(5, normalizedDept), full_name = "Karan Singh",      mobile_no = "9800000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = deptOffices[4 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(6, normalizedDept), full_name = "Meera Patel",      mobile_no = "9800000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = deptOffices[5 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
             };
             var (paged, total) = Paginate(all, page, pageSize);
-            return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId(departmentCode, "USER")));
+            return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId(normalizedDept, "USER")));
         }
 
         // ─────────────────────────────────────────────────────────────
@@ -337,34 +342,36 @@ namespace MockExternalApi.Controllers
 
         private IActionResult BuildAckResponse(string departmentCode, int page, int pageSize)
         {
-            if (departmentCode.Equals("EMPTY", StringComparison.OrdinalIgnoreCase))
+            var normalizedDept = departmentCode.ToUpper() == "FOOD" ? "FSD" : departmentCode.ToUpper();
+
+            if (normalizedDept.Equals("EMPTY", StringComparison.OrdinalIgnoreCase))
                 return Ok(ApiResponse<AcknowledgementDto>.Empty("No acknowledgements found"));
 
             var statuses     = new[] { "IN_PROGRESS", "DISPOSED", "REJECTED", "PENDING" };
-            var deptOffices  = OfficesFor(departmentCode);
-            var deptServices = ServicesFor(departmentCode);
+            var deptOffices  = OfficesFor(normalizedDept);
+            var deptServices = ServicesFor(normalizedDept);
             var all = Enumerable.Range(1, 20).Select(i =>
             {
                 var svc = deptServices[(i - 1) % deptServices.Length];
                 var off = deptOffices[(i - 1)  % deptOffices.Length];
                 return new AcknowledgementDto
                 {
-                    acknowledgement_no = AckNo(departmentCode, i),
-                    application_no     = $"APP/{departmentCode.ToUpper()}/{DateTime.UtcNow:yyyyMM}/{i:D5}",
+                    acknowledgement_no = AckNo(normalizedDept, i),
+                    application_no     = $"APP/{normalizedDept}/{DateTime.UtcNow:yyyyMM}/{i:D5}",
                     applicant_name     = SampleApplicantName(i),
                     applicant_mobile   = $"980000{i:D4}",
-                    applicant_email    = $"citizen.{departmentCode.ToLower()}{i}@example.com",
+                    applicant_email    = $"citizen.{normalizedDept.ToLower()}{i}@example.com",
                     service_code       = svc.Code,
                     office_code        = off.Code,
-                    official_email     = OfficerEmail((i % 6) + 1, departmentCode),
-                    department_code    = departmentCode.ToUpper(),
+                    official_email     = OfficerEmail((i % 6) + 1, normalizedDept),
+                    department_code    = normalizedDept,
                     present_status     = statuses[(i - 1) % statuses.Length],
                     applied_date       = DateTime.UtcNow.AddDays(-(i * 5)).ToString("yyyy-MM-dd"),
                     last_updated_date  = DateTime.UtcNow.AddDays(-(i * 2)).ToString("yyyy-MM-dd"),
                 };
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
-            return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId(departmentCode, "ACK")));
+            return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId(normalizedDept, "ACK")));
         }
 
         // ═══════════════════════════════════════════════════════════════
@@ -912,8 +919,9 @@ namespace MockExternalApi.Controllers
 
             // ── Extract pipeline name from payload_id ─────────────────────
             // Format: P-BCW-OFFICE-20260408095646  →  pipeline = OFFICE
+            // UUID format (BCW): 7c99b30f-3385-4ca2-...  →  pipeline = UNKNOWN
             var pipeline = "UNKNOWN";
-            if (!string.IsNullOrWhiteSpace(payload.PayloadId))
+            if (!string.IsNullOrWhiteSpace(payload.PayloadId) && payload.PayloadId.StartsWith("P-"))
             {
                 var parts = payload.PayloadId.Split('-');
                 if (parts.Length >= 3) pipeline = parts[2];
@@ -1200,7 +1208,8 @@ namespace MockExternalApi.Controllers
 
     public class CallbackError
     {
-        [JsonPropertyName("referenceId")]    public string ReferenceId   { get; set; } = string.Empty;
-        [JsonPropertyName("errorMessage")]   public string ErrorMessage  { get; set; } = string.Empty;
+        [JsonPropertyName("reference_id")]   public string ReferenceId   { get; set; } = string.Empty;
+        [JsonPropertyName("error_code")]     public string ErrorCode     { get; set; } = string.Empty;
+        [JsonPropertyName("error_message")]  public string ErrorMessage  { get; set; } = string.Empty;
     }
 }

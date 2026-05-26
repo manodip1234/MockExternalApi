@@ -1,6 +1,187 @@
-@MockExternalApi_HostAddress = http://localhost:5257
+@host = http://localhost:5257
 
-GET {{MockExternalApi_HostAddress}}/weatherforecast/
+# ═══════════════════════════════════════════════════════════════════
+# BCW API  —  Auth: X-API-KEY header
+# ═══════════════════════════════════════════════════════════════════
+
+### BCW — Offices (3 objects)
+# Expected response shape:
+# { "success": true, "message": "OK", "payload_id": "BCW-...", "totalCount": 4,
+#   "data": [ { "office_name": "...", "department_name": "BCW", "office_level": "...",
+#               "district_name": "...", "is_active": true }, ... ] }
+GET {{host}}/offices?page=1&page_size=3
+X-API-KEY: bcw-test-api-key-001
+Accept: application/json
+
+###
+
+### BCW — Services (3 objects)
+# Expected response shape:
+# { "data": [ { "service_name": "...", "department_name": "BCW",
+#               "stipulated_days": 30, "appeal_days": 30, "reappeal_days": 60,
+#               "is_active": true }, ... ] }
+GET {{host}}/services?page=1&page_size=3
+X-API-KEY: bcw-test-api-key-001
+Accept: application/json
+
+###
+
+### BCW — Officers (3 objects)
+# Expected response shape:
+# { "data": [ { "officer_email": "dotest@gmail.com", "full_name": "DO BCW Officer",
+#               "role_key": "DESIGNATED_OFFICER", "office_name": "...",
+#               "department_name": "BCW", "is_active": true }, ... ] }
+GET {{host}}/officers?page=1&page_size=3
+X-API-KEY: bcw-test-api-key-001
+Accept: application/json
+
+###
+
+### BCW — Acknowledgements (3 objects)
+# Expected response shape:
+# { "data": [ { "acknowledgement_no": "BCW/2026/00001", "application_no": "APP/2026/001",
+#               "service_name": "BCW Caste Certificate Service",
+#               "office_name": "BCW District Office Kolkata",
+#               "officer_email": "rotest@gmail.com", "applicant_name": "Suresh Mondal",
+#               "present_status": "PENDING", "applied_date": "2026-01-05" }, ... ] }
+GET {{host}}/acknowledgements?page=1&page_size=3
+X-API-KEY: bcw-test-api-key-001
+Accept: application/json
+
+###
+
+
+# ═══════════════════════════════════════════════════════════════════
+# FOOD API  —  Auth: HMAC (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE)
+# NOTE: Replace X-TIMESTAMP and X-HMAC-SIGNATURE with freshly computed
+#       values. Secret = "food-hmac-secret-001", Key = "food-api-key-001"
+#       Raw string format: GET|/food/offices?page=1&page_size=3|<timestamp>|
+# ═══════════════════════════════════════════════════════════════════
+
+### FOOD — Offices (3 objects)
+# Expected response shape:
+# { "data": [ { "office_code": "OFF-FOOD-STATE-01", "office_name": "...",
+#               "department_code": "FOOD", "department_id": 6,
+#               "level_id": 1, "level_key": "STATE",
+#               "district_name": "Kolkata", "state_name": "West Bengal",
+#               "state_id": 0, "is_active": true }, ... ] }
+GET {{host}}/food/offices?page=1&page_size=3
+X-API-KEY: food-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### FOOD — Services (3 objects)
+# Expected response shape:
+# { "data": [ { "service_code": 3001, "service_name": "Ration Card Issuance",
+#               "department_code": "FOOD", "department_id": 6,
+#               "stipulated_days": 15, "resolution_days": 20,
+#               "appeal_days": 30, "reappeal_days": 60,
+#               "stipulated_text": "15 working days", "is_active": true }, ... ] }
+GET {{host}}/food/services?page=1&page_size=3
+X-API-KEY: food-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### FOOD — Users (3 objects)
+# Expected response shape:
+# { "data": [ { "official_email": "do.food.kol@wb.gov.in", "full_name": "Subrata Biswas",
+#               "mobile_no": "9830100001", "designation": "Deputy Director",
+#               "role_key": "DESIGNATED_OFFICER", "office_code": "OFF-FOOD-DIST-KOL",
+#               "department_code": "FOOD", "is_active": true }, ... ] }
+GET {{host}}/food/users?page=1&page_size=3
+X-API-KEY: food-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### FOOD — Acknowledgements (3 objects)
+# Expected response shape:
+# { "data": [ { "acknowledgement_no": "FOOD/2026/00001", "application_no": "APP/FOOD/2026/001",
+#               "service_code": 3001, "office_code": "OFF-FOOD-DIST-KOL",
+#               "official_email": "do.food.kol@wb.gov.in",
+#               "department_code": "FOOD", "applicant_name": "Ramesh Haldar",
+#               "applicant_mobile": "9800010001", "present_status": "PENDING",
+#               "applied_date": "2026-01-05", "last_updated_date": "2026-01-05" }, ... ] }
+GET {{host}}/food/acknowledgements?page=1&page_size=3
+X-API-KEY: food-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+
+# ═══════════════════════════════════════════════════════════════════
+# TRANS API  —  Auth: HMAC (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE)
+# NOTE: Replace X-TIMESTAMP and X-HMAC-SIGNATURE with freshly computed
+#       values. Secret = "rtps-demo-secret-001", Key = "rtps-demo-key-001"
+#       Raw string format: GET|/trans/offices?page=1&page_size=3|<timestamp>|
+# ═══════════════════════════════════════════════════════════════════
+
+### TRANS — Offices (3 objects)
+# Expected response shape:
+# { "data": [ { "office_code": "OFF-TRANS-STATE-01", "office_name": "...",
+#               "department_code": "TRANS", "department_id": 8,
+#               "level_id": 1, "level_key": "STATE",
+#               "district_name": "Kolkata", "state_name": "West Bengal",
+#               "state_id": 0, "is_active": true }, ... ] }
+GET {{host}}/trans/offices?page=1&page_size=3
+X-API-KEY: rtps-demo-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### TRANS — Services (3 objects)
+# Expected response shape:
+# { "data": [ { "service_code": 6001, "service_name": "Driving Licence Issuance",
+#               "department_code": "TRANS", "department_id": 8,
+#               "stipulated_days": 30, "resolution_days": 35,
+#               "appeal_days": 30, "reappeal_days": 60,
+#               "stipulated_text": "30 working days", "is_active": true }, ... ] }
+GET {{host}}/trans/services?page=1&page_size=3
+X-API-KEY: rtps-demo-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### TRANS — Users (3 objects)
+# Expected response shape:
+# { "data": [ { "official_email": "do.trans.kol@wb.gov.in", "full_name": "Rajesh Sinha",
+#               "mobile_no": "9822000001", "designation": "Deputy Transport Commissioner",
+#               "role_key": "DESIGNATED_OFFICER", "office_code": "OFF-TRANS-DIST-KOL",
+#               "department_code": "TRANS", "is_active": true }, ... ] }
+GET {{host}}/trans/users?page=1&page_size=3
+X-API-KEY: rtps-demo-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### TRANS — Acknowledgements (3 objects)
+# Expected response shape:
+# { "data": [ { "acknowledgement_no": "TRANS/2026/00001", "application_no": "APP/TRANS/2026/001",
+#               "service_code": 6001, "office_code": "OFF-TRANS-DIST-KOL",
+#               "official_email": "do.trans.kol@wb.gov.in",
+#               "department_code": "TRANS", "applicant_name": "Suresh Mondal",
+#               "applicant_mobile": "9800020001", "present_status": "PENDING",
+#               "applied_date": "2026-01-05", "last_updated_date": "2026-01-05" }, ... ] }
+GET {{host}}/trans/acknowledgements?page=1&page_size=3
+X-API-KEY: rtps-demo-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
 Accept: application/json
 
 ###
