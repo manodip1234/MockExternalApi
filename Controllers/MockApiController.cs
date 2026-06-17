@@ -14,9 +14,9 @@ namespace MockExternalApi.Controllers
     [Route("mock-api")]
     public class MockApiController : ControllerBase
     {
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // AUTH CONSTANTS
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private const string ApiKeyHeaderName    = "X-API-KEY";
         private const string TimestampHeaderName = "X-TIMESTAMP";
         private const string SignatureHeaderName = "X-HMAC-SIGNATURE";
@@ -27,12 +27,12 @@ namespace MockExternalApi.Controllers
         // HMAC signing secret
         private const string HmacSecret          = "rtps-demo-secret-001";
 
-        // ─────────────────────────────────────────────────────────────
-        // GROUND TRUTH — values that MUST exist in the DB before sync
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // GROUND TRUTH â€” values that MUST exist in the DB before sync
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
         // Department IDs are looked up by the ingestion service via department_code.
-        // These values are only used for the mock API response payload — the
+        // These values are only used for the mock API response payload â€” the
         // ingestion service ignores department_id from the payload and resolves
         // it from rtps_wb.department by department_code.
         private static readonly Dictionary<string, int> _deptMap = new()
@@ -58,6 +58,25 @@ namespace MockExternalApi.Controllers
             ["MUNICIPALITY"] = 4,
         };
 
+        private static readonly Dictionary<string, int> _districtNameToId = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Kolkata"] = 10,
+            ["Howrah"] = 11,
+            ["Bardhaman"] = 12,
+            ["North 24 Parganas"] = 13,
+            ["South 24 Parganas"] = 14,
+            ["Nadia"] = 15,
+            ["Murshidabad"] = 16,
+            ["Birbhum"] = 17,
+            ["Darjeeling"] = 18,
+            ["Jalpaiguri"] = 19,
+            ["Paschim Medinipur"] = 20,
+            ["Bankura"] = 21,
+            ["Purulia"] = 22,
+            ["Asansol"] = 23,
+            ["Siliguri"] = 24
+        };
+
         private static readonly Dictionary<string, int> _roleKeyToId = new()
         {
             ["DESIGNATED_OFFICER"] = 5,
@@ -74,15 +93,11 @@ namespace MockExternalApi.Controllers
 
         private static readonly OfficeRef[] _realOffices =
         [
-            // BCW - Expanded with fresh data
-            new("OFF-BCW-1",   2, "BCW District Office Kolkata",           "Kolkata"),
-            new("OFF-BCW-2",   1, "BCW State Office Kolkata",               "Kolkata"),
-            new("OFF-BCW-3",   2, "BCW District Office Bardhaman",          "Bardhaman"),
-            new("OFF-BCW-4",   3, "BCW Block Office North 24 Parganas",     "North 24 Parganas"),
-            new("OFF-BCW-5",   2, "BCW District Office Howrah",             "Howrah"),
-            new("OFF-BCW-6",   3, "BCW Block Office South 24 Parganas",     "South 24 Parganas"),
-            new("OFF-BCW-7",   2, "BCW District Office Nadia",              "Nadia"),
-            new("OFF-BCW-8",   3, "BCW Block Office Murshidabad",           "Murshidabad"),
+            // BCW — codes/names match rtps_wb.office (source=API rows, ids 45-48)
+            new("OFF-BCW-2A21EDB28681", 1, "BCW State Office Kolkata",          "Kolkata"),
+            new("OFF-BCW-26BF2BD85AAB", 2, "BCW District Office Kolkata",        "Kolkata"),
+            new("OFF-BCW-E836B6B786C1", 2, "BCW District Office Bardhaman",      "Bardhaman"),
+            new("OFF-BCW-64857254172B", 2, "BCW Block Office North 24 Parganas", "North 24 Parganas"),
             // FOOD - Expanded with fresh data
             new("OFF-FOOD-1",  2, "Food District Office Kolkata",           "Kolkata"),
             new("OFF-FOOD-2",  1, "Food State Office Kolkata",               "Kolkata"),
@@ -132,12 +147,11 @@ namespace MockExternalApi.Controllers
 
         private static readonly ServiceRef[] _realServices =
         [
-            new(2001, "BCW Service A",   30),
-            new(2002, "BCW Service B",   45),
-            new(2003, "BCW Service C",   20),
-            new(2004, "BCW Service D",   35),
-            new(2005, "BCW Service E",   50),
-            new(2006, "BCW Service F",   25),
+            // BCW — service_name must match rtps_wb.service exactly for name-based promotion
+            new(784217, "BCW Caste Certificate Service", 30),
+            new(784218, "BCW Welfare Scheme Service",    45),
+            new(784219, "BCW Scholarship Grant Service",  30),
+            new(30003,  "BCW Community Certificate",     20),
             new(3001, "Food Service A",  15),
             new(3002, "Food Service B",  25),
             new(3003, "Food Service C",  35),
@@ -188,8 +202,48 @@ namespace MockExternalApi.Controllers
             "ENV"           => _realServices.Where(s => s.Code >= 5001 && s.Code <= 5999).ToArray(),
             "TRANS"         => _realServices.Where(s => s.Code >= 6001 && s.Code <= 6999).ToArray(),
             "WRD"           => _realServices.Where(s => s.Code >= 7001 && s.Code <= 7999).ToArray(),
-            _               => _realServices.Where(s => s.Code >= 2001 && s.Code <= 2999).ToArray(),
+            _               => _realServices.Where(s => s.Code < 3000).ToArray(),
         };
+
+        private static int? ResolveDistrictId(string? districtName)
+            => districtName != null && _districtNameToId.TryGetValue(districtName, out var id) ? id : null;
+
+        private static int? ResolveBlockId(string? districtName)
+            => ResolveDistrictId(districtName) is int districtId ? districtId + 100 : null;
+
+        private static bool IsCustomJurisdictionService(string dept, int serviceCode)
+            => false; // no custom jurisdiction services in current BCW dataset
+
+        private static List<JurisdictionDto> BuildServiceCoverageRules(string dept)
+        {
+            var first = OfficesFor(dept).FirstOrDefault();
+            var second = OfficesFor(dept).Skip(1).FirstOrDefault();
+
+            var rules = new List<JurisdictionDto>();
+
+            if (first != null)
+            {
+                rules.Add(new JurisdictionDto
+                {
+                    state_name = "West Bengal",
+                    district_name = first.DistrictName,
+                    block_name = $"{first.DistrictName} Block"
+                });
+            }
+
+            if (second != null)
+            {
+                rules.Add(new JurisdictionDto
+                {
+                    state_name = "West Bengal",
+                    district_name = second.DistrictName,
+                    municipality_name = second.DistrictName == "Howrah" ? "Howrah Municipality" : null,
+                    ward_name = second.DistrictName == "Howrah" ? "Ward 1" : null
+                });
+            }
+
+            return rules;
+        }
 
         private readonly ILogger<MockApiController> _logger;
 
@@ -204,7 +258,7 @@ namespace MockExternalApi.Controllers
         private int ResolveDeptId(string deptCode)
             => _deptMap.TryGetValue(deptCode.ToUpper(), out var id) ? id : 4;
 
-        // Stable payload_id — changes only once per day per pipeline
+        // Stable payload_id â€” changes only once per day per pipeline
         private static string StablePayloadId(string dept, string type)
             => $"P-{dept.ToUpper()}-{type}-{DateTime.UtcNow:yyyyMMddHH}";
 
@@ -220,9 +274,9 @@ namespace MockExternalApi.Controllers
             return (paged, total);
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // OFFICE endpoint  →  auth: HMAC
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // OFFICE endpoint  â†’  auth: HMAC
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("office/{departmentCode}")]
         public IActionResult GetOffice(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -250,14 +304,23 @@ namespace MockExternalApi.Controllers
                 level_key        = _levelKeyToId.First(kv => kv.Value == o.LevelId).Key,
                 parent_office_id = null,
                 is_active        = true,
+                jurisdiction_mode = "LGD",
+                jurisdiction_scope = "OFFICE",
+                jurisdiction = new JurisdictionDto
+                {
+                    state_name = "West Bengal",
+                    district_name = o.DistrictName,
+                    block_name = o.LevelId == 3 ? $"{o.DistrictName} Block" : null,
+                    municipality_name = null
+                }
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId(normalizedDept, "OFFICE")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // SERVICE endpoint  →  auth: HMAC
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // SERVICE endpoint  â†’  auth: HMAC
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("service/{departmentCode}")]
         public IActionResult GetService(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -287,14 +350,27 @@ namespace MockExternalApi.Controllers
                 reappeal_days    = 60,
                 reappeal_hours   = null,
                 is_active        = true,
+                jurisdiction_mode  = IsCustomJurisdictionService(normalizedDept, s.Code) ? "CUSTOM" : "LGD",
+                jurisdiction_scope = "SERVICE",
+                jurisdiction = IsCustomJurisdictionService(normalizedDept, s.Code)
+                    ? new JurisdictionDto
+                    {
+                        state_name = "West Bengal",
+                        district_name = OfficesFor(normalizedDept).First().DistrictName,
+                        block_name = $"{OfficesFor(normalizedDept).First().DistrictName} Block"
+                    }
+                    : null,
+                jurisdiction_rules = IsCustomJurisdictionService(normalizedDept, s.Code)
+                    ? BuildServiceCoverageRules(normalizedDept)
+                    : null
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId(normalizedDept, "SERVICE")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // USER endpoint  →  auth: HMAC
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // USER endpoint  â†’  auth: HMAC
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("user/{departmentCode}")]
         public IActionResult GetUser(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -326,9 +402,9 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId(normalizedDept, "USER")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // ACKNOWLEDGEMENT endpoint  →  auth: HMAC
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ACKNOWLEDGEMENT endpoint  â†’  auth: HMAC
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("acknowledgement/{departmentCode}")]
         [HttpGet("ack/{departmentCode}")]
         public IActionResult GetAcknowledgement(string departmentCode,
@@ -374,20 +450,20 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId(normalizedDept, "ACK")));
         }
 
-        // ═══════════════════════════════════════════════════════════════
+        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
         // DEPARTMENT-SPECIFIC ENDPOINTS
-        // ═══════════════════════════════════════════════════════════════
+        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // BCW DEPARTMENT ENDPOINTS
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("bcw/office")]
         public IActionResult GetBcwOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("BCW", page, page_size);
         }
 
@@ -397,7 +473,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("BCW", page, page_size);
         }
 
@@ -407,7 +483,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("BCW", page, page_size);
         }
 
@@ -418,20 +494,20 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("BCW", page, page_size);
         }
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // FOOD DEPARTMENT ENDPOINTS
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("food/office")]
         public IActionResult GetFoodOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("FOOD", page, page_size);
         }
 
@@ -441,7 +517,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("FOOD", page, page_size);
         }
 
@@ -451,7 +527,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("FOOD", page, page_size);
         }
 
@@ -462,20 +538,20 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("FOOD", page, page_size);
         }
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // AGR DEPARTMENT ENDPOINTS
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("agr/office")]
         public IActionResult GetAgrOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("AGR", page, page_size);
         }
 
@@ -485,7 +561,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("AGR", page, page_size);
         }
 
@@ -495,7 +571,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("AGR", page, page_size);
         }
 
@@ -506,20 +582,20 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("AGR", page, page_size);
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // ENV  —  SCENARIO: Happy path (all valid, all FKs resolvable)
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ENV  â€”  SCENARIO: Happy path (all valid, all FKs resolvable)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("env/office")]
         public IActionResult GetEnvOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
@@ -542,7 +618,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
@@ -563,7 +639,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
@@ -585,7 +661,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var statuses = new[] { "DISPOSED", "IN_PROGRESS", "PENDING", "REJECTED", "DISPOSED", "IN_PROGRESS" };
             var all = Enumerable.Range(1, 15).Select(i => new AcknowledgementDto
@@ -607,18 +683,18 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("ENV", "ACK")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // TRANS  —  SCENARIO: Partial FK failure
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // TRANS  â€”  SCENARIO: Partial FK failure
         //   Offices 3 & 4 use codes that do NOT exist in rtps_wb.office
-        //   ACK records 5-8 reference those ghost offices → retry queue
-        // ─────────────────────────────────────────────────────────────
+        //   ACK records 5-8 reference those ghost offices â†’ retry queue
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("trans/office")]
         public IActionResult GetTransOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
@@ -641,7 +717,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
@@ -662,7 +738,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
@@ -684,7 +760,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
             {
@@ -705,20 +781,20 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("TRANS", "ACK")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // WRD  —  SCENARIO: Edge cases
-        //   USER → empty list (tests empty-dataset handling)
-        //   ACK  → 25 records (tests pagination); records 21-25 reuse
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // WRD  â€”  SCENARIO: Edge cases
+        //   USER â†’ empty list (tests empty-dataset handling)
+        //   ACK  â†’ 25 records (tests pagination); records 21-25 reuse
         //          ack numbers from 1-5 (tests duplicate handling)
-        //   ACK  → null official_email (tests null FK handling)
-        // ─────────────────────────────────────────────────────────────
+        //   ACK  â†’ null official_email (tests null FK handling)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpGet("wrd/office")]
         public IActionResult GetWrdOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-OFFICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
@@ -741,7 +817,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-SERVICE] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
@@ -762,7 +838,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-USER] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
@@ -784,7 +860,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-ACK] ✓ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var statuses = new[] { "IN_PROGRESS", "DISPOSED", "REJECTED", "PENDING" };
             var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
@@ -806,9 +882,105 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("WRD", "ACK")));
         }
 
-        // ─────────────────────────────────────────────────────────────
-        // DEPARTMENT-SPECIFIC CALLBACK ENDPOINTS
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ABC SUBMISSIONS endpoint  â†’  Monthly MIS aggregate (Form A shape)
+        // Route: GET /mock-api/abc/submissions
+        // Returns monthly MIS summary records per service per office.
+        // Same shape as Form A portal submissions â€” dept_code, office_id,
+        // service_id, period_month, period_year, counts.
+        // AbcSyncService calls this endpoint, groups records by
+        // (dept_code, period_month, period_year), and promotes via
+        // IApplicationRecordService.AddBatchAsync to rtps_wb.form_a_submission.
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        [HttpGet("abc/submissions")]
+        public IActionResult GetAbcSubmissions(
+            [FromQuery] int page = 1, [FromQuery] int page_size = 100)
+        {
+            var path       = Request.Path + Request.QueryString;
+            var authResult = ValidateRequest("HMAC", path);
+            if (authResult != null) return authResult;
+
+            _logger.LogInformation(
+                "[BCW-ABC-SYNC] âœ“ Request passed | Page={Page} PageSize={PageSize}",
+                page, page_size);
+
+            return BuildAbcSubmissionsResponse(page, page_size);
+        }
+
+        private IActionResult BuildAbcSubmissionsResponse(int page, int pageSize)
+        {
+            const string AbcDeptCode = "BCW";
+            const string AbcDeptName = "Backward Classes Welfare Department";
+            // index → form_type: 0,1 = A  |  2 = B  |  3 = C
+            var fixtures = new[]
+            {
+                // Names must exactly match rtps_wb.service.service_name for promotion
+                new { Form = "A", Service = "OBC Certificate Issuance", Office = "BCW District Office Bankura", Officer = "dwo.bnk.bcw@wb.gov.in" },
+                new { Form = "A", Service = "SC Certificate Issuance", Office = "BCW District Office Birbhum", Officer = "dwo.brb.bcw@wb.gov.in" },
+                new { Form = "B", Service = "Minority Welfare Scholarship", Office = "BCW District Office Murshidabad", Officer = "dwo.mur.bcw@wb.gov.in" },
+                new { Form = "C", Service = "Pre-Matric Scholarship for OBC Students", Office = "BCW District Office Purulia", Officer = "dwo.prl.bcw@wb.gov.in" }
+            };
+
+            var all = new List<AbcSubmissionMisDto>();
+
+            foreach (var (month, year) in new[] { (5, 2026), (6, 2026) })
+            {
+                foreach (var (fixture, idx) in fixtures.Select((value, index) => (value, index)))
+                {
+                    var seed     = (year * 100) + (month * 10) + idx + 1;
+                    var received = 50 + (seed % 50);
+                    var form1    = received - (seed % 10);
+                    var within   = form1 - (seed % 8);
+                    var after    = seed % 5;
+                    var pending  = received - within - after;
+
+                    all.Add(new AbcSubmissionMisDto
+                    {
+                        external_record_id    = $"BCW-{fixture.Form}-{year:D4}{month:D2}-{idx + 1:D2}",
+                        dept_code             = AbcDeptCode,
+                        department_code       = AbcDeptCode,
+                        dept_name             = AbcDeptName,
+                        department_name       = AbcDeptName,
+                        office_name           = fixture.Office,
+                        service_name          = fixture.Service,
+                        form_type             = fixture.Form,
+                        officer_email         = fixture.Officer,
+                        period_month          = month,
+                        period_year           = year,
+                        applications_received = received,
+                        form1_issued          = form1,
+                        disposed_within_time  = within,
+                        disposed_after_time   = after,
+                        pending_applications  = pending < 0 ? 0 : pending,
+                        appeals_received      = fixture.Form == "A" ? 0 : received,
+                        pending_appeals       = fixture.Form == "A" ? 0 : Math.Max(0, received - within - after),
+                        external_updated_at   = new DateTimeOffset(year, month, 28, 12, 0, 0, TimeSpan.Zero)
+                    });
+                }
+            }
+
+            var (paged, total) = Paginate(all, page, pageSize);
+            return Ok(ApiResponse<AbcSubmissionMisDto>.Ok(
+                paged, total,
+                "ABC monthly MIS submission data",
+                StablePayloadId("ABC", "SUBMISSIONS")));
+        }
+
+        // ABC callback receiver
+        [HttpPost("abc/sync-response")]
+        public Task<IActionResult> AbcCallback() => ReceiveSyncCallback();
+
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ABC SUBMISSIONS endpoint  â†’  Monthly MIS aggregate (Form A shape)
+        // Route: GET /mock-api/abc/submissions
+        //
+        // Returns monthly MIS summary records per service per period.
+        // AbcSyncService fetches these pages, groups by
+        // (dept_code, period_month, period_year), maps to
+        // FormSubmissionBatchDto and calls AddBatchAsync â€”
+        // same pipeline as Form A portal submissions.
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpPost("bcw/sync-response")]
         public Task<IActionResult> BcwCallback()   => ReceiveSyncCallback();
 
@@ -827,9 +999,9 @@ namespace MockExternalApi.Controllers
         [HttpPost("wrd/sync-response")]
         public Task<IActionResult> WrdCallback()   => ReceiveSyncCallback();
 
-        // ─────────────────────────────────────────────────────────────
-        // CALLBACK receiver  →  POST /mock-api/sync-response (shared)
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // CALLBACK receiver  â†’  POST /mock-api/sync-response (shared)
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         [HttpPost("sync-response")]
         public async Task<IActionResult> ReceiveSyncCallback()
         {
@@ -846,16 +1018,16 @@ namespace MockExternalApi.Controllers
             var apiKey    = Request.Headers.TryGetValue("X-API-KEY",   out var ak) ? ak.ToString() : string.Empty;
             var incomingSig = Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var sig) ? sig.ToString() : string.Empty;
 
-            _logger.LogInformation("╔══════════════════════════════════════════════════════════╗");
-            _logger.LogInformation("║           [CALLBACK-RECEIVED] INCOMING POST              ║");
-            _logger.LogInformation("╚══════════════════════════════════════════════════════════╝");
+            _logger.LogInformation("â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—");
+            _logger.LogInformation("â•‘           [CALLBACK-RECEIVED] INCOMING POST              â•‘");
+            _logger.LogInformation("â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
             _logger.LogInformation("[CALLBACK-RECEIVED] Path      : {Path}", path);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-API-KEY : {Key}",  apiKey);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-TIMESTAMP: {Ts}",  timestamp);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-HMAC-SIGNATURE: {Sig}", incomingSig);
             _logger.LogInformation("[CALLBACK-RECEIVED] Raw Body  : {Body}", rawBody);
 
-            // ── HMAC Validation ──────────────────────────────────────────
+            // â”€â”€ HMAC Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             if (string.IsNullOrWhiteSpace(apiKey) || apiKey != ValidApiKey)
             {
                 _logger.LogWarning("[CALLBACK-REJECTED] Invalid or missing X-API-KEY");
@@ -891,13 +1063,13 @@ namespace MockExternalApi.Controllers
                     Encoding.UTF8.GetBytes(expectedSig),
                     Encoding.UTF8.GetBytes(incomingSig)))
             {
-                _logger.LogWarning("[CALLBACK-REJECTED] ✗ HMAC signature mismatch | Path={Path} | Timestamp={Ts}", path, timestamp);
+                _logger.LogWarning("[CALLBACK-REJECTED] âœ— HMAC signature mismatch | Path={Path} | Timestamp={Ts}", path, timestamp);
                 return Unauthorized("CALLBACK: Signature mismatch");
             }
 
-            _logger.LogInformation("[CALLBACK-RECEIVED] ✓ HMAC signature VALID");
+            _logger.LogInformation("[CALLBACK-RECEIVED] âœ“ HMAC signature VALID");
 
-            // ── Deserialize payload ───────────────────────────────────────
+            // â”€â”€ Deserialize payload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             CallbackPayload? payload = null;
             try
             {
@@ -917,9 +1089,9 @@ namespace MockExternalApi.Controllers
                 return BadRequest("Empty payload");
             }
 
-            // ── Extract pipeline name from payload_id ─────────────────────
-            // Format: P-BCW-OFFICE-20260408095646  →  pipeline = OFFICE
-            // UUID format (BCW): 7c99b30f-3385-4ca2-...  →  pipeline = UNKNOWN
+            // â”€â”€ Extract pipeline name from payload_id â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // Format: P-BCW-OFFICE-20260408095646  â†’  pipeline = OFFICE
+            // UUID format (BCW): 7c99b30f-3385-4ca2-...  â†’  pipeline = UNKNOWN
             var pipeline = "UNKNOWN";
             if (!string.IsNullOrWhiteSpace(payload.PayloadId) && payload.PayloadId.StartsWith("P-"))
             {
@@ -927,17 +1099,17 @@ namespace MockExternalApi.Controllers
                 if (parts.Length >= 3) pipeline = parts[2];
             }
 
-            // ── Structured log summary ────────────────────────────────────
-            _logger.LogInformation("┌──────────────────────────────────────────────────────────┐");
-            _logger.LogInformation("│              [CALLBACK-RECEIVED] SUMMARY                 │");
-            _logger.LogInformation("├──────────────────────────────────────────────────────────┤");
-            _logger.LogInformation("│ Pipeline   : {Pipeline,-52} │", pipeline);
-            _logger.LogInformation("│ PayloadId  : {Id,-52} │", payload.PayloadId ?? "[NULL]");
-            _logger.LogInformation("│ Status     : {Status,-52} │", payload.Status);
-            _logger.LogInformation("│ Total      : {Total,-52} │", payload.TotalRecords);
-            _logger.LogInformation("│ Success    : {Success,-52} │", payload.SuccessCount);
-            _logger.LogInformation("│ Failed     : {Failed,-52} │", payload.FailureCount);
-            _logger.LogInformation("└──────────────────────────────────────────────────────────┘");
+            // â”€â”€ Structured log summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            _logger.LogInformation("â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”");
+            _logger.LogInformation("â”‚              [CALLBACK-RECEIVED] SUMMARY                 â”‚");
+            _logger.LogInformation("â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤");
+            _logger.LogInformation("â”‚ Pipeline   : {Pipeline,-52} â”‚", pipeline);
+            _logger.LogInformation("â”‚ PayloadId  : {Id,-52} â”‚", payload.PayloadId ?? "[NULL]");
+            _logger.LogInformation("â”‚ Status     : {Status,-52} â”‚", payload.Status);
+            _logger.LogInformation("â”‚ Total      : {Total,-52} â”‚", payload.TotalRecords);
+            _logger.LogInformation("â”‚ Success    : {Success,-52} â”‚", payload.SuccessCount);
+            _logger.LogInformation("â”‚ Failed     : {Failed,-52} â”‚", payload.FailureCount);
+            _logger.LogInformation("â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜");
 
             if (payload.Errors?.Count > 0)
             {
@@ -951,7 +1123,7 @@ namespace MockExternalApi.Controllers
                 _logger.LogInformation("[CALLBACK-RECEIVED] Errors: NONE");
             }
 
-            // ── Pretty print to console ───────────────────────────────────
+            // â”€â”€ Pretty print to console â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
             try
             {
                 var parsed = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(rawBody);
@@ -975,16 +1147,16 @@ namespace MockExternalApi.Controllers
                 timestamp  = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
             });
         }
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // AUTH: UNIFIED DISPATCHER
         //
         // authType | behaviour
         // ---------|--------------------------------------------------
-        // "NONE"   | Always passes — returns null
+        // "NONE"   | Always passes â€” returns null
         // "API_KEY"| Delegates to ValidateApiKey()
         // "HMAC"   | Delegates to ValidateHmac(path)
         // other    | Returns 401 Unsupported auth type
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private IActionResult? ValidateRequest(string authType, string path) =>
             authType.ToUpperInvariant() switch
             {
@@ -994,12 +1166,12 @@ namespace MockExternalApi.Controllers
                 _         => Unauthorized($"Unsupported auth type: {authType}"),
             };
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // AUTH: API KEY
         //
         // Reads header X-API-KEY and compares against ValidApiKey.
         // Returns null on success, Unauthorized on failure.
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private IActionResult? ValidateApiKey()
         {
             if (!Request.Headers.TryGetValue(ApiKeyHeaderName, out var key))
@@ -1011,20 +1183,20 @@ namespace MockExternalApi.Controllers
             return null; // valid
         }
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // AUTH: HMAC SHA-256
         //
         // Expected headers:
-        //   X-API-KEY        — must equal ValidApiKey
-        //   X-TIMESTAMP      — ISO / epoch string included in raw string
-        //   X-HMAC-SIGNATURE — Base64(HMAC-SHA256(raw, HmacSecret))
+        //   X-API-KEY        â€” must equal ValidApiKey
+        //   X-TIMESTAMP      â€” ISO / epoch string included in raw string
+        //   X-HMAC-SIGNATURE â€” Base64(HMAC-SHA256(raw, HmacSecret))
         //
         // Raw string format (pipe-separated, no spaces around pipe):
         //   METHOD|PATH_AND_QUERY|TIMESTAMP|BODY
         //
         // For GET requests BODY is always "{}".
         // Returns null on success, Unauthorized on failure.
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private IActionResult? ValidateHmac(string path, string body = "")
         {
             // 1. Validate API key presence and value
@@ -1051,7 +1223,7 @@ namespace MockExternalApi.Controllers
                 || string.IsNullOrWhiteSpace(incomingSignature))
                 return Unauthorized("HMAC: X-HMAC-SIGNATURE header missing");
 
-            // 4. Rebuild raw string — METHOD|PATH|TIMESTAMP|BODY
+            // 4. Rebuild raw string â€” METHOD|PATH|TIMESTAMP|BODY
             //    GET callers pass body="" (default); POST callers pass the actual request body.
             var method  = Request.Method.ToUpperInvariant();
             var rawData = $"{method}|{path}|{timestamp}|{body}";
@@ -1078,9 +1250,9 @@ namespace MockExternalApi.Controllers
             return null; // valid
         }
 
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         // Helpers
-        // ─────────────────────────────────────────────────────────────
+        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
         private static string SampleApplicantName(int i) => i switch
         {
             1  => "Ramesh Kumar",
@@ -1113,9 +1285,9 @@ namespace MockExternalApi.Controllers
             int Code, string Name, int StimulateDays);
     }
 
-    // ─────────────────────────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // Response wrapper
-    // ─────────────────────────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     public class ApiResponse<T>
     {
     [JsonPropertyName("success")]    public bool     Success    { get; set; }
@@ -1131,9 +1303,9 @@ namespace MockExternalApi.Controllers
         { Success = true, Message = msg, TotalCount = 0, Data = [], PayloadId = string.Empty };
 }
 
-    // ─────────────────────────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     // DTOs
-    // ─────────────────────────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     public class OfficeDto
     {
@@ -1148,6 +1320,10 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("level_key")]        public string  level_key        { get; set; } = default!;
         [JsonPropertyName("parent_office_id")] public int?    parent_office_id { get; set; }
         [JsonPropertyName("is_active")]        public bool    is_active        { get; set; }
+        [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode { get; set; }
+        [JsonPropertyName("jurisdiction_scope")]  public string? jurisdiction_scope { get; set; }
+        [JsonPropertyName("jurisdiction")]        public JurisdictionDto? jurisdiction { get; set; }
+        [JsonPropertyName("jurisdiction_rules")]  public List<JurisdictionDto>? jurisdiction_rules { get; set; }
     }
 
     public class ServiceDto
@@ -1166,6 +1342,10 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("reappeal_days")]    public int?    reappeal_days    { get; set; }
         [JsonPropertyName("reappeal_hours")]   public int?    reappeal_hours   { get; set; }
         [JsonPropertyName("is_active")]        public bool    is_active        { get; set; }
+        [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode { get; set; }
+        [JsonPropertyName("jurisdiction_scope")]  public string? jurisdiction_scope { get; set; }
+        [JsonPropertyName("jurisdiction")]        public JurisdictionDto? jurisdiction { get; set; }
+        [JsonPropertyName("jurisdiction_rules")]  public List<JurisdictionDto>? jurisdiction_rules { get; set; }
     }
 
     public class UserDto
@@ -1196,6 +1376,40 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("last_updated_date")]  public string? last_updated_date  { get; set; }
     }
 
+    /// <summary>
+    /// ABC monthly MIS aggregate record.
+    /// One record per service per period.
+    /// AbcSyncService maps this to FormSubmissionRecordDto and calls
+    /// IApplicationRecordService.AddBatchAsync â€” same as Form A portal.
+    /// </summary>
+    /// <summary>
+    /// ABC monthly MIS aggregate record sent by the upstream ABC API.
+    /// Uses integer IDs (service_id, office_id) matching rtps_wb.service and rtps_wb.office.
+    /// AbcSyncService maps this directly to FormSubmissionRecordDto via IApplicationRecordService.AddBatchAsync.
+    /// </summary>
+    public class AbcSubmissionMisDto
+    {
+        [JsonPropertyName("external_record_id")]    public string  external_record_id    { get; set; } = string.Empty;
+        [JsonPropertyName("dept_code")]             public string  dept_code             { get; set; } = string.Empty;
+        [JsonPropertyName("department_code")]       public string  department_code       { get; set; } = string.Empty;
+        [JsonPropertyName("dept_name")]             public string? dept_name             { get; set; }
+        [JsonPropertyName("department_name")]       public string? department_name       { get; set; }
+        [JsonPropertyName("office_name")]           public string? office_name           { get; set; }
+        [JsonPropertyName("service_name")]          public string  service_name          { get; set; } = string.Empty;
+        [JsonPropertyName("form_type")]             public string  form_type             { get; set; } = "A";
+        [JsonPropertyName("officer_email")]         public string? officer_email         { get; set; }
+        [JsonPropertyName("period_month")]          public int     period_month          { get; set; }
+        [JsonPropertyName("period_year")]           public int     period_year           { get; set; }
+        [JsonPropertyName("applications_received")] public int     applications_received { get; set; }
+        [JsonPropertyName("form1_issued")]          public int     form1_issued          { get; set; }
+        [JsonPropertyName("disposed_within_time")]  public int     disposed_within_time  { get; set; }
+        [JsonPropertyName("disposed_after_time")]   public int     disposed_after_time   { get; set; }
+        [JsonPropertyName("pending_applications")]  public int     pending_applications  { get; set; }
+        [JsonPropertyName("appeals_received")]      public int     appeals_received      { get; set; }
+        [JsonPropertyName("pending_appeals")]       public int     pending_appeals       { get; set; }
+        [JsonPropertyName("external_updated_at")]   public DateTimeOffset external_updated_at { get; set; }
+    }
+
     public class CallbackPayload
     {
         [JsonPropertyName("payload_id")]    public string?              PayloadId    { get; set; }
@@ -1212,4 +1426,8 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("error_code")]     public string ErrorCode     { get; set; } = string.Empty;
         [JsonPropertyName("error_message")]  public string ErrorMessage  { get; set; } = string.Empty;
     }
+
+    /// <summary>
+    /// ABC monthly MIS aggregate record â€” one per service per period.
+    /// AbcSyncService maps this to FormSubmissionRecordDto and calls
 }

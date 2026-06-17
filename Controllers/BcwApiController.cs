@@ -1,315 +1,257 @@
 // =============================================================================
 // FILE:      BcwApiController.cs
 // DEPT:      BCW (Backward Classes Welfare, West Bengal)
-// AUTH:      HMAC  (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE)
-// FLOW:      NAME-BASED  — office_name / service_name used directly
+// AUTH:      HMAC  (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE + X-API-VERSION)
+// FLOW:      NAME-BASED  — RTPS resolves codes from names (uses_name_mapping=true)
 // BASE PATH: /bcw
 // =============================================================================
 
-using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace MockExternalApi.Controllers
+namespace MockExternalApi.Controllers;
+
+[ApiController]
+[Route("bcw")]
+public sealed class BcwApiController : ControllerBase
 {
-    [ApiController]
-    [Route("bcw")]
-    public class BcwApiController : ControllerBase
+    private const string DeptCode        = "BCW";
+    private const string StateName       = "West Bengal";
+    private const string TimestampFormat = "yyyy-MM-ddTHH:mm:ssZ";
+
+    private readonly string _apiKey;
+    private readonly string _hmacSecret;
+    private readonly int    _toleranceMinutes;
+    private readonly ILogger<BcwApiController> _logger;
+
+    public BcwApiController(IConfiguration config, ILogger<BcwApiController> logger)
     {
-        private const string DeptCode = "BCW";
-        private const string StateName = "West Bengal";
-        private const int ServiceCodeBase = 30000;
-
-        // NOTE: BCW DB rows point to /offices, /services, /officers, /acknowledgements (no /bcw/ prefix).
-        // The [HttpGet] attributes below add those alias routes so both paths work.
-        private readonly string _apiKey;
-        private readonly string _hmacSecret;
-        private readonly int    _toleranceMinutes;
-        private readonly ILogger<BcwApiController> _logger;
-
-        public BcwApiController(IConfiguration config, ILogger<BcwApiController> logger)
-        {
-            _apiKey           = config["BcwApi:ApiKey"]                      ?? "bcw-test-api-key-001";
-            _hmacSecret       = config["BcwApi:HmacSecret"]                  ?? "bcw-test-api-key-001";
-            _toleranceMinutes = config.GetValue("BcwApi:TimestampToleranceMinutes", 5);
-            _logger           = logger;
-        }
-
-        // ── Static data ───────────────────────────────────────────────────────
-
-        private static readonly List<BcwOfficeDto> _offices =
-        [
-            new() { office_name = "BCW State Office West Bengal",         department_name = "BCW", office_level = "STATE",    district_name = "Kolkata",          is_active = true },
-            new() { office_name = "BCW District Office Kolkata",           department_name = "BCW", office_level = "DISTRICT", district_name = "Kolkata",          is_active = true },
-            new() { office_name = "BCW District Office Howrah",            department_name = "BCW", office_level = "DISTRICT", district_name = "Howrah",           is_active = true },
-            new() { office_name = "BCW District Office Murshidabad",       department_name = "BCW", office_level = "DISTRICT", district_name = "Murshidabad",      is_active = true },
-            new() { office_name = "BCW District Office Bankura",           department_name = "BCW", office_level = "DISTRICT", district_name = "Bankura",          is_active = true },
-            new() { office_name = "BCW District Office Nadia",             department_name = "BCW", office_level = "DISTRICT", district_name = "Nadia",            is_active = true },
-            new() { office_name = "BCW District Office North 24 Parganas", department_name = "BCW", office_level = "DISTRICT", district_name = "North 24 Parganas",is_active = true },
-            new() { office_name = "BCW Block Office Birbhum",              department_name = "BCW", office_level = "BLOCK",    district_name = "Birbhum",          is_active = true },
-            new() { office_name = "BCW Block Office Malda",                department_name = "BCW", office_level = "BLOCK",    district_name = "Malda",            is_active = true },
-            new() { office_name = "BCW Block Office Purulia",              department_name = "BCW", office_level = "BLOCK",    district_name = "Purulia",          is_active = true },
-        ];
-
-        private static readonly List<BcwServiceDto> _services =
-        [
-            new() { service_name = "BCW Minority Welfare Certificate",   department_name = "BCW", stipulated_days = 25, stipulated_text = "25 working days", resolution_days = 25, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW OBC Certificate",                department_name = "BCW", stipulated_days = 30, stipulated_text = "30 working days", resolution_days = 30, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW SC Certificate",                 department_name = "BCW", stipulated_days = 20, stipulated_text = "20 working days", resolution_days = 20, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Tribal Development Certificate", department_name = "BCW", stipulated_days = 35, stipulated_text = "35 working days", resolution_days = 35, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Pre-Matric Scholarship",         department_name = "BCW", stipulated_days = 45, stipulated_text = "45 working days", resolution_days = 45, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Post-Matric Scholarship",        department_name = "BCW", stipulated_days = 45, stipulated_text = "45 working days", resolution_days = 45, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Madrasah Education Support",     department_name = "BCW", stipulated_days = 30, stipulated_text = "30 working days", resolution_days = 30, appeal_days = 30, reappeal_days = 60, is_active = true },
-            new() { service_name = "BCW Waqf Property Management",       department_name = "BCW", stipulated_days = 60, stipulated_text = "60 working days", resolution_days = 60, appeal_days = 30, reappeal_days = 60, is_active = true },
-        ];
-
-        private static readonly List<BcwOfficerDto> _officers =
-        [
-            new() { officer_email = "do.bcw.hq@wb.gov.in",   full_name = "Arnab Majumdar",    mobile_no = "9300200001", designation = "Deputy Secretary",       role_key = "DESIGNATED_OFFICER", office_name = "BCW State Office West Bengal",         department_name = "BCW", is_active = true },
-            new() { officer_email = "ao.bcw.hq@wb.gov.in",   full_name = "Suchitra Bose",     mobile_no = "9300200002", designation = "Joint Secretary",        role_key = "APPELLATE_OFFICER",  office_name = "BCW State Office West Bengal",         department_name = "BCW", is_active = true },
-            new() { officer_email = "ro.bcw.hq@wb.gov.in",   full_name = "Debabrata Halder",  mobile_no = "9300200003", designation = "Under Secretary",        role_key = "REVIEWING_OFFICER",  office_name = "BCW State Office West Bengal",         department_name = "BCW", is_active = true },
-            new() { officer_email = "do.bcw.kol@wb.gov.in",  full_name = "Sudipta Ghosh",     mobile_no = "9300200004", designation = "District Welfare Officer",role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Kolkata",          department_name = "BCW", is_active = true },
-            new() { officer_email = "ao.bcw.kol@wb.gov.in",  full_name = "Rekha Chatterjee",  mobile_no = "9300200005", designation = "Assistant Director",     role_key = "APPELLATE_OFFICER",  office_name = "BCW District Office Kolkata",          department_name = "BCW", is_active = true },
-            new() { officer_email = "do.bcw.mur@wb.gov.in",  full_name = "Prasanta Mondal",   mobile_no = "9300200006", designation = "District Welfare Officer",role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Murshidabad",      department_name = "BCW", is_active = true },
-            new() { officer_email = "ao.bcw.mur@wb.gov.in",  full_name = "Nilufar Khatun",    mobile_no = "9300200007", designation = "Assistant Director",     role_key = "APPELLATE_OFFICER",  office_name = "BCW District Office Murshidabad",      department_name = "BCW", is_active = true },
-            new() { officer_email = "do.bcw.bnk@wb.gov.in",  full_name = "Tapan Kumar Das",   mobile_no = "9300200008", designation = "District Welfare Officer",role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Bankura",          department_name = "BCW", is_active = true },
-            new() { officer_email = "ro.bcw.brb@wb.gov.in",  full_name = "Mita Sarkar",       mobile_no = "9300200009", designation = "Block Welfare Officer",  role_key = "REVIEWING_OFFICER",  office_name = "BCW Block Office Birbhum",             department_name = "BCW", is_active = true },
-            new() { officer_email = "ro.bcw.mld@wb.gov.in",  full_name = "Imran Hossain",     mobile_no = "9300200010", designation = "Block Welfare Officer",  role_key = "REVIEWING_OFFICER",  office_name = "BCW Block Office Malda",               department_name = "BCW", is_active = true },
-        ];
-
-        private static readonly List<BcwAcknowledgementDto> _acknowledgements =
-        [
-            new() { acknowledgement_no = "BCW/2026/20001", application_no = "APP/BCW/2026/201", service_name = "BCW Minority Welfare Certificate",   department_name = "BCW", office_name = "BCW District Office Murshidabad",       officer_email = "do.bcw.mur@wb.gov.in", applicant_name = "Tanmoy Biswas",   applicant_mobile = "9300500001", applicant_email = "tanmoy.b@example.com",  present_status = "RESOLVED",    applied_date = "2026-05-01", last_updated_date = "2026-05-15" },
-            new() { acknowledgement_no = "BCW/2026/20002", application_no = "APP/BCW/2026/202", service_name = "BCW OBC Certificate",               department_name = "BCW", office_name = "BCW State Office West Bengal",         officer_email = "do.bcw.hq@wb.gov.in",  applicant_name = "Lipika Sarkar",   applicant_mobile = "9300500002", applicant_email = "lipika.s@example.com",  present_status = "RESOLVED",    applied_date = "2026-05-03", last_updated_date = "2026-05-18" },
-            new() { acknowledgement_no = "BCW/2026/20003", application_no = "APP/BCW/2026/203", service_name = "BCW Tribal Development Certificate", department_name = "BCW", office_name = "BCW Block Office Birbhum",             officer_email = "ro.bcw.brb@wb.gov.in", applicant_name = "Partha Mondal",   applicant_mobile = "9300500003", applicant_email = "partha.m@example.com",  present_status = "RESOLVED",    applied_date = "2026-04-15", last_updated_date = "2026-05-20" },
-            new() { acknowledgement_no = "BCW/2026/20004", application_no = "APP/BCW/2026/204", service_name = "BCW SC Certificate",                department_name = "BCW", office_name = "BCW District Office Bankura",          officer_email = "do.bcw.bnk@wb.gov.in", applicant_name = "Riya Mondal",     applicant_mobile = "9300500004", applicant_email = "riya.m@example.com",    present_status = "PENDING",     applied_date = "2026-05-05", last_updated_date = "2026-05-05" },
-            new() { acknowledgement_no = "BCW/2026/20005", application_no = "APP/BCW/2026/205", service_name = "BCW Madrasah Education Support",     department_name = "BCW", office_name = "BCW Block Office Malda",               officer_email = "ro.bcw.mld@wb.gov.in", applicant_name = "Imran Sheikh",    applicant_mobile = "9300500005", applicant_email = "imran.s@example.com",   present_status = "IN_PROGRESS", applied_date = "2026-05-08", last_updated_date = "2026-05-15" },
-            new() { acknowledgement_no = "BCW/2026/20006", application_no = "APP/BCW/2026/206", service_name = "BCW Pre-Matric Scholarship",         department_name = "BCW", office_name = "BCW District Office Kolkata",          officer_email = "do.bcw.kol@wb.gov.in", applicant_name = "Sunita Devi",     applicant_mobile = "9300500006", applicant_email = "sunita.d@example.com",  present_status = "RESOLVED",    applied_date = "2026-05-10", last_updated_date = "2026-05-25" },
-            new() { acknowledgement_no = "BCW/2026/20007", application_no = "APP/BCW/2026/207", service_name = "BCW Post-Matric Scholarship",        department_name = "BCW", office_name = "BCW District Office North 24 Parganas", officer_email = "do.bcw.hq@wb.gov.in",  applicant_name = "Karim Ansari",    applicant_mobile = "9300500007", applicant_email = "karim.a@example.com",   present_status = "RESOLVED",    applied_date = "2026-04-20", last_updated_date = "2026-05-18" },
-            new() { acknowledgement_no = "BCW/2026/20008", application_no = "APP/BCW/2026/208", service_name = "BCW Waqf Property Management",       department_name = "BCW", office_name = "BCW District Office Howrah",           officer_email = "ao.bcw.kol@wb.gov.in", applicant_name = "Fatema Begum",    applicant_mobile = "9300500008", applicant_email = "fatema.b@example.com",  present_status = "IN_PROGRESS", applied_date = "2026-05-02", last_updated_date = "2026-05-12" },
-            new() { acknowledgement_no = "BCW/2026/20009", application_no = "APP/BCW/2026/209", service_name = "BCW Minority Welfare Certificate",   department_name = "BCW", office_name = "BCW District Office Murshidabad",       officer_email = "ao.bcw.mur@wb.gov.in", applicant_name = "Bimal Sen",       applicant_mobile = "9300500009", applicant_email = "bimal.s@example.com",   present_status = "RESOLVED",    applied_date = "2026-05-12", last_updated_date = "2026-05-27" },
-            new() { acknowledgement_no = "BCW/2026/20010", application_no = "APP/BCW/2026/210", service_name = "BCW OBC Certificate",               department_name = "BCW", office_name = "BCW District Office Kolkata",          officer_email = "do.bcw.kol@wb.gov.in", applicant_name = "Kavita Roy",      applicant_mobile = "9300500010", applicant_email = "kavita.r@example.com",  present_status = "RESOLVED",    applied_date = "2026-04-25", last_updated_date = "2026-05-22" },
-        ];
-
-        // ── Endpoints ─────────────────────────────────────────────────────────
-
-        [HttpGet("offices")]
-        [HttpGet("/offices")]
-        public IActionResult GetOffices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
-        {
-            var auth = ValidateHmac();
-            if (auth != null) return auth;
-
-            var projectedAll = _offices
-                .Select(o => new
-                {
-                    office_code = ResolveOfficeCode(o.office_name),
-                    office_name = o.office_name,
-                    district_name = o.district_name,
-                    state_name = StateName,
-                    department_code = DeptCode,
-                    is_active = o.is_active
-                })
-                .ToList();
-
-            var (paged, total) = Paginate(projectedAll, page, page_size);
-            _logger.LogInformation("[BCW] GET /bcw/offices → {Count}/{Total}", paged.Count, total);
-            return Ok(BcwResponse<object>.From(paged.Cast<object>().ToList(), total));
-        }
-
-        [HttpGet("services")]
-        [HttpGet("/services")]
-        public IActionResult GetServices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
-        {
-            var auth = ValidateHmac();
-            if (auth != null) return auth;
-
-            var projectedAll = _services
-                .Select(s => new
-                {
-                    service_code = ResolveServiceCode(s.service_name),
-                    service_name = s.service_name,
-                    department_code = DeptCode,
-                    stipulated_days = s.stipulated_days,
-                    stipulated_text = s.stipulated_text,
-                    stipulated_hours = s.stipulated_hours,
-                    resolution_days = s.resolution_days,
-                    resolution_hours = s.resolution_hours,
-                    appeal_days = s.appeal_days,
-                    appeal_hours = s.appeal_hours,
-                    reappeal_days = s.reappeal_days,
-                    reappeal_hours = s.reappeal_hours,
-                    is_active = s.is_active
-                })
-                .ToList();
-
-            var (paged, total) = Paginate(projectedAll, page, page_size);
-            _logger.LogInformation("[BCW] GET /bcw/services → {Count}/{Total}", paged.Count, total);
-            return Ok(BcwResponse<object>.From(paged.Cast<object>().ToList(), total));
-        }
-
-        [HttpGet("officers")]
-        [HttpGet("/officers")]
-        public IActionResult GetOfficers([FromQuery] int page = 1, [FromQuery] int page_size = 100)
-        {
-            var auth = ValidateHmac();
-            if (auth != null) return auth;
-
-            var projectedAll = _officers
-                .Select(o => new
-                {
-                    official_email = o.officer_email,
-                    full_name = o.full_name,
-                    mobile_no = o.mobile_no,
-                    designation = o.designation,
-                    office_code = ResolveOfficeCode(o.office_name),
-                    department_code = DeptCode,
-                    role_key = o.role_key,
-                    is_active = o.is_active
-                })
-                .ToList();
-
-            var (paged, total) = Paginate(projectedAll, page, page_size);
-            _logger.LogInformation("[BCW] GET /bcw/officers → {Count}/{Total}", paged.Count, total);
-            return Ok(BcwResponse<object>.From(paged.Cast<object>().ToList(), total));
-        }
-
-        [HttpGet("acknowledgements")]
-        [HttpGet("/acknowledgements")]
-        public IActionResult GetAcknowledgements([FromQuery] int page = 1, [FromQuery] int page_size = 100)
-        {
-            var auth = ValidateHmac();
-            if (auth != null) return auth;
-
-            var projectedAll = _acknowledgements
-                .Select(a => new
-                {
-                    acknowledgement_no = a.acknowledgement_no,
-                    application_number = a.application_no,
-                    applicant_name = a.applicant_name,
-                    applicant_mobile = a.applicant_mobile,
-                    applicant_email = a.applicant_email,
-                    service_code = ResolveServiceCode(a.service_name),
-                    office_code = ResolveOfficeCode(a.office_name),
-                    official_email = a.officer_email,
-                    present_status = NormalizeStatus(a.present_status),
-                    applied_date = a.applied_date,
-                    last_updated_date = a.last_updated_date
-                })
-                .ToList();
-
-            var (paged, total) = Paginate(projectedAll, page, page_size);
-            _logger.LogInformation("[BCW] GET /bcw/acknowledgements → {Count}/{Total}", paged.Count, total);
-            return Ok(BcwResponse<object>.From(paged.Cast<object>().ToList(), total));
-        }
-
-        // ── HMAC validation ───────────────────────────────────────────────────
-
-        private IActionResult? ValidateHmac()
-        {
-            var path = Request.Path + Request.QueryString;
-
-            if (!Request.Headers.TryGetValue("X-API-KEY", out var apiKey) || apiKey != _apiKey)
-                return Unauthorized(new { error = "BCW: Invalid or missing X-API-KEY" });
-
-            if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
-                return Unauthorized(new { error = "BCW: X-TIMESTAMP missing" });
-
-            if (DateTime.TryParse(timestamp, null, System.Globalization.DateTimeStyles.RoundtripKind, out var ts))
-                if (Math.Abs((DateTime.UtcNow - ts.ToUniversalTime()).TotalMinutes) > _toleranceMinutes)
-                    return StatusCode(403, new { error = "BCW: Timestamp expired" });
-
-            if (!Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) || string.IsNullOrWhiteSpace(incoming))
-                return Unauthorized(new { error = "BCW: X-HMAC-SIGNATURE missing" });
-
-            var raw      = $"GET|{path}|{timestamp}|";
-            var keyBytes = Encoding.UTF8.GetBytes(_hmacSecret);
-            var msgBytes = Encoding.UTF8.GetBytes(raw);
-            using var hmac = new HMACSHA256(keyBytes);
-            var expected = Convert.ToBase64String(hmac.ComputeHash(msgBytes));
-
-            _logger.LogInformation("[BCW-HMAC] raw={Raw} expected={Exp}", raw, expected);
-
-            if (!CryptographicOperations.FixedTimeEquals(
-                    Encoding.UTF8.GetBytes(expected),
-                    Encoding.UTF8.GetBytes(incoming.ToString())))
-                return Unauthorized(new { error = "BCW: Signature mismatch" });
-
-            return null;
-        }
-
-        // ── Helpers ───────────────────────────────────────────────────────────
-
-        private static (List<T> Page, int Total) Paginate<T>(List<T> all, int page, int pageSize)
-        {
-            pageSize = Math.Clamp(pageSize, 1, 500);
-            page     = Math.Max(1, page);
-            return (all.Skip((page - 1) * pageSize).Take(pageSize).ToList(), all.Count);
-        }
-
-        private static string ResolveOfficeCode(string officeName)
-        {
-            if (string.IsNullOrWhiteSpace(officeName)) return $"{DeptCode}-OFF-000";
-            var index = _offices.FindIndex(o => string.Equals(o.office_name, officeName, StringComparison.OrdinalIgnoreCase));
-            return index >= 0 ? $"{DeptCode}-OFF-{index + 1:000}" : $"{DeptCode}-OFF-999";
-        }
-
-        private static int ResolveServiceCode(string serviceName)
-        {
-            if (string.IsNullOrWhiteSpace(serviceName)) return 0;
-            var index = _services.FindIndex(s => string.Equals(s.service_name, serviceName, StringComparison.OrdinalIgnoreCase));
-            return index >= 0 ? ServiceCodeBase + index + 1 : ServiceCodeBase + 999;
-        }
-
-        private static string NormalizeStatus(string? status)
-            => status?.Trim().ToUpperInvariant() switch
-            {
-                "RESOLVED" => "disposed",
-                "PENDING" => "pending",
-                "IN_PROGRESS" => "in_progress",
-                "INPROGRESS" => "in_progress",
-                _ => (status ?? "pending").ToLowerInvariant()
-            };
+        _apiKey           = config["BcwApi:ApiKey"]     ?? "bcw-test-api-key-001";
+        _hmacSecret       = config["BcwApi:HmacSecret"] ?? "bcw-test-api-key-001";
+        _toleranceMinutes = config.GetValue("BcwApi:TimestampToleranceMinutes", 5);
+        _logger           = logger;
     }
 
-    // ── Response wrapper ──────────────────────────────────────────────────────
+    private static readonly List<BcwOfficeDto> Offices =
+    [
+        new() { office_name = "BCW State Office West Bengal", department_name = "Backward Classes Welfare Department", office_level = "STATE", district_name = "Kolkata", parent_office_name = null, jurisdiction_mode = "LGD", is_active = true },
+        new() { office_name = "BCW District Office Bankura", department_name = "Backward Classes Welfare Department", office_level = "DISTRICT", district_name = "Bankura", parent_office_name = "BCW State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
+        new() { office_name = "BCW District Office Murshidabad", department_name = "Backward Classes Welfare Department", office_level = "DISTRICT", district_name = "Murshidabad", parent_office_name = "BCW State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
+    ];
 
-    public class BcwResponse<T>
-    {
-        [JsonPropertyName("success")]    public bool    success    { get; set; }
-        [JsonPropertyName("message")]    public string  message    { get; set; } = string.Empty;
-        [JsonPropertyName("payload_id")] public string  payload_id { get; set; } = string.Empty;
-        [JsonPropertyName("totalCount")] public int     totalCount { get; set; }
-        [JsonPropertyName("data")]       public List<T> data       { get; set; } = [];
-
-        public static BcwResponse<T> From(List<T> data, int total) => new()
+    private static readonly List<BcwServiceDto> Services =
+    [
+        new()
         {
-            success    = true,
-            message    = "OK",
-            payload_id = $"BCW-{DateTime.UtcNow:yyyyMMddHH}",
-            totalCount = total,
-            data       = data,
+            service_name = "OBC Certificate Issuance",
+            department_name = "Backward Classes Welfare Department",
+            stipulated_days = 30,
+            stipulated_text = "Standard processing",
+            stipulated_hours = 0,
+            resolution_days = 30,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ],
+            has_external_dependency = true,
+            is_active = true
+        },
+        new()
+        {
+            service_name = "Minority Welfare Scholarship",
+            department_name = "Backward Classes Welfare Department",
+            stipulated_days = 21,
+            stipulated_text = "Standard processing",
+            stipulated_hours = 0,
+            resolution_days = 21,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ],
+            has_external_dependency = false,
+            is_active = true
+        }
+    ];
+
+    private static readonly List<BcwOfficerDto> Officers =
+    [
+        new() { official_email = "acs.bcw@wb.gov.in", full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_name = "BCW State Office West Bengal", department_name = "Backward Classes Welfare Department", is_active = true },
+        new() { official_email = "dwo.bankura.bcw@wb.gov.in", full_name = "Ritabrata Saha", mobile_no = "9800000002", designation = "District Welfare Officer", role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Bankura", department_name = "Backward Classes Welfare Department", is_active = true },
+        new() { official_email = "dwo.murshidabad.bcw@wb.gov.in", full_name = "Farhana Ali", mobile_no = "9800000003", designation = "District Welfare Officer", role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Murshidabad", department_name = "Backward Classes Welfare Department", is_active = true }
+    ];
+
+    private static readonly List<BcwAcknowledgementDto> Acknowledgements =
+    [
+        new() { acknowledgement_no = "BCW/2026/10001", application_no = "APP/BCW/2026/101", service_name = "OBC Certificate Issuance", office_name = "BCW District Office Bankura", official_email = "dwo.bankura.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Ratan Bauri", applicant_mobile = "9400500001", applicant_email = "ratan.b@example.com", present_status = "RESOLVED", applied_date = "2026-04-01", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = 5 },
+        new() { acknowledgement_no = "BCW/2026/10002", application_no = "APP/BCW/2026/102", service_name = "Minority Welfare Scholarship", office_name = "BCW District Office Murshidabad", official_email = "dwo.murshidabad.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Farida Khatun", applicant_mobile = "9400500002", applicant_email = "farida.k@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-10", last_updated_date = "2026-04-22", NumberOfDaysBeyondDepartmentScope = null },
+        new() { acknowledgement_no = "BCW/2026/10003", application_no = "APP/BCW/2026/103", service_name = "OBC Certificate Issuance", office_name = "BCW State Office West Bengal", official_email = "acs.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Subhash Mondal", applicant_mobile = "9400500003", applicant_email = "subhash.m@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-25", NumberOfDaysBeyondDepartmentScope = 1 },
+    ];
+
+    [HttpGet("offices")]
+    public IActionResult GetOffices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        var (paged, total) = Paginate(Offices, page, page_size);
+        _logger.LogInformation("[BCW] GET /bcw/offices -> {Count}/{Total}", paged.Count, total);
+        return Ok(ApiEnvelope<BcwOfficeDto>.Ok("Office data", PayloadId("OFFICE"), total, paged));
+    }
+
+    [HttpGet("services")]
+    public IActionResult GetServices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        var (paged, total) = Paginate(Services, page, page_size);
+        _logger.LogInformation("[BCW] GET /bcw/services -> {Count}/{Total}", paged.Count, total);
+        return Ok(ApiEnvelope<BcwServiceDto>.Ok("Service data", PayloadId("SERVICE"), total, paged));
+    }
+
+    [HttpGet("officers")]
+    public IActionResult GetOfficers([FromQuery] int page = 1, [FromQuery] int page_size = 100)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        var projected = Officers.Select(o => new
+        {
+            official_email = o.official_email,
+            full_name = o.full_name,
+            mobile_no = o.mobile_no,
+            designation = o.designation,
+            role_key = o.role_key,
+            office_name = o.office_name,
+            department_name = o.department_name,
+            is_active = o.is_active
+        }).Select(x => (object)x).ToList();
+
+        var (paged, total) = Paginate(projected, page, page_size);
+        _logger.LogInformation("[BCW] GET /bcw/officers -> {Count}/{Total}", paged.Count, total);
+        return Ok(ApiEnvelope<object>.Ok("User data", PayloadId("USER"), total, paged));
+    }
+
+    [HttpGet("acknowledgements")]
+    public IActionResult GetAcknowledgements([FromQuery] int page = 1, [FromQuery] int page_size = 100)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        var projected = Acknowledgements.Select(a => new
+        {
+            acknowledgement_no = a.acknowledgement_no,
+            application_no = a.application_no,
+            applicant_name = a.applicant_name,
+            applicant_mobile = a.applicant_mobile,
+            applicant_email = a.applicant_email,
+            service_name = a.service_name,
+            office_name = a.office_name,
+            officer_email = a.official_email,
+            official_email = a.official_email,
+            department_name = a.department_name,
+            present_status = NormalizeStatus(a.present_status),
+            applied_date = a.applied_date,
+            last_updated_date = a.last_updated_date,
+            NumberOfDaysBeyondDepartmentScope = a.NumberOfDaysBeyondDepartmentScope
+        }).Select(x => (object)x).ToList();
+
+        var (paged, total) = Paginate(projected, page, page_size);
+        _logger.LogInformation("[BCW] GET /bcw/acknowledgements -> {Count}/{Total}", paged.Count, total);
+        return Ok(ApiEnvelope<object>.Ok("Acknowledgement data", PayloadId("ACK"), total, paged));
+    }
+
+    private IActionResult? ValidateHmac()
+    {
+        var pathAndQuery = Request.Path + Request.QueryString;
+
+        if (!Request.Headers.TryGetValue("X-API-KEY", out var apiKey) || apiKey != _apiKey)
+            return Unauthorized(new { error = "BCW: Invalid or missing X-API-KEY" });
+
+        if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
+            return Unauthorized(new { error = "BCW: X-TIMESTAMP missing" });
+
+        if (!DateTime.TryParseExact(
+                timestamp.ToString(),
+                TimestampFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out var parsedTimestamp))
+            return Unauthorized(new { error = "BCW: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
+
+        var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
+        if (skewMinutes > _toleranceMinutes)
+            return StatusCode(403, new { error = "BCW: Timestamp expired" });
+
+        if (!Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) || string.IsNullOrWhiteSpace(incoming))
+            return Unauthorized(new { error = "BCW: X-HMAC-SIGNATURE missing" });
+
+        if (!Request.Headers.TryGetValue("X-API-VERSION", out var apiVersion) || string.IsNullOrWhiteSpace(apiVersion))
+            return Unauthorized(new { error = "BCW: X-API-VERSION missing" });
+
+        var raw = $"GET|{pathAndQuery}|{timestamp}|";
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
+        var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+
+        if (!CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(expected),
+                Encoding.UTF8.GetBytes(incoming.ToString())))
+            return Unauthorized(new { error = "BCW: Signature mismatch" });
+
+        return null;
+    }
+
+    private static string NormalizeStatus(string? status)
+        => status?.Trim().ToUpperInvariant() switch
+        {
+            "PENDING"       => "PENDING",
+            "IN_PROGRESS"   => "IN_PROGRESS",
+            "INPROGRESS"    => "IN_PROGRESS",
+            "RESOLVED"      => "RESOLVED",
+            "REJECTED"      => "REJECTED",
+            "DISPOSED"      => "DISPOSED",
+            "DISPOSED_LATE" => "DISPOSED",
+            _               => "PENDING"
         };
-    }
 
-    // ── DTOs ──────────────────────────────────────────────────────────────────
+    private static string PayloadId(string type)
+        => $"P-{DeptCode}-{type}-{DateTime.UtcNow:yyyyMMddHH}";
 
-    public class BcwOfficeDto
+    private static (List<T> Page, int Total) Paginate<T>(IReadOnlyList<T> all, int page, int pageSize)
     {
-        [JsonPropertyName("office_name")]         public string  office_name         { get; set; } = default!;
-        [JsonPropertyName("department_name")]      public string  department_name     { get; set; } = default!;
-        [JsonPropertyName("office_level")]         public string  office_level        { get; set; } = default!;
-        [JsonPropertyName("district_name")]        public string? district_name       { get; set; }
-        [JsonPropertyName("block_name")]           public string? block_name          { get; set; }
-        [JsonPropertyName("municipality_name")]    public string? municipality_name   { get; set; }
-        [JsonPropertyName("gram_panchayat_name")]  public string? gram_panchayat_name { get; set; }
-        [JsonPropertyName("ward_name")]            public string? ward_name           { get; set; }
-        [JsonPropertyName("parent_office_name")]   public string? parent_office_name  { get; set; }
-        [JsonPropertyName("is_active")]            public bool    is_active           { get; set; }
+        pageSize = Math.Clamp(pageSize, 1, 500);
+        page     = Math.Max(1, page);
+        return (all.Skip((page - 1) * pageSize).Take(pageSize).ToList(), all.Count);
     }
 
-    public class BcwServiceDto
+    // DTOs
+    public sealed class BcwOfficeDto
+    {
+        [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
+        [JsonPropertyName("department_name")]    public string  department_name    { get; set; } = default!;
+        [JsonPropertyName("office_level")]       public string  office_level       { get; set; } = default!;
+        [JsonPropertyName("district_name")]      public string? district_name      { get; set; }
+        [JsonPropertyName("block_name")]         public string? block_name         { get; set; }
+        [JsonPropertyName("municipality_name")]  public string? municipality_name  { get; set; }
+        [JsonPropertyName("gram_panchayat_name")] public string? gram_panchayat_name { get; set; }
+        [JsonPropertyName("ward_name")]          public string? ward_name          { get; set; }
+        [JsonPropertyName("parent_office_name")] public string? parent_office_name { get; set; }
+        [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode  { get; set; }
+        [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
+        [JsonPropertyName("is_active")]          public bool    is_active          { get; set; } = true;
+    }
+
+    public sealed class BcwServiceDto
     {
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_name")]  public string  department_name  { get; set; } = default!;
@@ -322,34 +264,84 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("appeal_hours")]     public int?    appeal_hours     { get; set; }
         [JsonPropertyName("reappeal_days")]    public int?    reappeal_days    { get; set; }
         [JsonPropertyName("reappeal_hours")]   public int?    reappeal_hours   { get; set; }
-        [JsonPropertyName("is_active")]        public bool    is_active        { get; set; }
+        [JsonPropertyName("jurisdiction_mode")]   public string? jurisdiction_mode  { get; set; }
+        [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
+        [JsonPropertyName("is_active")]        public bool    is_active               { get; set; } = true;
+        [JsonPropertyName("beyond_department_days")]   [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?  beyond_department_days  { get; set; }
+        [JsonPropertyName("has_external_dependency")] public bool   has_external_dependency { get; set; } = false;
     }
 
-    public class BcwOfficerDto
+    public sealed class BcwOfficerDto
     {
-        [JsonPropertyName("officer_email")]   public string  officer_email   { get; set; } = default!;
-        [JsonPropertyName("full_name")]       public string  full_name       { get; set; } = default!;
-        [JsonPropertyName("mobile_no")]       public string? mobile_no       { get; set; }
-        [JsonPropertyName("designation")]     public string  designation     { get; set; } = default!;
-        [JsonPropertyName("role_key")]        public string  role_key        { get; set; } = default!;
-        [JsonPropertyName("office_name")]     public string  office_name     { get; set; } = default!;
-        [JsonPropertyName("department_name")] public string  department_name { get; set; } = default!;
-        [JsonPropertyName("is_active")]       public bool    is_active       { get; set; }
+        [JsonPropertyName("official_email")] public string official_email { get; set; } = default!;
+        [JsonPropertyName("full_name")] public string full_name { get; set; } = default!;
+        [JsonPropertyName("mobile_no")] public string? mobile_no { get; set; }
+        [JsonPropertyName("designation")] public string? designation { get; set; }
+        [JsonPropertyName("role_key")] public string? role_key { get; set; }
+        [JsonPropertyName("office_name")] public string? office_name { get; set; }
+        [JsonPropertyName("department_name")] public string? department_name { get; set; }
+        [JsonPropertyName("is_active")] public bool is_active { get; set; } = true;
     }
 
-    public class BcwAcknowledgementDto
+    public sealed class BcwAcknowledgementDto
     {
-        [JsonPropertyName("acknowledgement_no")] public string  acknowledgement_no { get; set; } = default!;
-        [JsonPropertyName("application_no")]     public string? application_no     { get; set; }
-        [JsonPropertyName("service_name")]       public string  service_name       { get; set; } = default!;
-        [JsonPropertyName("department_name")]    public string  department_name    { get; set; } = default!;
-        [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
-        [JsonPropertyName("officer_email")]      public string? officer_email      { get; set; }
-        [JsonPropertyName("applicant_name")]     public string  applicant_name     { get; set; } = default!;
-        [JsonPropertyName("applicant_mobile")]   public string? applicant_mobile   { get; set; }
-        [JsonPropertyName("applicant_email")]    public string? applicant_email    { get; set; }
-        [JsonPropertyName("present_status")]     public string  present_status     { get; set; } = default!;
-        [JsonPropertyName("applied_date")]       public string? applied_date       { get; set; }
-        [JsonPropertyName("last_updated_date")]  public string? last_updated_date  { get; set; }
+        [JsonPropertyName("acknowledgement_no")] public string acknowledgement_no { get; set; } = default!;
+        [JsonPropertyName("application_no")] public string? application_no { get; set; }
+        [JsonPropertyName("service_name")] public string service_name { get; set; } = default!;
+        [JsonPropertyName("office_name")] public string office_name { get; set; } = default!;
+        [JsonPropertyName("official_email")] public string? official_email { get; set; }
+        [JsonPropertyName("department_name")] public string department_name { get; set; } = default!;
+        [JsonPropertyName("applicant_name")] public string? applicant_name { get; set; }
+        [JsonPropertyName("applicant_mobile")] public string? applicant_mobile { get; set; }
+        [JsonPropertyName("applicant_email")] public string? applicant_email { get; set; }
+        [JsonPropertyName("present_status")] public string present_status { get; set; } = "PENDING";
+        [JsonPropertyName("applied_date")] public string? applied_date { get; set; }
+        [JsonPropertyName("last_updated_date")] public string? last_updated_date { get; set; }
+        [JsonPropertyName("number_of_days_beyond_department_scope")] public int? NumberOfDaysBeyondDepartmentScope { get; set; }
+    }
+
+    private sealed class ApiEnvelope<T>
+    {
+        [JsonPropertyName("success")] public bool success { get; set; }
+        [JsonPropertyName("message")] public string message { get; set; } = string.Empty;
+        [JsonPropertyName("payload_id")] public string payload_id { get; set; } = string.Empty;
+        [JsonPropertyName("totalCount")] public int totalCount { get; set; }
+        [JsonPropertyName("checksum")] public string? checksum { get; set; }
+        [JsonPropertyName("data")] public List<T> data { get; set; } = [];
+
+        public static ApiEnvelope<T> Ok(string message, string payloadId, int total, List<T> data)
+        {
+            var without = new ApiEnvelope<T>
+            {
+                success = true,
+                message = message,
+                payload_id = payloadId,
+                totalCount = total,
+                checksum = null,
+                data = data
+            };
+
+            var raw = JsonSerializer.Serialize(without, JsonHelpers.WithoutNulls);
+            var checksum = JsonHelpers.Base64Sha256(raw);
+
+            without.checksum = checksum;
+            return without;
+        }
+    }
+
+    private static class JsonHelpers
+    {
+        public static readonly JsonSerializerOptions WithoutNulls = new()
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = null,
+            WriteIndented = false
+        };
+
+        public static string Base64Sha256(string rawJson)
+        {
+            var hash = SHA256.HashData(Encoding.UTF8.GetBytes(rawJson));
+            return Convert.ToBase64String(hash);
+        }
     }
 }

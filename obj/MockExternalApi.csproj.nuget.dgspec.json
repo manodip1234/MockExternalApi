@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\NIC\\Modk api\\MockExternalApi\\MockExternalApi.csproj": {}
+    "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj": {}
   },
   "projects": {
-    "D:\\NIC\\Modk api\\MockExternalApi\\MockExternalApi.csproj": {
+    "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\NIC\\Modk api\\MockExternalApi\\MockExternalApi.csproj",
+        "projectUniqueName": "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj",
         "projectName": "MockExternalApi",
-        "projectPath": "D:\\NIC\\Modk api\\MockExternalApi\\MockExternalApi.csproj",
+        "projectPath": "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj",
         "packagesPath": "C:\\Users\\manod\\.nuget\\packages\\",
-        "outputPath": "D:\\NIC\\Modk api\\MockExternalApi\\obj\\",
+        "outputPath": "D:\\NIC\\Mock api\\MockExternalApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
