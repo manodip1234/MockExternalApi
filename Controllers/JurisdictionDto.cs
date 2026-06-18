@@ -5,7 +5,6 @@ namespace MockExternalApi.Controllers;
 // Flat geo entry used inside a jurisdiction group's "jurisdiction" array
 public sealed class JurisdictionDto
 {
-    [JsonPropertyName("notes")]              [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public string? notes              { get; set; }
     [JsonPropertyName("state_id")]           [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?    state_id           { get; set; }
     [JsonPropertyName("district_id")]        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?    district_id        { get; set; }
     [JsonPropertyName("block_id")]           [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?    block_id           { get; set; }

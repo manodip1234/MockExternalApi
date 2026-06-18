@@ -14,9 +14,9 @@ namespace MockExternalApi.Controllers
     [Route("mock-api")]
     public class MockApiController : ControllerBase
     {
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // AUTH CONSTANTS
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         private const string ApiKeyHeaderName    = "X-API-KEY";
         private const string TimestampHeaderName = "X-TIMESTAMP";
         private const string SignatureHeaderName = "X-HMAC-SIGNATURE";
@@ -27,12 +27,12 @@ namespace MockExternalApi.Controllers
         // HMAC signing secret
         private const string HmacSecret          = "rtps-demo-secret-001";
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // GROUND TRUTH â€” values that MUST exist in the DB before sync
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // GROUND TRUTH ├óΓé¼ΓÇ¥ values that MUST exist in the DB before sync
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
 
         // Department IDs are looked up by the ingestion service via department_code.
-        // These values are only used for the mock API response payload â€” the
+        // These values are only used for the mock API response payload ├óΓé¼ΓÇ¥ the
         // ingestion service ignores department_id from the payload and resolves
         // it from rtps_wb.department by department_code.
         private static readonly Dictionary<string, int> _deptMap = new()
@@ -93,7 +93,7 @@ namespace MockExternalApi.Controllers
 
         private static readonly OfficeRef[] _realOffices =
         [
-            // BCW — codes/names match rtps_wb.office (source=API rows, ids 45-48)
+            // BCW ΓÇö codes/names match rtps_wb.office (source=API rows, ids 45-48)
             new("OFF-BCW-2A21EDB28681", 1, "BCW State Office Kolkata",          "Kolkata"),
             new("OFF-BCW-26BF2BD85AAB", 2, "BCW District Office Kolkata",        "Kolkata"),
             new("OFF-BCW-E836B6B786C1", 2, "BCW District Office Bardhaman",      "Bardhaman"),
@@ -147,7 +147,7 @@ namespace MockExternalApi.Controllers
 
         private static readonly ServiceRef[] _realServices =
         [
-            // BCW — service_name must match rtps_wb.service exactly for name-based promotion
+            // BCW ΓÇö service_name must match rtps_wb.service exactly for name-based promotion
             new(784217, "BCW Caste Certificate Service", 30),
             new(784218, "BCW Welfare Scheme Service",    45),
             new(784219, "BCW Scholarship Grant Service",  30),
@@ -258,7 +258,7 @@ namespace MockExternalApi.Controllers
         private int ResolveDeptId(string deptCode)
             => _deptMap.TryGetValue(deptCode.ToUpper(), out var id) ? id : 4;
 
-        // Stable payload_id â€” changes only once per day per pipeline
+        // Stable payload_id ├óΓé¼ΓÇ¥ changes only once per day per pipeline
         private static string StablePayloadId(string dept, string type)
             => $"P-{dept.ToUpper()}-{type}-{DateTime.UtcNow:yyyyMMddHH}";
 
@@ -274,9 +274,9 @@ namespace MockExternalApi.Controllers
             return (paged, total);
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // OFFICE endpoint  â†’  auth: HMAC
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // OFFICE endpoint  ├óΓÇáΓÇÖ  auth: HMAC
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("office/{departmentCode}")]
         public IActionResult GetOffice(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -293,7 +293,6 @@ namespace MockExternalApi.Controllers
             var deptId = ResolveDeptId(normalizedDept);
             var all = OfficesFor(normalizedDept).Select(o => new OfficeDto
             {
-                office_code      = o.Code,
                 office_name      = o.Name,
                 department_code  = normalizedDept,
                 department_id    = deptId,
@@ -318,9 +317,9 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId(normalizedDept, "OFFICE")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // SERVICE endpoint  â†’  auth: HMAC
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // SERVICE endpoint  ├óΓÇáΓÇÖ  auth: HMAC
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("service/{departmentCode}")]
         public IActionResult GetService(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -336,7 +335,6 @@ namespace MockExternalApi.Controllers
             var normalizedDept = departmentCode.ToUpper() == "FOOD" ? "FSD" : departmentCode.ToUpper();
             var all = ServicesFor(normalizedDept).Select(s => new ServiceDto
             {
-                service_code     = s.Code,
                 service_name     = s.Name,
                 department_code  = normalizedDept,
                 department_id    = ResolveDeptId(normalizedDept),
@@ -360,17 +358,19 @@ namespace MockExternalApi.Controllers
                         block_name = $"{OfficesFor(normalizedDept).First().DistrictName} Block"
                     }
                     : null,
-                jurisdiction_rules = IsCustomJurisdictionService(normalizedDept, s.Code)
-                    ? BuildServiceCoverageRules(normalizedDept)
-                    : null
+                // jurisdiction_rules = IsCustomJurisdictionService(normalizedDept, s.Code)
+                //    ? BuildServiceCoverageRules(normalizedDept)
+                //    : null,
+                beyond_department_days = (s.Code % 2 == 0) ? 5 : null,
+                has_external_dependency = (s.Code % 2 == 0)
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId(normalizedDept, "SERVICE")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // USER endpoint  â†’  auth: HMAC
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // USER endpoint  ├óΓÇáΓÇÖ  auth: HMAC
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("user/{departmentCode}")]
         public IActionResult GetUser(string departmentCode,
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -391,20 +391,20 @@ namespace MockExternalApi.Controllers
             var deptOffices = OfficesFor(normalizedDept);
             var all = new List<UserDto>
             {
-                new() { official_email = OfficerEmail(1, normalizedDept), full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = deptOffices[0].Code,                         department_code = normalizedDept, is_active = true },
-                new() { official_email = OfficerEmail(2, normalizedDept), full_name = "Priya Banerjee",   mobile_no = "9800000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = deptOffices[1 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
-                new() { official_email = OfficerEmail(3, normalizedDept), full_name = "Suresh Mondal",    mobile_no = "9800000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = deptOffices[2 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
-                new() { official_email = OfficerEmail(4, normalizedDept), full_name = "Rina Das",         mobile_no = "9800000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = deptOffices[3 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
-                new() { official_email = OfficerEmail(5, normalizedDept), full_name = "Karan Singh",      mobile_no = "9800000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = deptOffices[4 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
-                new() { official_email = OfficerEmail(6, normalizedDept), full_name = "Meera Patel",      mobile_no = "9800000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = deptOffices[5 % deptOffices.Length].Code,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(1, normalizedDept), full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_name = deptOffices[0].Name,                         department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(2, normalizedDept), full_name = "Priya Banerjee",   mobile_no = "9800000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_name = deptOffices[1 % deptOffices.Length].Name,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(3, normalizedDept), full_name = "Suresh Mondal",    mobile_no = "9800000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_name = deptOffices[2 % deptOffices.Length].Name,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(4, normalizedDept), full_name = "Rina Das",         mobile_no = "9800000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_name = deptOffices[3 % deptOffices.Length].Name,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(5, normalizedDept), full_name = "Karan Singh",      mobile_no = "9800000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_name = deptOffices[4 % deptOffices.Length].Name,  department_code = normalizedDept, is_active = true },
+                new() { official_email = OfficerEmail(6, normalizedDept), full_name = "Meera Patel",      mobile_no = "9800000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_name = deptOffices[5 % deptOffices.Length].Name,  department_code = normalizedDept, is_active = true },
             };
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId(normalizedDept, "USER")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // ACKNOWLEDGEMENT endpoint  â†’  auth: HMAC
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // ACKNOWLEDGEMENT endpoint  ├óΓÇáΓÇÖ  auth: HMAC
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("acknowledgement/{departmentCode}")]
         [HttpGet("ack/{departmentCode}")]
         public IActionResult GetAcknowledgement(string departmentCode,
@@ -437,33 +437,34 @@ namespace MockExternalApi.Controllers
                     applicant_name     = SampleApplicantName(i),
                     applicant_mobile   = $"980000{i:D4}",
                     applicant_email    = $"citizen.{normalizedDept.ToLower()}{i}@example.com",
-                    service_code       = svc.Code,
-                    office_code        = off.Code,
+                    service_name       = svc.Name,
+                    office_name        = off.Name,
                     official_email     = OfficerEmail((i % 6) + 1, normalizedDept),
                     department_code    = normalizedDept,
                     present_status     = statuses[(i - 1) % statuses.Length],
                     applied_date       = DateTime.UtcNow.AddDays(-(i * 5)).ToString("yyyy-MM-dd"),
                     last_updated_date  = DateTime.UtcNow.AddDays(-(i * 2)).ToString("yyyy-MM-dd"),
+                    NumberOfDaysBeyondDepartmentScope = (i % 3 == 0) ? 3 : null,
                 };
             }).ToList();
             var (paged, total) = Paginate(all, page, pageSize);
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId(normalizedDept, "ACK")));
         }
 
-        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        // ├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É
         // DEPARTMENT-SPECIFIC ENDPOINTS
-        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        // ├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // BCW DEPARTMENT ENDPOINTS
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("bcw/office")]
         public IActionResult GetBcwOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("BCW", page, page_size);
         }
 
@@ -473,7 +474,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("BCW", page, page_size);
         }
 
@@ -483,7 +484,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("BCW", page, page_size);
         }
 
@@ -494,20 +495,20 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[BCW-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[BCW-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("BCW", page, page_size);
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // FOOD DEPARTMENT ENDPOINTS
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("food/office")]
         public IActionResult GetFoodOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("FOOD", page, page_size);
         }
 
@@ -517,7 +518,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("FOOD", page, page_size);
         }
 
@@ -527,7 +528,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("FOOD", page, page_size);
         }
 
@@ -538,20 +539,20 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[FOOD-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[FOOD-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("FOOD", page, page_size);
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // AGR DEPARTMENT ENDPOINTS
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("agr/office")]
         public IActionResult GetAgrOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildOfficeResponse("AGR", page, page_size);
         }
 
@@ -561,7 +562,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildServiceResponse("AGR", page, page_size);
         }
 
@@ -571,7 +572,7 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildUserResponse("AGR", page, page_size);
         }
 
@@ -582,31 +583,31 @@ namespace MockExternalApi.Controllers
             var path       = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[AGR-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[AGR-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
             return BuildAckResponse("AGR", page, page_size);
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // ENV  â€”  SCENARIO: Happy path (all valid, all FKs resolvable)
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // ENV  ├óΓé¼ΓÇ¥  SCENARIO: Happy path (all valid, all FKs resolvable)
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("env/office")]
         public IActionResult GetEnvOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
-                new() { office_code = "OFF-ENV-1", office_name = "Environment District Office Kolkata",    department_code = "ENV", department_id = 7, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-ENV-2", office_name = "Environment State Office Kolkata",      department_code = "ENV", department_id = 7, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
-                new() { office_code = "OFF-ENV-3", office_name = "Environment District Office Darjeeling",department_code = "ENV", department_id = 7, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-ENV-4", office_name = "Environment Block Office Jalpaiguri",   department_code = "ENV", department_id = 7, district_name = "Jalpaiguri", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-ENV-5", office_name = "Environment District Office Howrah",    department_code = "ENV", department_id = 7, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-ENV-6", office_name = "Environment Block Office Nadia",        department_code = "ENV", department_id = 7, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-ENV-7", office_name = "Environment District Office Bardhaman", department_code = "ENV", department_id = 7, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-ENV-8", office_name = "Environment Block Office Birbhum",      department_code = "ENV", department_id = 7, district_name = "Birbhum",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Environment District Office Kolkata",    department_code = "ENV", department_id = 7, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Environment State Office Kolkata",      department_code = "ENV", department_id = 7, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
+                new() { office_name = "Environment District Office Darjeeling",department_code = "ENV", department_id = 7, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Environment Block Office Jalpaiguri",   department_code = "ENV", department_id = 7, district_name = "Jalpaiguri", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Environment District Office Howrah",    department_code = "ENV", department_id = 7, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Environment Block Office Nadia",        department_code = "ENV", department_id = 7, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Environment District Office Bardhaman", department_code = "ENV", department_id = 7, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Environment Block Office Birbhum",      department_code = "ENV", department_id = 7, district_name = "Birbhum",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("ENV", "OFFICE")));
@@ -618,16 +619,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
-                new() { service_code = 5001, service_name = "ENV Service A", department_code = "ENV", department_id = 7, stipulated_days = 21, resolution_days = 26, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 5002, service_name = "ENV Service B", department_code = "ENV", department_id = 7, stipulated_days = 14, resolution_days = 19, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 5003, service_name = "ENV Service C", department_code = "ENV", department_id = 7, stipulated_days = 28, resolution_days = 33, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 5004, service_name = "ENV Service D", department_code = "ENV", department_id = 7, stipulated_days = 33, resolution_days = 38, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 5005, service_name = "ENV Service E", department_code = "ENV", department_id = 7, stipulated_days = 19, resolution_days = 24, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 5006, service_name = "ENV Service F", department_code = "ENV", department_id = 7, stipulated_days = 42, resolution_days = 47, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service A", department_code = "ENV", department_id = 7, stipulated_days = 21, resolution_days = 26, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service B", department_code = "ENV", department_id = 7, stipulated_days = 14, resolution_days = 19, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service C", department_code = "ENV", department_id = 7, stipulated_days = 28, resolution_days = 33, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service D", department_code = "ENV", department_id = 7, stipulated_days = 33, resolution_days = 38, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service E", department_code = "ENV", department_id = 7, stipulated_days = 19, resolution_days = 24, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "ENV Service F", department_code = "ENV", department_id = 7, stipulated_days = 42, resolution_days = 47, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("ENV", "SERVICE")));
@@ -639,16 +640,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
-                new() { official_email = "officer1.env@wb.gov.in", full_name = "Ananya Das",       mobile_no = "9811000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-ENV-1", department_code = "ENV", is_active = true },
-                new() { official_email = "officer2.env@wb.gov.in", full_name = "Debashis Roy",     mobile_no = "9811000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-ENV-2", department_code = "ENV", is_active = true },
-                new() { official_email = "officer3.env@wb.gov.in", full_name = "Mitali Ghosh",     mobile_no = "9811000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-ENV-3", department_code = "ENV", is_active = true },
-                new() { official_email = "officer4.env@wb.gov.in", full_name = "Rajib Chatterjee", mobile_no = "9811000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-ENV-4", department_code = "ENV", is_active = true },
-                new() { official_email = "officer5.env@wb.gov.in", full_name = "Smita Banerjee",   mobile_no = "9811000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-ENV-5", department_code = "ENV", is_active = true },
-                new() { official_email = "officer6.env@wb.gov.in", full_name = "Arindam Pal",      mobile_no = "9811000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-ENV-6", department_code = "ENV", is_active = true },
+                new() { official_email = "officer1.env@wb.gov.in", full_name = "Ananya Das",       mobile_no = "9811000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", department_code = "ENV", is_active = true },
+                new() { official_email = "officer2.env@wb.gov.in", full_name = "Debashis Roy",     mobile_no = "9811000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  department_code = "ENV", is_active = true },
+                new() { official_email = "officer3.env@wb.gov.in", full_name = "Mitali Ghosh",     mobile_no = "9811000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  department_code = "ENV", is_active = true },
+                new() { official_email = "officer4.env@wb.gov.in", full_name = "Rajib Chatterjee", mobile_no = "9811000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", department_code = "ENV", is_active = true },
+                new() { official_email = "officer5.env@wb.gov.in", full_name = "Smita Banerjee",   mobile_no = "9811000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  department_code = "ENV", is_active = true },
+                new() { official_email = "officer6.env@wb.gov.in", full_name = "Arindam Pal",      mobile_no = "9811000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  department_code = "ENV", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("ENV", "USER")));
@@ -661,7 +662,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[ENV-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[ENV-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var statuses = new[] { "DISPOSED", "IN_PROGRESS", "PENDING", "REJECTED", "DISPOSED", "IN_PROGRESS" };
             var all = Enumerable.Range(1, 15).Select(i => new AcknowledgementDto
@@ -671,8 +672,8 @@ namespace MockExternalApi.Controllers
                 applicant_name     = SampleApplicantName(i),
                 applicant_mobile   = $"9811100{i:D3}",
                 applicant_email    = $"citizen.env{i}@example.com",
-                service_code       = 5001 + ((i - 1) % 6),
-                office_code        = $"OFF-ENV-{((i - 1) % 8) + 1}",
+                service_name = $"Service {(char)('A' + ((i - 1) % 6))}",
+                office_name = $"Office {((i - 1) % 8) + 1}",
                 official_email     = $"officer{((i % 6) + 1)}.env@wb.gov.in",
                 department_code    = "ENV",
                 present_status     = statuses[(i - 1) % statuses.Length],
@@ -683,29 +684,29 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("ENV", "ACK")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // TRANS  â€”  SCENARIO: Partial FK failure
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // TRANS  ├óΓé¼ΓÇ¥  SCENARIO: Partial FK failure
         //   Offices 3 & 4 use codes that do NOT exist in rtps_wb.office
-        //   ACK records 5-8 reference those ghost offices â†’ retry queue
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        //   ACK records 5-8 reference those ghost offices ├óΓÇáΓÇÖ retry queue
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("trans/office")]
         public IActionResult GetTransOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
-                new() { office_code = "OFF-TRANS-1", office_name = "Transport District Office Kolkata",   department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-2", office_name = "Transport State Office Kolkata",     department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
-                new() { office_code = "OFF-TRANS-3", office_name = "Transport District Office Asansol",  department_code = "TRANS", department_id = 8, district_name = "Asansol",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-4", office_name = "Transport Block Office Siliguri",    department_code = "TRANS", department_id = 8, district_name = "Siliguri",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-TRANS-5", office_name = "Transport District Office Howrah",   department_code = "TRANS", department_id = 8, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-6", office_name = "Transport Block Office Darjeeling",  department_code = "TRANS", department_id = 8, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-TRANS-7", office_name = "Transport District Office Bardhaman",department_code = "TRANS", department_id = 8, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-TRANS-8", office_name = "Transport Block Office Nadia",       department_code = "TRANS", department_id = 8, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Transport District Office Kolkata",   department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Transport State Office Kolkata",     department_code = "TRANS", department_id = 8, district_name = "Kolkata",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
+                new() { office_name = "Transport District Office Asansol",  department_code = "TRANS", department_id = 8, district_name = "Asansol",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Transport Block Office Siliguri",    department_code = "TRANS", department_id = 8, district_name = "Siliguri",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Transport District Office Howrah",   department_code = "TRANS", department_id = 8, district_name = "Howrah",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Transport Block Office Darjeeling",  department_code = "TRANS", department_id = 8, district_name = "Darjeeling", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Transport District Office Bardhaman",department_code = "TRANS", department_id = 8, district_name = "Bardhaman",  state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Transport Block Office Nadia",       department_code = "TRANS", department_id = 8, district_name = "Nadia",      state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("TRANS", "OFFICE")));
@@ -717,16 +718,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
-                new() { service_code = 6001, service_name = "TRANS Service A", department_code = "TRANS", department_id = 8, stipulated_days = 10, resolution_days = 15, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 6002, service_name = "TRANS Service B", department_code = "TRANS", department_id = 8, stipulated_days = 20, resolution_days = 25, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 6003, service_name = "TRANS Service C", department_code = "TRANS", department_id = 8, stipulated_days = 30, resolution_days = 35, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 6004, service_name = "TRANS Service D", department_code = "TRANS", department_id = 8, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 6005, service_name = "TRANS Service E", department_code = "TRANS", department_id = 8, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 6006, service_name = "TRANS Service F", department_code = "TRANS", department_id = 8, stipulated_days = 35, resolution_days = 40, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service A", department_code = "TRANS", department_id = 8, stipulated_days = 10, resolution_days = 15, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service B", department_code = "TRANS", department_id = 8, stipulated_days = 20, resolution_days = 25, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service C", department_code = "TRANS", department_id = 8, stipulated_days = 30, resolution_days = 35, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service D", department_code = "TRANS", department_id = 8, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service E", department_code = "TRANS", department_id = 8, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "TRANS Service F", department_code = "TRANS", department_id = 8, stipulated_days = 35, resolution_days = 40, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("TRANS", "SERVICE")));
@@ -738,16 +739,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
-                new() { official_email = "officer1.trans@wb.gov.in", full_name = "Rajesh Sinha",    mobile_no = "9822000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-TRANS-1", department_code = "TRANS", is_active = true },
-                new() { official_email = "officer2.trans@wb.gov.in", full_name = "Soma Chatterjee", mobile_no = "9822000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-TRANS-2", department_code = "TRANS", is_active = true },
-                new() { official_email = "officer3.trans@wb.gov.in", full_name = "Nikhil Bose",     mobile_no = "9822000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-TRANS-3", department_code = "TRANS", is_active = true },
-                new() { official_email = "officer4.trans@wb.gov.in", full_name = "Priya Sharma",    mobile_no = "9822000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-TRANS-4", department_code = "TRANS", is_active = true },
-                new() { official_email = "officer5.trans@wb.gov.in", full_name = "Amit Kumar",      mobile_no = "9822000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-TRANS-5", department_code = "TRANS", is_active = true },
-                new() { official_email = "officer6.trans@wb.gov.in", full_name = "Kavita Jain",     mobile_no = "9822000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-TRANS-6", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer1.trans@wb.gov.in", full_name = "Rajesh Sinha",    mobile_no = "9822000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer2.trans@wb.gov.in", full_name = "Soma Chatterjee", mobile_no = "9822000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  department_code = "TRANS", is_active = true },
+                new() { official_email = "officer3.trans@wb.gov.in", full_name = "Nikhil Bose",     mobile_no = "9822000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  department_code = "TRANS", is_active = true },
+                new() { official_email = "officer4.trans@wb.gov.in", full_name = "Priya Sharma",    mobile_no = "9822000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", department_code = "TRANS", is_active = true },
+                new() { official_email = "officer5.trans@wb.gov.in", full_name = "Amit Kumar",      mobile_no = "9822000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  department_code = "TRANS", is_active = true },
+                new() { official_email = "officer6.trans@wb.gov.in", full_name = "Kavita Jain",     mobile_no = "9822000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  department_code = "TRANS", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("TRANS", "USER")));
@@ -760,7 +761,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[TRANS-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[TRANS-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
             {
@@ -769,8 +770,8 @@ namespace MockExternalApi.Controllers
                 applicant_name     = SampleApplicantName(i),
                 applicant_mobile   = $"9822200{i:D3}",
                 applicant_email    = $"citizen.trans{i}@example.com",
-                service_code       = 6001 + ((i - 1) % 6),
-                office_code        = $"OFF-TRANS-{((i - 1) % 8) + 1}",
+                service_name = $"Service {(char)('A' + ((i - 1) % 6))}",
+                office_name = $"Office {((i - 1) % 8) + 1}",
                 official_email     = $"officer{((i % 6) + 1)}.trans@wb.gov.in",
                 department_code    = "TRANS",
                 present_status     = i % 2 == 0 ? "DISPOSED" : "IN_PROGRESS",
@@ -781,31 +782,31 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("TRANS", "ACK")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // WRD  â€”  SCENARIO: Edge cases
-        //   USER â†’ empty list (tests empty-dataset handling)
-        //   ACK  â†’ 25 records (tests pagination); records 21-25 reuse
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // WRD  ├óΓé¼ΓÇ¥  SCENARIO: Edge cases
+        //   USER ├óΓÇáΓÇÖ empty list (tests empty-dataset handling)
+        //   ACK  ├óΓÇáΓÇÖ 25 records (tests pagination); records 21-25 reuse
         //          ack numbers from 1-5 (tests duplicate handling)
-        //   ACK  â†’ null official_email (tests null FK handling)
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        //   ACK  ├óΓÇáΓÇÖ null official_email (tests null FK handling)
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("wrd/office")]
         public IActionResult GetWrdOffice([FromQuery] int page = 1, [FromQuery] int page_size = 100)
         {
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-OFFICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-OFFICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<OfficeDto>
             {
-                new() { office_code = "OFF-WRD-1", office_name = "Water Resource District Office Kolkata",   department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-WRD-2", office_name = "Water Resource State Office Kolkata",     department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
-                new() { office_code = "OFF-WRD-3", office_name = "Water Resource District Office Paschim Medinipur",department_code = "WRD", department_id = 13, district_name = "Paschim Medinipur", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-WRD-4", office_name = "Water Resource Block Office Bankura",     department_code = "WRD", department_id = 13, district_name = "Bankura",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-WRD-5", office_name = "Water Resource District Office Howrah",   department_code = "WRD", department_id = 13, district_name = "Howrah",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-WRD-6", office_name = "Water Resource Block Office Purulia",     department_code = "WRD", department_id = 13, district_name = "Purulia",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
-                new() { office_code = "OFF-WRD-7", office_name = "Water Resource District Office Nadia",    department_code = "WRD", department_id = 13, district_name = "Nadia",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
-                new() { office_code = "OFF-WRD-8", office_name = "Water Resource Block Office Birbhum",     department_code = "WRD", department_id = 13, district_name = "Birbhum",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Water Resource District Office Kolkata",   department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Water Resource State Office Kolkata",     department_code = "WRD", department_id = 13, district_name = "Kolkata",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 1, level_key = "STATE",    is_active = true },
+                new() { office_name = "Water Resource District Office Paschim Medinipur",department_code = "WRD", department_id = 13, district_name = "Paschim Medinipur", state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Water Resource Block Office Bankura",     department_code = "WRD", department_id = 13, district_name = "Bankura",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Water Resource District Office Howrah",   department_code = "WRD", department_id = 13, district_name = "Howrah",    state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Water Resource Block Office Purulia",     department_code = "WRD", department_id = 13, district_name = "Purulia",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
+                new() { office_name = "Water Resource District Office Nadia",    department_code = "WRD", department_id = 13, district_name = "Nadia",     state_name = "West Bengal", state_id = WestBengalStateId, level_id = 2, level_key = "DISTRICT", is_active = true },
+                new() { office_name = "Water Resource Block Office Birbhum",     department_code = "WRD", department_id = 13, district_name = "Birbhum",   state_name = "West Bengal", state_id = WestBengalStateId, level_id = 3, level_key = "BLOCK",    is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<OfficeDto>.Ok(paged, total, "Office data", StablePayloadId("WRD", "OFFICE")));
@@ -817,16 +818,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-SERVICE] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-SERVICE] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<ServiceDto>
             {
-                new() { service_code = 7001, service_name = "WRD Service A", department_code = "WRD", department_id = 13, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 7002, service_name = "WRD Service B", department_code = "WRD", department_id = 13, stipulated_days = 40, resolution_days = 45, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 7003, service_name = "WRD Service C", department_code = "WRD", department_id = 13, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 7004, service_name = "WRD Service D", department_code = "WRD", department_id = 13, stipulated_days = 32, resolution_days = 37, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 7005, service_name = "WRD Service E", department_code = "WRD", department_id = 13, stipulated_days = 18, resolution_days = 23, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
-                new() { service_code = 7006, service_name = "WRD Service F", department_code = "WRD", department_id = 13, stipulated_days = 48, resolution_days = 53, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service A", department_code = "WRD", department_id = 13, stipulated_days = 25, resolution_days = 30, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service B", department_code = "WRD", department_id = 13, stipulated_days = 40, resolution_days = 45, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service C", department_code = "WRD", department_id = 13, stipulated_days = 15, resolution_days = 20, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service D", department_code = "WRD", department_id = 13, stipulated_days = 32, resolution_days = 37, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service E", department_code = "WRD", department_id = 13, stipulated_days = 18, resolution_days = 23, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
+                new() { service_name = "WRD Service F", department_code = "WRD", department_id = 13, stipulated_days = 48, resolution_days = 53, appeal_days = 30, reappeal_days = 60, stipulated_text = "Standard processing", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<ServiceDto>.Ok(paged, total, "Service data", StablePayloadId("WRD", "SERVICE")));
@@ -838,16 +839,16 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-USER] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-USER] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var all = new List<UserDto>
             {
-                new() { official_email = "officer1.wrd@wb.gov.in", full_name = "Subrata Ghosh",   mobile_no = "9833000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_code = "OFF-WRD-1", department_code = "WRD", is_active = true },
-                new() { official_email = "officer2.wrd@wb.gov.in", full_name = "Tanmoy Basu",     mobile_no = "9833000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  office_code = "OFF-WRD-2", department_code = "WRD", is_active = true },
-                new() { official_email = "officer3.wrd@wb.gov.in", full_name = "Lipika Sen",      mobile_no = "9833000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  office_code = "OFF-WRD-3", department_code = "WRD", is_active = true },
-                new() { official_email = "officer4.wrd@wb.gov.in", full_name = "Partha Sarkar",   mobile_no = "9833000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", office_code = "OFF-WRD-4", department_code = "WRD", is_active = true },
-                new() { official_email = "officer5.wrd@wb.gov.in", full_name = "Debjani Mitra",   mobile_no = "9833000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  office_code = "OFF-WRD-5", department_code = "WRD", is_active = true },
-                new() { official_email = "officer6.wrd@wb.gov.in", full_name = "Suman Chakraborty",mobile_no = "9833000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  office_code = "OFF-WRD-6", department_code = "WRD", is_active = true },
+                new() { official_email = "officer1.wrd@wb.gov.in", full_name = "Subrata Ghosh",   mobile_no = "9833000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", department_code = "WRD", is_active = true },
+                new() { official_email = "officer2.wrd@wb.gov.in", full_name = "Tanmoy Basu",     mobile_no = "9833000002", designation = "Principal Secretary",        role_key = "APPELLATE_OFFICER",  department_code = "WRD", is_active = true },
+                new() { official_email = "officer3.wrd@wb.gov.in", full_name = "Lipika Sen",      mobile_no = "9833000003", designation = "Secretary",                  role_key = "REVIEWING_OFFICER",  department_code = "WRD", is_active = true },
+                new() { official_email = "officer4.wrd@wb.gov.in", full_name = "Partha Sarkar",   mobile_no = "9833000004", designation = "Deputy Secretary",           role_key = "DESIGNATED_OFFICER", department_code = "WRD", is_active = true },
+                new() { official_email = "officer5.wrd@wb.gov.in", full_name = "Debjani Mitra",   mobile_no = "9833000005", designation = "Joint Secretary",            role_key = "APPELLATE_OFFICER",  department_code = "WRD", is_active = true },
+                new() { official_email = "officer6.wrd@wb.gov.in", full_name = "Suman Chakraborty",mobile_no = "9833000006", designation = "Assistant Secretary",        role_key = "REVIEWING_OFFICER",  department_code = "WRD", is_active = true },
             };
             var (paged, total) = Paginate(all, page, page_size);
             return Ok(ApiResponse<UserDto>.Ok(paged, total, "User data", StablePayloadId("WRD", "USER")));
@@ -860,7 +861,7 @@ namespace MockExternalApi.Controllers
             var path = Request.Path + Request.QueryString;
             var authResult = ValidateRequest("HMAC", path);
             if (authResult != null) return authResult;
-            _logger.LogInformation("[WRD-ACK] âœ“ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
+            _logger.LogInformation("[WRD-ACK] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize} | Path={Path}", page, page_size, path);
 
             var statuses = new[] { "IN_PROGRESS", "DISPOSED", "REJECTED", "PENDING" };
             var all = Enumerable.Range(1, 20).Select(i => new AcknowledgementDto
@@ -870,8 +871,8 @@ namespace MockExternalApi.Controllers
                 applicant_name     = SampleApplicantName((i - 1) % 10 + 1),
                 applicant_mobile   = $"9833300{i:D3}",
                 applicant_email    = $"citizen.wrd{i}@example.com",
-                service_code       = 7001 + ((i - 1) % 6),
-                office_code        = $"OFF-WRD-{((i - 1) % 8) + 1}",
+                service_name = $"Service {(char)('A' + ((i - 1) % 6))}",
+                office_name = $"Office {((i - 1) % 8) + 1}",
                 official_email     = $"officer{((i % 6) + 1)}.wrd@wb.gov.in",
                 department_code    = "WRD",
                 present_status     = statuses[(i - 1) % statuses.Length],
@@ -882,16 +883,16 @@ namespace MockExternalApi.Controllers
             return Ok(ApiResponse<AcknowledgementDto>.Ok(paged, total, "Acknowledgement data", StablePayloadId("WRD", "ACK")));
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // ABC SUBMISSIONS endpoint  â†’  Monthly MIS aggregate (Form A shape)
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // ABC SUBMISSIONS endpoint  ├óΓÇáΓÇÖ  Monthly MIS aggregate (Form A shape)
         // Route: GET /mock-api/abc/submissions
         // Returns monthly MIS summary records per service per office.
-        // Same shape as Form A portal submissions â€” dept_code, office_id,
+        // Same shape as Form A portal submissions ├óΓé¼ΓÇ¥ dept_code, office_id,
         // service_id, period_month, period_year, counts.
         // AbcSyncService calls this endpoint, groups records by
         // (dept_code, period_month, period_year), and promotes via
         // IApplicationRecordService.AddBatchAsync to rtps_wb.form_a_submission.
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpGet("abc/submissions")]
         public IActionResult GetAbcSubmissions(
             [FromQuery] int page = 1, [FromQuery] int page_size = 100)
@@ -901,7 +902,7 @@ namespace MockExternalApi.Controllers
             if (authResult != null) return authResult;
 
             _logger.LogInformation(
-                "[BCW-ABC-SYNC] âœ“ Request passed | Page={Page} PageSize={PageSize}",
+                "[BCW-ABC-SYNC] ├ó┼ôΓÇ£ Request passed | Page={Page} PageSize={PageSize}",
                 page, page_size);
 
             return BuildAbcSubmissionsResponse(page, page_size);
@@ -911,7 +912,7 @@ namespace MockExternalApi.Controllers
         {
             const string AbcDeptCode = "BCW";
             const string AbcDeptName = "Backward Classes Welfare Department";
-            // index → form_type: 0,1 = A  |  2 = B  |  3 = C
+            // index ΓåÆ form_type: 0,1 = A  |  2 = B  |  3 = C
             var fixtures = new[]
             {
                 // Names must exactly match rtps_wb.service.service_name for promotion
@@ -970,17 +971,17 @@ namespace MockExternalApi.Controllers
         [HttpPost("abc/sync-response")]
         public Task<IActionResult> AbcCallback() => ReceiveSyncCallback();
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // ABC SUBMISSIONS endpoint  â†’  Monthly MIS aggregate (Form A shape)
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // ABC SUBMISSIONS endpoint  ├óΓÇáΓÇÖ  Monthly MIS aggregate (Form A shape)
         // Route: GET /mock-api/abc/submissions
         //
         // Returns monthly MIS summary records per service per period.
         // AbcSyncService fetches these pages, groups by
         // (dept_code, period_month, period_year), maps to
-        // FormSubmissionBatchDto and calls AddBatchAsync â€”
+        // FormSubmissionBatchDto and calls AddBatchAsync ├óΓé¼ΓÇ¥
         // same pipeline as Form A portal submissions.
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpPost("bcw/sync-response")]
         public Task<IActionResult> BcwCallback()   => ReceiveSyncCallback();
 
@@ -999,9 +1000,9 @@ namespace MockExternalApi.Controllers
         [HttpPost("wrd/sync-response")]
         public Task<IActionResult> WrdCallback()   => ReceiveSyncCallback();
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-        // CALLBACK receiver  â†’  POST /mock-api/sync-response (shared)
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+        // CALLBACK receiver  ├óΓÇáΓÇÖ  POST /mock-api/sync-response (shared)
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         [HttpPost("sync-response")]
         public async Task<IActionResult> ReceiveSyncCallback()
         {
@@ -1018,16 +1019,16 @@ namespace MockExternalApi.Controllers
             var apiKey    = Request.Headers.TryGetValue("X-API-KEY",   out var ak) ? ak.ToString() : string.Empty;
             var incomingSig = Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var sig) ? sig.ToString() : string.Empty;
 
-            _logger.LogInformation("â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—");
-            _logger.LogInformation("â•‘           [CALLBACK-RECEIVED] INCOMING POST              â•‘");
-            _logger.LogInformation("â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•");
+            _logger.LogInformation("├óΓÇóΓÇ¥├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇóΓÇö");
+            _logger.LogInformation("├óΓÇóΓÇÿ           [CALLBACK-RECEIVED] INCOMING POST              ├óΓÇóΓÇÿ");
+            _logger.LogInformation("├óΓÇó┼í├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬É├óΓÇó┬¥");
             _logger.LogInformation("[CALLBACK-RECEIVED] Path      : {Path}", path);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-API-KEY : {Key}",  apiKey);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-TIMESTAMP: {Ts}",  timestamp);
             _logger.LogInformation("[CALLBACK-RECEIVED] X-HMAC-SIGNATURE: {Sig}", incomingSig);
             _logger.LogInformation("[CALLBACK-RECEIVED] Raw Body  : {Body}", rawBody);
 
-            // â”€â”€ HMAC Validation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼ HMAC Validation ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
             if (string.IsNullOrWhiteSpace(apiKey) || apiKey != ValidApiKey)
             {
                 _logger.LogWarning("[CALLBACK-REJECTED] Invalid or missing X-API-KEY");
@@ -1063,13 +1064,13 @@ namespace MockExternalApi.Controllers
                     Encoding.UTF8.GetBytes(expectedSig),
                     Encoding.UTF8.GetBytes(incomingSig)))
             {
-                _logger.LogWarning("[CALLBACK-REJECTED] âœ— HMAC signature mismatch | Path={Path} | Timestamp={Ts}", path, timestamp);
+                _logger.LogWarning("[CALLBACK-REJECTED] ├ó┼ôΓÇö HMAC signature mismatch | Path={Path} | Timestamp={Ts}", path, timestamp);
                 return Unauthorized("CALLBACK: Signature mismatch");
             }
 
-            _logger.LogInformation("[CALLBACK-RECEIVED] âœ“ HMAC signature VALID");
+            _logger.LogInformation("[CALLBACK-RECEIVED] ├ó┼ôΓÇ£ HMAC signature VALID");
 
-            // â”€â”€ Deserialize payload â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼ Deserialize payload ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
             CallbackPayload? payload = null;
             try
             {
@@ -1089,9 +1090,9 @@ namespace MockExternalApi.Controllers
                 return BadRequest("Empty payload");
             }
 
-            // â”€â”€ Extract pipeline name from payload_id â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-            // Format: P-BCW-OFFICE-20260408095646  â†’  pipeline = OFFICE
-            // UUID format (BCW): 7c99b30f-3385-4ca2-...  â†’  pipeline = UNKNOWN
+            // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼ Extract pipeline name from payload_id ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+            // Format: P-BCW-OFFICE-20260408095646  ├óΓÇáΓÇÖ  pipeline = OFFICE
+            // UUID format (BCW): 7c99b30f-3385-4ca2-...  ├óΓÇáΓÇÖ  pipeline = UNKNOWN
             var pipeline = "UNKNOWN";
             if (!string.IsNullOrWhiteSpace(payload.PayloadId) && payload.PayloadId.StartsWith("P-"))
             {
@@ -1099,17 +1100,17 @@ namespace MockExternalApi.Controllers
                 if (parts.Length >= 3) pipeline = parts[2];
             }
 
-            // â”€â”€ Structured log summary â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-            _logger.LogInformation("â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”");
-            _logger.LogInformation("â”‚              [CALLBACK-RECEIVED] SUMMARY                 â”‚");
-            _logger.LogInformation("â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤");
-            _logger.LogInformation("â”‚ Pipeline   : {Pipeline,-52} â”‚", pipeline);
-            _logger.LogInformation("â”‚ PayloadId  : {Id,-52} â”‚", payload.PayloadId ?? "[NULL]");
-            _logger.LogInformation("â”‚ Status     : {Status,-52} â”‚", payload.Status);
-            _logger.LogInformation("â”‚ Total      : {Total,-52} â”‚", payload.TotalRecords);
-            _logger.LogInformation("â”‚ Success    : {Success,-52} â”‚", payload.SuccessCount);
-            _logger.LogInformation("â”‚ Failed     : {Failed,-52} â”‚", payload.FailureCount);
-            _logger.LogInformation("â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜");
+            // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼ Structured log summary ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
+            _logger.LogInformation("├óΓÇ¥┼Æ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥┬É");
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ              [CALLBACK-RECEIVED] SUMMARY                 ├óΓÇ¥ΓÇÜ");
+            _logger.LogInformation("├óΓÇ¥┼ô├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥┬ñ");
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ Pipeline   : {Pipeline,-52} ├óΓÇ¥ΓÇÜ", pipeline);
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ PayloadId  : {Id,-52} ├óΓÇ¥ΓÇÜ", payload.PayloadId ?? "[NULL]");
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ Status     : {Status,-52} ├óΓÇ¥ΓÇÜ", payload.Status);
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ Total      : {Total,-52} ├óΓÇ¥ΓÇÜ", payload.TotalRecords);
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ Success    : {Success,-52} ├óΓÇ¥ΓÇÜ", payload.SuccessCount);
+            _logger.LogInformation("├óΓÇ¥ΓÇÜ Failed     : {Failed,-52} ├óΓÇ¥ΓÇÜ", payload.FailureCount);
+            _logger.LogInformation("├óΓÇ¥ΓÇ¥├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥╦£");
 
             if (payload.Errors?.Count > 0)
             {
@@ -1123,7 +1124,7 @@ namespace MockExternalApi.Controllers
                 _logger.LogInformation("[CALLBACK-RECEIVED] Errors: NONE");
             }
 
-            // â”€â”€ Pretty print to console â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+            // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼ Pretty print to console ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
             try
             {
                 var parsed = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(rawBody);
@@ -1147,16 +1148,16 @@ namespace MockExternalApi.Controllers
                 timestamp  = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
             });
         }
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // AUTH: UNIFIED DISPATCHER
         //
         // authType | behaviour
         // ---------|--------------------------------------------------
-        // "NONE"   | Always passes â€” returns null
+        // "NONE"   | Always passes ├óΓé¼ΓÇ¥ returns null
         // "API_KEY"| Delegates to ValidateApiKey()
         // "HMAC"   | Delegates to ValidateHmac(path)
         // other    | Returns 401 Unsupported auth type
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         private IActionResult? ValidateRequest(string authType, string path) =>
             authType.ToUpperInvariant() switch
             {
@@ -1166,12 +1167,12 @@ namespace MockExternalApi.Controllers
                 _         => Unauthorized($"Unsupported auth type: {authType}"),
             };
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // AUTH: API KEY
         //
         // Reads header X-API-KEY and compares against ValidApiKey.
         // Returns null on success, Unauthorized on failure.
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         private IActionResult? ValidateApiKey()
         {
             if (!Request.Headers.TryGetValue(ApiKeyHeaderName, out var key))
@@ -1183,20 +1184,20 @@ namespace MockExternalApi.Controllers
             return null; // valid
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // AUTH: HMAC SHA-256
         //
         // Expected headers:
-        //   X-API-KEY        â€” must equal ValidApiKey
-        //   X-TIMESTAMP      â€” ISO / epoch string included in raw string
-        //   X-HMAC-SIGNATURE â€” Base64(HMAC-SHA256(raw, HmacSecret))
+        //   X-API-KEY        ├óΓé¼ΓÇ¥ must equal ValidApiKey
+        //   X-TIMESTAMP      ├óΓé¼ΓÇ¥ ISO / epoch string included in raw string
+        //   X-HMAC-SIGNATURE ├óΓé¼ΓÇ¥ Base64(HMAC-SHA256(raw, HmacSecret))
         //
         // Raw string format (pipe-separated, no spaces around pipe):
         //   METHOD|PATH_AND_QUERY|TIMESTAMP|BODY
         //
         // For GET requests BODY is always "{}".
         // Returns null on success, Unauthorized on failure.
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         private IActionResult? ValidateHmac(string path, string body = "")
         {
             // 1. Validate API key presence and value
@@ -1223,7 +1224,7 @@ namespace MockExternalApi.Controllers
                 || string.IsNullOrWhiteSpace(incomingSignature))
                 return Unauthorized("HMAC: X-HMAC-SIGNATURE header missing");
 
-            // 4. Rebuild raw string â€” METHOD|PATH|TIMESTAMP|BODY
+            // 4. Rebuild raw string ├óΓé¼ΓÇ¥ METHOD|PATH|TIMESTAMP|BODY
             //    GET callers pass body="" (default); POST callers pass the actual request body.
             var method  = Request.Method.ToUpperInvariant();
             var rawData = $"{method}|{path}|{timestamp}|{body}";
@@ -1250,9 +1251,9 @@ namespace MockExternalApi.Controllers
             return null; // valid
         }
 
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         // Helpers
-        // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
         private static string SampleApplicantName(int i) => i switch
         {
             1  => "Ramesh Kumar",
@@ -1285,9 +1286,9 @@ namespace MockExternalApi.Controllers
             int Code, string Name, int StimulateDays);
     }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
     // Response wrapper
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
     public class ApiResponse<T>
     {
     [JsonPropertyName("success")]    public bool     Success    { get; set; }
@@ -1303,13 +1304,12 @@ namespace MockExternalApi.Controllers
         { Success = true, Message = msg, TotalCount = 0, Data = [], PayloadId = string.Empty };
 }
 
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
     // DTOs
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼├óΓÇ¥Γé¼
 
     public class OfficeDto
     {
-        [JsonPropertyName("office_code")]      public string  office_code      { get; set; } = default!;
         [JsonPropertyName("office_name")]      public string  office_name      { get; set; } = default!;
         [JsonPropertyName("department_code")]  public string  department_code  { get; set; } = default!;
         [JsonPropertyName("department_id")]    public int     department_id    { get; set; }
@@ -1323,12 +1323,11 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode { get; set; }
         [JsonPropertyName("jurisdiction_scope")]  public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction")]        public JurisdictionDto? jurisdiction { get; set; }
-        [JsonPropertyName("jurisdiction_rules")]  public List<JurisdictionDto>? jurisdiction_rules { get; set; }
+
     }
 
     public class ServiceDto
     {
-        [JsonPropertyName("service_code")]     public int     service_code     { get; set; }
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_code")]  public string  department_code  { get; set; } = default!;
         [JsonPropertyName("department_id")]    public int     department_id    { get; set; }
@@ -1345,7 +1344,8 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode { get; set; }
         [JsonPropertyName("jurisdiction_scope")]  public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction")]        public JurisdictionDto? jurisdiction { get; set; }
-        [JsonPropertyName("jurisdiction_rules")]  public List<JurisdictionDto>? jurisdiction_rules { get; set; }
+        [JsonPropertyName("beyond_department_days")]   [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?  beyond_department_days  { get; set; }
+        [JsonPropertyName("has_external_dependency")] public bool   has_external_dependency { get; set; } = false;
     }
 
     public class UserDto
@@ -1355,7 +1355,7 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("mobile_no")]       public string? mobile_no       { get; set; }
         [JsonPropertyName("designation")]     public string  designation     { get; set; } = default!;
         [JsonPropertyName("role_key")]        public string  role_key        { get; set; } = default!;
-        [JsonPropertyName("office_code")]     public string  office_code     { get; set; } = default!;
+        [JsonPropertyName("office_name")]     public string  office_name     { get; set; } = default!;
         [JsonPropertyName("department_code")] public string  department_code { get; set; } = default!;
         [JsonPropertyName("is_active")]       public bool    is_active       { get; set; }
     }
@@ -1367,20 +1367,21 @@ namespace MockExternalApi.Controllers
         [JsonPropertyName("applicant_name")]     public string  applicant_name     { get; set; } = default!;
         [JsonPropertyName("applicant_mobile")]   public string? applicant_mobile   { get; set; }
         [JsonPropertyName("applicant_email")]    public string? applicant_email    { get; set; }
-        [JsonPropertyName("service_code")]       public int     service_code       { get; set; }
-        [JsonPropertyName("office_code")]        public string  office_code        { get; set; } = default!;
+        [JsonPropertyName("service_name")]       public string  service_name       { get; set; } = default!;
+        [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
         [JsonPropertyName("official_email")]     public string? official_email     { get; set; }
         [JsonPropertyName("department_code")]    public string  department_code    { get; set; } = default!;
         [JsonPropertyName("present_status")]     public string  present_status     { get; set; } = default!;
         [JsonPropertyName("applied_date")]       public string? applied_date       { get; set; }
         [JsonPropertyName("last_updated_date")]  public string? last_updated_date  { get; set; }
+        [JsonPropertyName("number_of_days_beyond_department_scope")] public int? NumberOfDaysBeyondDepartmentScope { get; set; }
     }
 
     /// <summary>
     /// ABC monthly MIS aggregate record.
     /// One record per service per period.
     /// AbcSyncService maps this to FormSubmissionRecordDto and calls
-    /// IApplicationRecordService.AddBatchAsync â€” same as Form A portal.
+    /// IApplicationRecordService.AddBatchAsync ├óΓé¼ΓÇ¥ same as Form A portal.
     /// </summary>
     /// <summary>
     /// ABC monthly MIS aggregate record sent by the upstream ABC API.
@@ -1428,6 +1429,8 @@ namespace MockExternalApi.Controllers
     }
 
     /// <summary>
-    /// ABC monthly MIS aggregate record â€” one per service per period.
+    /// ABC monthly MIS aggregate record ├óΓé¼ΓÇ¥ one per service per period.
     /// AbcSyncService maps this to FormSubmissionRecordDto and calls
 }
+
+

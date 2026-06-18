@@ -68,7 +68,7 @@ public sealed class BcwApiController : ControllerBase
             service_name = "Minority Welfare Scholarship",
             department_name = "Backward Classes Welfare Department",
             stipulated_days = 21,
-            stipulated_text = "Standard processing",
+            stipulated_text = "Custom processing",
             stipulated_hours = 0,
             resolution_days = 21,
             resolution_hours = 0,
@@ -76,8 +76,8 @@ public sealed class BcwApiController : ControllerBase
             appeal_hours = 0,
             reappeal_days = 60,
             reappeal_hours = 0,
-            jurisdiction_mode = "LGD",
-            jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ],
+            jurisdiction_mode = "CUSTOM",
+            jurisdiction_groups = [ new() { group_name = "Custom District Coverage", jurisdiction = [ new() { district_name = "Bankura" }, new() { district_name = "Murshidabad" } ] } ],
             has_external_dependency = false,
             is_active = true
         }
@@ -247,6 +247,7 @@ public sealed class BcwApiController : ControllerBase
         [JsonPropertyName("ward_name")]          public string? ward_name          { get; set; }
         [JsonPropertyName("parent_office_name")] public string? parent_office_name { get; set; }
         [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode  { get; set; }
+        [JsonPropertyName("jurisdiction_scope")] public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
         [JsonPropertyName("is_active")]          public bool    is_active          { get; set; } = true;
     }
@@ -264,10 +265,10 @@ public sealed class BcwApiController : ControllerBase
         [JsonPropertyName("appeal_hours")]     public int?    appeal_hours     { get; set; }
         [JsonPropertyName("reappeal_days")]    public int?    reappeal_days    { get; set; }
         [JsonPropertyName("reappeal_hours")]   public int?    reappeal_hours   { get; set; }
-        [JsonPropertyName("jurisdiction_mode")]   public string? jurisdiction_mode  { get; set; }
+        [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode  { get; set; }
+        [JsonPropertyName("jurisdiction_scope")] public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
         [JsonPropertyName("is_active")]        public bool    is_active               { get; set; } = true;
-        [JsonPropertyName("beyond_department_days")]   [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?  beyond_department_days  { get; set; }
         [JsonPropertyName("has_external_dependency")] public bool   has_external_dependency { get; set; } = false;
     }
 
