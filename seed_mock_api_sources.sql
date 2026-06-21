@@ -7,6 +7,14 @@
 -- =============================================================================
 
 -- ─────────────────────────────────────────────────────────────────────────────
+-- Allow on-the-fly acknowledgement verification sources before inserting ACK_VERIFY rows.
+ALTER TABLE api_integration.api_source
+    DROP CONSTRAINT IF EXISTS api_source_api_type_check;
+
+ALTER TABLE api_integration.api_source
+    ADD CONSTRAINT api_source_api_type_check
+    CHECK (api_type IN ('OFFICE','SERVICE','USER','ACK','ACK_VERIFY','CALLBACK','ABC'));
+
 -- BCW: fix endpoints + credentials
 -- ─────────────────────────────────────────────────────────────────────────────
 UPDATE api_integration.api_source
@@ -40,6 +48,28 @@ SET    endpoint_url         = 'http://localhost:3001/bcw/acknowledgements',
        auth_credential      = 'bcw-test-api-key-001',
        updated_at           = NOW()
 WHERE  department_code = 'BCW' AND api_type = 'ACK';
+
+INSERT INTO api_integration.api_source
+    (department_code, department_name, api_type, endpoint_url,
+     auth_type, auth_header_name, is_active, timeout_seconds, max_retry_count,
+     api_key, api_secret_encrypted, auth_credential,
+     uses_name_mapping, supports_incremental_sync, date_range_initialized,
+     created_at, updated_at)
+VALUES
+    ('BCW', 'Backward Classes Welfare Department', 'ACK_VERIFY',
+     'http://localhost:3001/bcw/acknowledgement/verify',
+     'HMAC', 'X-API-KEY', true, 30, 3,
+     'bcw-test-api-key-001', 'bcw-test-api-key-001', 'bcw-test-api-key-001',
+     true, false, false, NOW(), NOW())
+ON CONFLICT (department_code, api_type) DO UPDATE
+SET endpoint_url = EXCLUDED.endpoint_url,
+    api_key = EXCLUDED.api_key,
+    api_secret_encrypted = EXCLUDED.api_secret_encrypted,
+    auth_credential = EXCLUDED.auth_credential,
+    auth_type = EXCLUDED.auth_type,
+    auth_header_name = EXCLUDED.auth_header_name,
+    is_active = true,
+    updated_at = NOW();
 
 UPDATE api_integration.api_source
 SET    endpoint_url         = 'http://localhost:3001/bcw/sync-response',
@@ -83,6 +113,28 @@ SET    endpoint_url              = 'http://localhost:3001/food/acknowledgements'
        auth_credential           = 'food-api-key-001',
        updated_at                = NOW()
 WHERE  department_code = 'FSD' AND api_type = 'ACK';
+
+INSERT INTO api_integration.api_source
+    (department_code, department_name, api_type, endpoint_url,
+     auth_type, auth_header_name, is_active, timeout_seconds, max_retry_count,
+     api_key, api_secret_encrypted, auth_credential,
+     uses_name_mapping, supports_incremental_sync, date_range_initialized,
+     created_at, updated_at)
+VALUES
+    ('FSD', 'Food and Supplies Department', 'ACK_VERIFY',
+     'http://localhost:3001/food/acknowledgement/verify',
+     'HMAC', 'X-API-KEY', true, 30, 3,
+     'food-api-key-001', 'food-hmac-secret-001', 'food-api-key-001',
+     true, false, false, NOW(), NOW())
+ON CONFLICT (department_code, api_type) DO UPDATE
+SET endpoint_url = EXCLUDED.endpoint_url,
+    api_key = EXCLUDED.api_key,
+    api_secret_encrypted = EXCLUDED.api_secret_encrypted,
+    auth_credential = EXCLUDED.auth_credential,
+    auth_type = EXCLUDED.auth_type,
+    auth_header_name = EXCLUDED.auth_header_name,
+    is_active = true,
+    updated_at = NOW();
 
 UPDATE api_integration.api_source
 SET    endpoint_url              = 'http://localhost:3001/food/sync-response',
@@ -156,7 +208,7 @@ ALTER TABLE api_integration.api_source
 
 ALTER TABLE api_integration.api_source
     ADD CONSTRAINT api_source_api_type_check
-    CHECK (api_type IN ('OFFICE','SERVICE','USER','ACK','CALLBACK','ABC'));
+    CHECK (api_type IN ('OFFICE','SERVICE','USER','ACK','ACK_VERIFY','CALLBACK','ABC'));
 
 -- Insert ABC source row (skip if already exists)
 INSERT INTO api_integration.api_source
@@ -230,21 +282,19 @@ WHERE NOT EXISTS (
 );
 
 -- Dedicated page-wise Form A/B/C source used by AbcSyncService.
--- Requires Database/20260612_abc_sync_production_upgrade.sql.
 INSERT INTO abc_integration.abc_source
-    (source_code, dept_code, dept_name, endpoint_url, callback_url,
+    (dept_code, dept_name, endpoint_url, callback_url,
      api_key, api_secret, auth_header_name, timeout_seconds,
      max_retry_count, page_size, contract_version, sync_cron,
      callback_enabled, is_active, created_at, updated_at)
 VALUES
-    ('BCW-ABC', 'BCW', 'Backward Classes Welfare Department',
+    ('BCW', 'Backward Classes Welfare Department',
      'http://localhost:3001/mock-api/abc/submissions',
      'http://localhost:3001/mock-api/abc/sync-response',
      'rtps-demo-key-001', 'rtps-demo-secret-001', 'X-API-KEY',
      30, 3, 100, 'v1', '0 */6 * * *', true, true, NOW(), NOW())
-ON CONFLICT ((upper(source_code))) DO UPDATE
-SET dept_code = EXCLUDED.dept_code,
-    dept_name = EXCLUDED.dept_name,
+ON CONFLICT (dept_code) DO UPDATE
+SET dept_name = EXCLUDED.dept_name,
     endpoint_url = EXCLUDED.endpoint_url,
     callback_url = EXCLUDED.callback_url,
     api_key = EXCLUDED.api_key,

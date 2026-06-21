@@ -92,9 +92,9 @@ public sealed class BcwApiController : ControllerBase
 
     private static readonly List<BcwAcknowledgementDto> Acknowledgements =
     [
-        new() { acknowledgement_no = "BCW/2026/10001", application_no = "APP/BCW/2026/101", service_name = "OBC Certificate Issuance", office_name = "BCW District Office Bankura", official_email = "dwo.bankura.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Ratan Bauri", applicant_mobile = "9400500001", applicant_email = "ratan.b@example.com", present_status = "RESOLVED", applied_date = "2026-04-01", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = 5 },
-        new() { acknowledgement_no = "BCW/2026/10002", application_no = "APP/BCW/2026/102", service_name = "Minority Welfare Scholarship", office_name = "BCW District Office Murshidabad", official_email = "dwo.murshidabad.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Farida Khatun", applicant_mobile = "9400500002", applicant_email = "farida.k@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-10", last_updated_date = "2026-04-22", NumberOfDaysBeyondDepartmentScope = null },
-        new() { acknowledgement_no = "BCW/2026/10003", application_no = "APP/BCW/2026/103", service_name = "OBC Certificate Issuance", office_name = "BCW State Office West Bengal", official_email = "acs.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Subhash Mondal", applicant_mobile = "9400500003", applicant_email = "subhash.m@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-25", NumberOfDaysBeyondDepartmentScope = 1 },
+        new() { acknowledgement_no = "BCW/2026/10001", application_no = "APP/BCW/2026/101", service_name = "OBC Certificate Issuance", office_name = "BCW District Office Bankura", official_email = "dwo.bankura.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Ratan Bauri", date_of_birth = "1989-05-11", applicant_mobile = "9400500001", applicant_email = "ratan.b@example.com", present_status = "RESOLVED", applied_date = "2026-04-01", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = 5 },
+        new() { acknowledgement_no = "BCW/2026/10002", application_no = "APP/BCW/2026/102", service_name = "Minority Welfare Scholarship", office_name = "BCW District Office Murshidabad", official_email = "dwo.murshidabad.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Farida Khatun", date_of_birth = "1994-01-19", applicant_mobile = "9400500002", applicant_email = "farida.k@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-10", last_updated_date = "2026-04-22", NumberOfDaysBeyondDepartmentScope = null },
+        new() { acknowledgement_no = "BCW/2026/10003", application_no = "APP/BCW/2026/103", service_name = "OBC Certificate Issuance", office_name = "BCW State Office West Bengal", official_email = "acs.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Subhash Mondal", date_of_birth = "1980-08-02", applicant_mobile = "9400500003", applicant_email = "subhash.m@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-25", NumberOfDaysBeyondDepartmentScope = 1 },
     ];
 
     [HttpGet("offices")]
@@ -169,6 +169,50 @@ public sealed class BcwApiController : ControllerBase
         var (paged, total) = Paginate(projected, page, page_size);
         _logger.LogInformation("[BCW] GET /bcw/acknowledgements -> {Count}/{Total}", paged.Count, total);
         return Ok(ApiEnvelope<object>.Ok("Acknowledgement data", PayloadId("ACK"), total, paged));
+    }
+
+    [HttpGet("acknowledgement/verify")]
+    public IActionResult VerifyAcknowledgement(
+        [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
+        [FromQuery(Name = "date_of_birth")] string? dateOfBirth)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        if (string.IsNullOrWhiteSpace(acknowledgementNo) ||
+            string.IsNullOrWhiteSpace(dateOfBirth) ||
+            !DateOnly.TryParseExact(dateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+        {
+            return Ok(new
+            {
+                success = false,
+                error_code = "VALIDATION_INVALID_FIELD_VALUE",
+                error_message = "acknowledgement_no and date_of_birth must be supplied; date_of_birth must be in YYYY-MM-DD format"
+            });
+        }
+
+        var match = Acknowledgements.FirstOrDefault(a =>
+            string.Equals(a.acknowledgement_no, acknowledgementNo.Trim(), StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(a.date_of_birth, dateOfBirth.Trim(), StringComparison.Ordinal));
+
+        if (match == null)
+        {
+            _logger.LogInformation("[BCW] GET /bcw/acknowledgement/verify -> no match");
+            return Ok(new
+            {
+                success = false,
+                message = "No matching acknowledgement found for the supplied details",
+                data = (object?)null
+            });
+        }
+
+        _logger.LogInformation("[BCW] GET /bcw/acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
+        return Ok(new
+        {
+            success = true,
+            message = "Acknowledgement verified",
+            data = ToVerifyRecord(match)
+        });
     }
 
     private IActionResult? ValidateHmac()
@@ -293,6 +337,7 @@ public sealed class BcwApiController : ControllerBase
         [JsonPropertyName("official_email")] public string? official_email { get; set; }
         [JsonPropertyName("department_name")] public string department_name { get; set; } = default!;
         [JsonPropertyName("applicant_name")] public string? applicant_name { get; set; }
+        [JsonPropertyName("date_of_birth")] public string? date_of_birth { get; set; }
         [JsonPropertyName("applicant_mobile")] public string? applicant_mobile { get; set; }
         [JsonPropertyName("applicant_email")] public string? applicant_email { get; set; }
         [JsonPropertyName("present_status")] public string present_status { get; set; } = "PENDING";
@@ -300,6 +345,22 @@ public sealed class BcwApiController : ControllerBase
         [JsonPropertyName("last_updated_date")] public string? last_updated_date { get; set; }
         [JsonPropertyName("number_of_days_beyond_department_scope")] public int? NumberOfDaysBeyondDepartmentScope { get; set; }
     }
+
+    private static object ToVerifyRecord(BcwAcknowledgementDto a) => new
+    {
+        acknowledgement_no = a.acknowledgement_no,
+        application_no = a.application_no,
+        applicant_name = a.applicant_name,
+        service_name = a.service_name,
+        office_name = a.office_name,
+        official_email = a.official_email,
+        department_name = a.department_name,
+        present_status = NormalizeStatus(a.present_status),
+        applied_date = a.applied_date,
+        officer_name = Officers.FirstOrDefault(o =>
+            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name,
+        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
+    };
 
     private sealed class ApiEnvelope<T>
     {

@@ -61,10 +61,10 @@ public sealed class FoodApiController : ControllerBase
 
     private static readonly List<AckDto> Acknowledgements =
     [
-        new() { acknowledgement_no = "FSD/2026/20001", application_no = "APP/FSD/2026/201", service_name = "Ration Card Issuance", office_name = "Food & Supplies District Office Howrah", official_email = "dfso.how.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Subrata Mondal", applicant_mobile = "9600500001", applicant_email = "subrata.m@example.com", present_status = "RESOLVED", applied_date = "2026-04-02", last_updated_date = "2026-04-28", NumberOfDaysBeyondDepartmentScope = 2 },
-        new() { acknowledgement_no = "FSD/2026/20002", application_no = "APP/FSD/2026/202", service_name = "Ration Card Modification", office_name = "Food & Supplies District Office Hooghly", official_email = "dfso.hgl.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Prabha Devi", applicant_mobile = "9600500002", applicant_email = "prabha.d@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-12", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = null },
-        new() { acknowledgement_no = "FSD/2026/20003", application_no = "APP/FSD/2026/203", service_name = "Ration Card Issuance", office_name = "Food & Supplies State Office West Bengal", official_email = "commissioner.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Mousumi Das", applicant_mobile = "9600500003", applicant_email = "mousumi.d@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-21", NumberOfDaysBeyondDepartmentScope = 1 },
-        new() { acknowledgement_no = "202603", application_no = "364644", service_name = "Food Ration Card Registration", office_name = "Barasat Municipal Office", official_email = "officer1.bcw@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Sample Applicant", applicant_mobile = "9800000000", applicant_email = "applicant@example.com", present_status = "IN_PROGRESS", applied_date = "2026-03-24", last_updated_date = "2026-03-24", NumberOfDaysBeyondDepartmentScope = 5 },
+        new() { acknowledgement_no = "FSD/2026/20001", application_no = "APP/FSD/2026/201", service_name = "Ration Card Issuance", office_name = "Food & Supplies District Office Howrah", official_email = "dfso.how.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Subrata Mondal", date_of_birth = "1988-02-10", applicant_mobile = "9600500001", applicant_email = "subrata.m@example.com", present_status = "RESOLVED", applied_date = "2026-04-02", last_updated_date = "2026-04-28", NumberOfDaysBeyondDepartmentScope = 2 },
+        new() { acknowledgement_no = "FSD/2026/20002", application_no = "APP/FSD/2026/202", service_name = "Ration Card Modification", office_name = "Food & Supplies District Office Hooghly", official_email = "dfso.hgl.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Prabha Devi", date_of_birth = "1992-11-03", applicant_mobile = "9600500002", applicant_email = "prabha.d@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-12", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = null },
+        new() { acknowledgement_no = "FSD/2026/20003", application_no = "APP/FSD/2026/203", service_name = "Ration Card Issuance", office_name = "Food & Supplies State Office West Bengal", official_email = "commissioner.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Mousumi Das", date_of_birth = "1985-06-21", applicant_mobile = "9600500003", applicant_email = "mousumi.d@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-21", NumberOfDaysBeyondDepartmentScope = 1 },
+        new() { acknowledgement_no = "202603", application_no = "364644", service_name = "Food Ration Card Registration", office_name = "Barasat Municipal Office", official_email = "officer1.bcw@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Sample Applicant", date_of_birth = "1990-07-14", applicant_mobile = "9800000000", applicant_email = "applicant@example.com", present_status = "IN_PROGRESS", applied_date = "2026-03-24", last_updated_date = "2026-03-24", NumberOfDaysBeyondDepartmentScope = 5 },
     ];
 
     [HttpGet("offices")]
@@ -135,6 +135,50 @@ public sealed class FoodApiController : ControllerBase
 
         var (paged, total) = Paginate(projected, page, page_size);
         return Ok(ApiEnvelope<object>.Ok("Acknowledgement data", PayloadId("ACK"), total, paged));
+    }
+
+    [HttpGet("acknowledgement/verify")]
+    public IActionResult VerifyAcknowledgement(
+        [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
+        [FromQuery(Name = "date_of_birth")] string? dateOfBirth)
+    {
+        var auth = ValidateHmac();
+        if (auth != null) return auth;
+
+        if (string.IsNullOrWhiteSpace(acknowledgementNo) ||
+            string.IsNullOrWhiteSpace(dateOfBirth) ||
+            !DateOnly.TryParseExact(dateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+        {
+            return Ok(new
+            {
+                success = false,
+                error_code = "VALIDATION_INVALID_FIELD_VALUE",
+                error_message = "acknowledgement_no and date_of_birth must be supplied; date_of_birth must be in YYYY-MM-DD format"
+            });
+        }
+
+        var match = Acknowledgements.FirstOrDefault(a =>
+            string.Equals(a.acknowledgement_no, acknowledgementNo.Trim(), StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(a.date_of_birth, dateOfBirth.Trim(), StringComparison.Ordinal));
+
+        if (match == null)
+        {
+            _logger.LogInformation("[FSD] GET /food/acknowledgement/verify -> no match");
+            return Ok(new
+            {
+                success = false,
+                message = "No matching acknowledgement found for the supplied details",
+                data = (object?)null
+            });
+        }
+
+        _logger.LogInformation("[FSD] GET /food/acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
+        return Ok(new
+        {
+            success = true,
+            message = "Acknowledgement verified",
+            data = ToVerifyRecord(match)
+        });
     }
 
     private IActionResult? ValidateHmac()
@@ -258,6 +302,7 @@ public sealed class FoodApiController : ControllerBase
         [JsonPropertyName("official_email")] public string? official_email { get; set; }
         [JsonPropertyName("department_name")] public string department_name { get; set; } = default!;
         [JsonPropertyName("applicant_name")] public string? applicant_name { get; set; }
+        [JsonPropertyName("date_of_birth")] public string? date_of_birth { get; set; }
         [JsonPropertyName("applicant_mobile")] public string? applicant_mobile { get; set; }
         [JsonPropertyName("applicant_email")] public string? applicant_email { get; set; }
         [JsonPropertyName("present_status")] public string present_status { get; set; } = "PENDING";
@@ -265,6 +310,22 @@ public sealed class FoodApiController : ControllerBase
         [JsonPropertyName("last_updated_date")] public string? last_updated_date { get; set; }
         [JsonPropertyName("number_of_days_beyond_department_scope")] public int? NumberOfDaysBeyondDepartmentScope { get; set; }
     }
+
+    private static object ToVerifyRecord(AckDto a) => new
+    {
+        acknowledgement_no = a.acknowledgement_no,
+        application_no = a.application_no,
+        applicant_name = a.applicant_name,
+        service_name = a.service_name,
+        office_name = a.office_name,
+        official_email = a.official_email,
+        department_name = a.department_name,
+        present_status = NormalizeStatus(a.present_status),
+        applied_date = a.applied_date,
+        officer_name = Officers.FirstOrDefault(o =>
+            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name,
+        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
+    };
 
     private sealed class ApiEnvelope<T>
     {

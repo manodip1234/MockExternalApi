@@ -50,6 +50,17 @@ Accept: application/json
 
 ###
 
+### BCW - Verify acknowledgement by ack no + DOB
+# Sample match: acknowledgement_no = BCW/2026/10001, date_of_birth = 1989-05-11
+# Raw string format: GET|/bcw/acknowledgement/verify?acknowledgement_no=BCW%2F2026%2F10001&date_of_birth=1989-05-11|<timestamp>|
+GET {{host}}/bcw/acknowledgement/verify?acknowledgement_no=BCW%2F2026%2F10001&date_of_birth=1989-05-11
+X-API-KEY: bcw-test-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
 
 # ═══════════════════════════════════════════════════════════════════
 # FOOD API  —  Auth: HMAC (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE)
@@ -111,6 +122,17 @@ Accept: application/json
 #               "applicant_mobile": "9800010001", "present_status": "PENDING",
 #               "applied_date": "2026-01-05", "last_updated_date": "2026-01-05" }, ... ] }
 GET {{host}}/food/acknowledgements?page=1&page_size=3
+X-API-KEY: food-api-key-001
+X-TIMESTAMP: 2026-01-01T00:00:00Z
+X-HMAC-SIGNATURE: <compute-fresh-signature>
+Accept: application/json
+
+###
+
+### FOOD - Verify acknowledgement by ack no + DOB
+# Sample match: acknowledgement_no = 202603, date_of_birth = 1990-07-14
+# Raw string format: GET|/food/acknowledgement/verify?acknowledgement_no=202603&date_of_birth=1990-07-14|<timestamp>|
+GET {{host}}/food/acknowledgement/verify?acknowledgement_no=202603&date_of_birth=1990-07-14
 X-API-KEY: food-api-key-001
 X-TIMESTAMP: 2026-01-01T00:00:00Z
 X-HMAC-SIGNATURE: <compute-fresh-signature>
