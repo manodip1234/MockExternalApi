@@ -46,9 +46,9 @@ public sealed class FoodApiController : ControllerBase
 
     private static readonly List<ServiceDto> Services =
     [
-        new() { service_name = "Ration Card Issuance", department_name = "Food and Supplies Department", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
-        new() { service_name = "Ration Card Modification", department_name = "Food and Supplies Department", stipulated_days = 15, stipulated_hours = 0, stipulated_text = "Custom processing", resolution_days = 15, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "CUSTOM", jurisdiction_groups = [ new() { group_name = "Zone A", jurisdiction = [ new() { district_name = "Howrah" }, new() { district_name = "Hooghly" } ] } ], is_active = true, has_external_dependency = false },
-        new() { service_name = "Food Ration Card Registration", department_name = "Food and Supplies Department", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
+        new() { service_name = "Ration Card Issuance", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
+        new() { service_name = "Ration Card Modification", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 15, stipulated_hours = 0, stipulated_text = "Custom processing", resolution_days = 15, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "CUSTOM", jurisdiction_groups = [ new() { group_name = "Zone A", jurisdiction = [ new() { district_name = "Howrah" }, new() { district_name = "Hooghly" } ] } ], is_active = true, has_external_dependency = false },
+        new() { service_name = "Food Ration Card Registration", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
     ];
 
     private static readonly List<OfficerDto> Officers =
@@ -265,6 +265,7 @@ public sealed class FoodApiController : ControllerBase
     {
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_name")]  public string  department_name  { get; set; } = default!;
+        [JsonPropertyName("service_type")]     public string? service_type     { get; set; }
         [JsonPropertyName("stipulated_days")]  public int?    stipulated_days  { get; set; }
         [JsonPropertyName("stipulated_text")]  public string? stipulated_text  { get; set; }
         [JsonPropertyName("stipulated_hours")] public int?    stipulated_hours { get; set; }

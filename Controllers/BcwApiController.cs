@@ -49,6 +49,7 @@ public sealed class BcwApiController : ControllerBase
         {
             service_name = "OBC Certificate Issuance",
             department_name = "Backward Classes Welfare Department",
+            service_type = "HYBRID",
             stipulated_days = 30,
             stipulated_text = "Standard processing",
             stipulated_hours = 0,
@@ -67,6 +68,7 @@ public sealed class BcwApiController : ControllerBase
         {
             service_name = "Minority Welfare Scholarship",
             department_name = "Backward Classes Welfare Department",
+            service_type = "HYBRID",
             stipulated_days = 21,
             stipulated_text = "Custom processing",
             stipulated_hours = 0,
@@ -300,6 +302,7 @@ public sealed class BcwApiController : ControllerBase
     {
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_name")]  public string  department_name  { get; set; } = default!;
+        [JsonPropertyName("service_type")]     public string?  service_type     { get; set; }
         [JsonPropertyName("stipulated_days")]  public int?    stipulated_days  { get; set; }
         [JsonPropertyName("stipulated_text")]  public string? stipulated_text  { get; set; }
         [JsonPropertyName("stipulated_hours")] public int?    stipulated_hours { get; set; }
