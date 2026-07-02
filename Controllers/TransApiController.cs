@@ -38,32 +38,287 @@ public sealed class TransApiController : ControllerBase
 
     private static readonly List<OfficeDto> Offices =
     [
-        new() { office_name = "Health & Family Welfare State Office West Bengal", department_name = "Health & Family Welfare Department", office_level = "STATE", district_name = "Kolkata", parent_office_name = null, jurisdiction_mode = "LGD", jurisdiction_scope = "OFFICE", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true },
-        new() { office_name = "Health & Family Welfare District Office Nadia", department_name = "Health & Family Welfare Department", office_level = "DISTRICT", district_name = "Nadia", parent_office_name = "Health & Family Welfare State Office West Bengal", jurisdiction_mode = "LGD", jurisdiction_scope = "OFFICE", jurisdiction_groups = [ new() { group_name = "District Wide", jurisdiction = [ new() { state_name = "West Bengal", district_name = "Nadia" } ] } ], is_active = true },
-        new() { office_name = "Health & Family Welfare District Office North 24 Parganas", department_name = "Health & Family Welfare Department", office_level = "DISTRICT", district_name = "24 PARAGANAS NORTH", parent_office_name = "Health & Family Welfare State Office West Bengal", jurisdiction_mode = "LGD", jurisdiction_scope = "OFFICE", jurisdiction_groups = [ new() { group_name = "District Wide", jurisdiction = [ new() { state_name = "West Bengal", district_name = "24 PARAGANAS NORTH" } ] } ], is_active = true },
+        new() {
+            office_name = "Health & Family Welfare State Office West Bengal",
+            department_name = "Health & Family Welfare Department",
+            office_level = "STATE",
+            district_name = "Kolkata",
+            parent_office_name = null,
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "OFFICE",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "State Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true 
+        },
+        new() {
+            office_name = "Health & Family Welfare District Office Nadia",
+            department_name = "Health & Family Welfare Department",
+            office_level = "DISTRICT",
+            district_name = "Nadia",
+            parent_office_name = "Health & Family Welfare State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "OFFICE",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "District Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal",
+                            district_name = "Nadia" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true 
+        },
+        new() {
+            office_name = "Health & Family Welfare District Office North 24 Parganas",
+            department_name = "Health & Family Welfare Department",
+            office_level = "DISTRICT",
+            district_name = "24 PARAGANAS NORTH",
+            parent_office_name = "Health & Family Welfare State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "OFFICE",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "District Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal",
+                            district_name = "24 PARAGANAS NORTH" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true 
+        },
     ];
 
     private static readonly List<ServiceDto> Services =
     [
-        new() { service_name = "Issuance CE License", department_name = "Health & Family Welfare Department", service_type = "HYBRID", stipulated_days = 20, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 20, resolution_hours = 0, appeal_days = 15, appeal_hours = 0, reappeal_days = 30, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_scope = "SERVICE", jurisdiction_groups = null, is_active = true, has_external_dependency = true },
-        new() { service_name = "Issuance of PCPNDT License", department_name = "Health & Family Welfare Department", service_type = "HYBRID", stipulated_days = 7, stipulated_hours = 0, stipulated_text = "Custom service coverage based on explicit jurisdiction rules", resolution_days = 10, resolution_hours = 0, appeal_days = 15, appeal_hours = 0, reappeal_days = 30, reappeal_hours = 0, jurisdiction_mode = "CUSTOM", jurisdiction_scope = "SERVICE", jurisdiction_groups = [ new() { group_name = "Health District 1", jurisdiction = [ new() { district_name = "Kolkata", block_name = "Kolkata Sadar" } ] } ], is_active = true, has_external_dependency = true },
-        new() { service_name = "Issuance of Drug license ", department_name = "Health & Family Welfare Department", service_type = "HYBRID", stipulated_days = 14, stipulated_hours = 0, stipulated_text = "Grouped health coverage", resolution_days = 18, resolution_hours = 0, appeal_days = 15, appeal_hours = 0, reappeal_days = 30, reappeal_hours = 0, jurisdiction_mode = "CUSTOM", jurisdiction_scope = "SERVICE", jurisdiction_groups = [ new() { group_name = "Health District 1", jurisdiction = [ new() { district_name = "24 PARAGANAS NORTH", block_name = "Barasat I" }, new() { district_name = "Howrah", block_name = "Sankrail" } ] }, new() { group_name = "Health District 2", jurisdiction = [ new() { district_name = "24 PARAGANAS NORTH", block_name = "Barasat I" }, new() { district_name = "24 PARAGANAS NORTH", block_name = "Barasat II" } ] } ], is_active = true, has_external_dependency = true },
-        new() { service_name = "Birth Certificate Issuance", department_name = "Health & Family Welfare Department", service_type = "HYBRID", stipulated_days = 7, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 10, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_scope = "SERVICE", jurisdiction_groups = null, is_active = true, has_external_dependency = false },
-        new() { service_name = "Death Certificate Issuance", department_name = "Health & Family Welfare Department", service_type = "HYBRID", stipulated_days = 7, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 10, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_scope = "SERVICE", jurisdiction_groups = null, is_active = true, has_external_dependency = false },
+        new() {
+            service_name = "Issuance CE License",
+            department_name = "Health & Family Welfare Department",
+            service_type = "HYBRID",
+            stipulated_days = 20,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 20,
+            resolution_hours = 0,
+            appeal_days = 15,
+            appeal_hours = 0,
+            reappeal_days = 30,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "SERVICE",
+            jurisdiction_groups = null,
+            is_active = true,
+            has_external_dependency = true 
+        },
+        new() {
+            service_name = "Issuance of PCPNDT License",
+            department_name = "Health & Family Welfare Department",
+            service_type = "HYBRID",
+            stipulated_days = 7,
+            stipulated_hours = 0,
+            stipulated_text = "Custom service coverage based on explicit jurisdiction rules",
+            resolution_days = 10,
+            resolution_hours = 0,
+            appeal_days = 15,
+            appeal_hours = 0,
+            reappeal_days = 30,
+            reappeal_hours = 0,
+            jurisdiction_mode = "CUSTOM",
+            jurisdiction_scope = "SERVICE",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "Health District 1",
+                    jurisdiction = [
+                        new() {
+                            district_name = "Kolkata",
+                            block_name = "Kolkata Sadar" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = true 
+        },
+        new() {
+            service_name = "Issuance of Drug license ",
+            department_name = "Health & Family Welfare Department",
+            service_type = "HYBRID",
+            stipulated_days = 14,
+            stipulated_hours = 0,
+            stipulated_text = "Grouped health coverage",
+            resolution_days = 18,
+            resolution_hours = 0,
+            appeal_days = 15,
+            appeal_hours = 0,
+            reappeal_days = 30,
+            reappeal_hours = 0,
+            jurisdiction_mode = "CUSTOM",
+            jurisdiction_scope = "SERVICE",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "Health District 1",
+                    jurisdiction = [
+                        new() {
+                            district_name = "24 PARAGANAS NORTH",
+                            block_name = "Barasat I" 
+                        },
+                        new() {
+                            district_name = "Howrah",
+                            block_name = "Sankrail" 
+                        } 
+                    ] 
+                },
+                new() {
+                    group_name = "Health District 2",
+                    jurisdiction = [
+                        new() {
+                            district_name = "24 PARAGANAS NORTH",
+                            block_name = "Barasat I" 
+                        },
+                        new() {
+                            district_name = "24 PARAGANAS NORTH",
+                            block_name = "Barasat II" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = true 
+        },
+        new() {
+            service_name = "Birth Certificate Issuance",
+            department_name = "Health & Family Welfare Department",
+            service_type = "HYBRID",
+            stipulated_days = 7,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 10,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "SERVICE",
+            jurisdiction_groups = null,
+            is_active = true,
+            has_external_dependency = false 
+        },
+        new() {
+            service_name = "Death Certificate Issuance",
+            department_name = "Health & Family Welfare Department",
+            service_type = "HYBRID",
+            stipulated_days = 7,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 10,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_scope = "SERVICE",
+            jurisdiction_groups = null,
+            is_active = true,
+            has_external_dependency = false 
+        },
     ];
 
     private static readonly List<OfficerDto> Officers =
     [
-        new() { official_email = "ps.hfw@wb.gov.in", full_name = "Dr. Indranil Roy", mobile_no = "9700100001", designation = "Principal Secretary", role_key = "DESIGNATED_OFFICER", office_name = "Health & Family Welfare State Office West Bengal", department_name = "Health & Family Welfare Department", is_active = true },
-        new() { official_email = "cmoh.nadia.hfw@wb.gov.in", full_name = "Dr. Partha Sarathi Ghosh", mobile_no = "9700100003", designation = "Chief Medical Officer of Health", role_key = "DESIGNATED_OFFICER", office_name = "Health & Family Welfare District Office Nadia", department_name = "Health & Family Welfare Department", is_active = true },
-        new() { official_email = "cmoh.n24.hfw@wb.gov.in", full_name = "Dr. Somnath Dutta", mobile_no = "9700100005", designation = "Chief Medical Officer of Health", role_key = "DESIGNATED_OFFICER", office_name = "Health & Family Welfare District Office North 24 Parganas", department_name = "Health & Family Welfare Department", is_active = true },
+        new() {
+            official_email = "ps.hfw@wb.gov.in",
+            full_name = "Dr. Indranil Roy",
+            mobile_no = "9700100001",
+            designation = "Principal Secretary",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Health & Family Welfare State Office West Bengal",
+            department_name = "Health & Family Welfare Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "cmoh.nadia.hfw@wb.gov.in",
+            full_name = "Dr. Partha Sarathi Ghosh",
+            mobile_no = "9700100003",
+            designation = "Chief Medical Officer of Health",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Health & Family Welfare District Office Nadia",
+            department_name = "Health & Family Welfare Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "cmoh.n24.hfw@wb.gov.in",
+            full_name = "Dr. Somnath Dutta",
+            mobile_no = "9700100005",
+            designation = "Chief Medical Officer of Health",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Health & Family Welfare District Office North 24 Parganas",
+            department_name = "Health & Family Welfare Department",
+            is_active = true 
+        },
     ];
 
     private static readonly List<AckDto> Acknowledgements =
     [
-        new() { acknowledgement_no = "HFW/2026/30001", application_no = "APP/HFW/2026/301", service_name = "Birth Certificate Issuance", office_name = "Health & Family Welfare District Office Nadia", official_email = "cmoh.nadia.hfw@wb.gov.in", department_name = "Health & Family Welfare Department", applicant_name = "Bapi Biswas", applicant_mobile = "9700500001", applicant_email = "bapi.b@example.com", present_status = "RESOLVED", applied_date = "2026-04-03", last_updated_date = "2026-04-09", NumberOfDaysBeyondDepartmentScope = 3 },
-        new() { acknowledgement_no = "HFW/2026/30002", application_no = "APP/HFW/2026/302", service_name = "Death Certificate Issuance", office_name = "Health & Family Welfare District Office North 24 Parganas", official_email = "cmoh.n24.hfw@wb.gov.in", department_name = "Health & Family Welfare Department", applicant_name = "Rekha Sarkar", applicant_mobile = "9700500002", applicant_email = "rekha.s@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-07", last_updated_date = "2026-04-13", NumberOfDaysBeyondDepartmentScope = null },
-        new() { acknowledgement_no = "HFW/2026/30003", application_no = "APP/HFW/2026/303", service_name = "Birth Certificate Issuance", office_name = "Health & Family Welfare State Office West Bengal", official_email = "ps.hfw@wb.gov.in", department_name = "Health & Family Welfare Department", applicant_name = "Purnima Barman", applicant_mobile = "9700500003", applicant_email = "purnima.b@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = 1 },
+        new() {
+            acknowledgement_no = "HFW/2026/30001",
+            application_no = "APP/HFW/2026/301",
+            service_name = "Birth Certificate Issuance",
+            office_name = "Health & Family Welfare District Office Nadia",
+            official_email = "cmoh.nadia.hfw@wb.gov.in",
+            department_name = "Health & Family Welfare Department",
+            applicant_name = "Bapi Biswas",
+            applicant_mobile = "9700500001",
+            applicant_email = "bapi.b@example.com",
+            present_status = "RESOLVED",
+            applied_date = "2026-04-03",
+            last_updated_date = "2026-04-09",
+            NumberOfDaysBeyondDepartmentScope = 3 
+        },
+        new() {
+            acknowledgement_no = "HFW/2026/30002",
+            application_no = "APP/HFW/2026/302",
+            service_name = "Death Certificate Issuance",
+            office_name = "Health & Family Welfare District Office North 24 Parganas",
+            official_email = "cmoh.n24.hfw@wb.gov.in",
+            department_name = "Health & Family Welfare Department",
+            applicant_name = "Rekha Sarkar",
+            applicant_mobile = "9700500002",
+            applicant_email = "rekha.s@example.com",
+            present_status = "IN_PROGRESS",
+            applied_date = "2026-04-07",
+            last_updated_date = "2026-04-13",
+            NumberOfDaysBeyondDepartmentScope = null 
+        },
+        new() {
+            acknowledgement_no = "HFW/2026/30003",
+            application_no = "APP/HFW/2026/303",
+            service_name = "Birth Certificate Issuance",
+            office_name = "Health & Family Welfare State Office West Bengal",
+            official_email = "ps.hfw@wb.gov.in",
+            department_name = "Health & Family Welfare Department",
+            applicant_name = "Purnima Barman",
+            applicant_mobile = "9700500003",
+            applicant_email = "purnima.b@example.com",
+            present_status = "PENDING",
+            applied_date = "2026-04-15",
+            last_updated_date = "2026-04-20",
+            NumberOfDaysBeyondDepartmentScope = 1 
+        },
     ];
 
     [HttpGet("offices")]

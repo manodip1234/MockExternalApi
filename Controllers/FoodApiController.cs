@@ -38,33 +38,243 @@ public sealed class FoodApiController : ControllerBase
 
     private static readonly List<OfficeDto> Offices =
     [
-        new() { office_name = "Food & Supplies State Office West Bengal", department_name = "Food and Supplies Department", office_level = "STATE", district_name = "Kolkata", parent_office_name = null, jurisdiction_mode = "LGD", is_active = true },
-        new() { office_name = "Food & Supplies District Office Howrah", department_name = "Food and Supplies Department", office_level = "DISTRICT", district_name = "Howrah", parent_office_name = "Food & Supplies State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
-        new() { office_name = "Food & Supplies District Office Hooghly", department_name = "Food and Supplies Department", office_level = "DISTRICT", district_name = "Hooghly", parent_office_name = "Food & Supplies State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
-        new() { office_name = "Barasat Municipal Office", department_name = "Food and Supplies Department", office_level = "MUNICIPALITY", district_name = "24 PARAGANAS NORTH", municipality_name = "Barasat", parent_office_name = "Food & Supplies State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
+        new() {
+            office_name = "Food & Supplies State Office West Bengal",
+            department_name = "Food and Supplies Department",
+            office_level = "STATE",
+            district_name = "Kolkata",
+            parent_office_name = null,
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
+        new() {
+            office_name = "Food & Supplies District Office Howrah",
+            department_name = "Food and Supplies Department",
+            office_level = "DISTRICT",
+            district_name = "Howrah",
+            parent_office_name = "Food & Supplies State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
+        new() {
+            office_name = "Food & Supplies District Office Hooghly",
+            department_name = "Food and Supplies Department",
+            office_level = "DISTRICT",
+            district_name = "Hooghly",
+            parent_office_name = "Food & Supplies State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
+        new() {
+            office_name = "Barasat Municipal Office",
+            department_name = "Food and Supplies Department",
+            office_level = "MUNICIPALITY",
+            district_name = "24 PARAGANAS NORTH",
+            municipality_name = "Barasat",
+            parent_office_name = "Food & Supplies State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
     ];
 
     private static readonly List<ServiceDto> Services =
     [
-        new() { service_name = "Ration Card Issuance", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
-        new() { service_name = "Ration Card Modification", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 15, stipulated_hours = 0, stipulated_text = "Custom processing", resolution_days = 15, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "CUSTOM", jurisdiction_groups = [ new() { group_name = "Zone A", jurisdiction = [ new() { district_name = "Howrah" }, new() { district_name = "Hooghly" } ] } ], is_active = true, has_external_dependency = false },
-        new() { service_name = "Food Ration Card Registration", department_name = "Food and Supplies Department", service_type = "HYBRID", stipulated_days = 30, stipulated_hours = 0, stipulated_text = "Standard processing", resolution_days = 30, resolution_hours = 0, appeal_days = 30, appeal_hours = 0, reappeal_days = 60, reappeal_hours = 0, jurisdiction_mode = "LGD", jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ], is_active = true, has_external_dependency = true },
+        new() {
+            service_name = "Ration Card Issuance",
+            department_name = "Food and Supplies Department",
+            service_type = "HYBRID",
+            stipulated_days = 30,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 30,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "State Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = true 
+        },
+        new() {
+            service_name = "Ration Card Modification",
+            department_name = "Food and Supplies Department",
+            service_type = "HYBRID",
+            stipulated_days = 15,
+            stipulated_hours = 0,
+            stipulated_text = "Custom processing",
+            resolution_days = 15,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "CUSTOM",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "Zone A",
+                    jurisdiction = [
+                        new() {
+                            district_name = "Howrah" 
+                        },
+                        new() {
+                            district_name = "Hooghly" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = false 
+        },
+        new() {
+            service_name = "Food Ration Card Registration",
+            department_name = "Food and Supplies Department",
+            service_type = "HYBRID",
+            stipulated_days = 30,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 30,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "State Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = true 
+        },
     ];
 
     private static readonly List<OfficerDto> Officers =
     [
-        new() { official_email = "commissioner.fsd@wb.gov.in", full_name = "Biswanath Dutta", mobile_no = "9600100001", designation = "Commissioner", role_key = "DESIGNATED_OFFICER", office_name = "Food & Supplies State Office West Bengal", department_name = "Food and Supplies Department", is_active = true },
-        new() { official_email = "dfso.how.fsd@wb.gov.in", full_name = "Ashok Kumar Panda", mobile_no = "9600100003", designation = "District Food & Supplies Officer", role_key = "DESIGNATED_OFFICER", office_name = "Food & Supplies District Office Howrah", department_name = "Food and Supplies Department", is_active = true },
-        new() { official_email = "dfso.hgl.fsd@wb.gov.in", full_name = "Dipika Bose", mobile_no = "9600100004", designation = "District Food & Supplies Officer", role_key = "DESIGNATED_OFFICER", office_name = "Food & Supplies District Office Hooghly", department_name = "Food and Supplies Department", is_active = true },
-        new() { official_email = "officer1.bcw@wb.gov.in", full_name = "Barasat Officer", mobile_no = "9800000000", designation = "Municipal Officer", role_key = "DESIGNATED_OFFICER", office_name = "Barasat Municipal Office", department_name = "Food and Supplies Department", is_active = true },
+        new() {
+            official_email = "commissioner.fsd@wb.gov.in",
+            full_name = "Biswanath Dutta",
+            mobile_no = "9600100001",
+            designation = "Commissioner",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Food & Supplies State Office West Bengal",
+            department_name = "Food and Supplies Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "dfso.how.fsd@wb.gov.in",
+            full_name = "Ashok Kumar Panda",
+            mobile_no = "9600100003",
+            designation = "District Food & Supplies Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Food & Supplies District Office Howrah",
+            department_name = "Food and Supplies Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "dfso.hgl.fsd@wb.gov.in",
+            full_name = "Dipika Bose",
+            mobile_no = "9600100004",
+            designation = "District Food & Supplies Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Food & Supplies District Office Hooghly",
+            department_name = "Food and Supplies Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "officer1.bcw@wb.gov.in",
+            full_name = "Barasat Officer",
+            mobile_no = "9800000000",
+            designation = "Municipal Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Barasat Municipal Office",
+            department_name = "Food and Supplies Department",
+            is_active = true 
+        },
     ];
 
     private static readonly List<AckDto> Acknowledgements =
     [
-        new() { acknowledgement_no = "FSD/2026/20001", application_no = "APP/FSD/2026/201", service_name = "Ration Card Issuance", office_name = "Food & Supplies District Office Howrah", official_email = "dfso.how.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Subrata Mondal", date_of_birth = "1988-02-10", applicant_mobile = "9600500001", applicant_email = "subrata.m@example.com", present_status = "RESOLVED", applied_date = "2026-04-02", last_updated_date = "2026-04-28", NumberOfDaysBeyondDepartmentScope = 2 },
-        new() { acknowledgement_no = "FSD/2026/20002", application_no = "APP/FSD/2026/202", service_name = "Ration Card Modification", office_name = "Food & Supplies District Office Hooghly", official_email = "dfso.hgl.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Prabha Devi", date_of_birth = "1992-11-03", applicant_mobile = "9600500002", applicant_email = "prabha.d@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-12", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = null },
-        new() { acknowledgement_no = "FSD/2026/20003", application_no = "APP/FSD/2026/203", service_name = "Ration Card Issuance", office_name = "Food & Supplies State Office West Bengal", official_email = "commissioner.fsd@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Mousumi Das", date_of_birth = "1985-06-21", applicant_mobile = "9600500003", applicant_email = "mousumi.d@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-21", NumberOfDaysBeyondDepartmentScope = 1 },
-        new() { acknowledgement_no = "202603", application_no = "364644", service_name = "Food Ration Card Registration", office_name = "Barasat Municipal Office", official_email = "officer1.bcw@wb.gov.in", department_name = "Food and Supplies Department", applicant_name = "Sample Applicant", date_of_birth = "1990-07-14", applicant_mobile = "9800000000", applicant_email = "applicant@example.com", present_status = "IN_PROGRESS", applied_date = "2026-03-24", last_updated_date = "2026-03-24", NumberOfDaysBeyondDepartmentScope = 5 },
+        new() {
+            acknowledgement_no = "FSD/2026/20001",
+            application_no = "APP/FSD/2026/201",
+            service_name = "Ration Card Issuance",
+            office_name = "Food & Supplies District Office Howrah",
+            official_email = "dfso.how.fsd@wb.gov.in",
+            department_name = "Food and Supplies Department",
+            applicant_name = "Subrata Mondal",
+            date_of_birth = "1988-02-10",
+            applicant_mobile = "9600500001",
+            applicant_email = "subrata.m@example.com",
+            present_status = "RESOLVED",
+            applied_date = "2026-04-02",
+            last_updated_date = "2026-04-28",
+            NumberOfDaysBeyondDepartmentScope = 2 
+        },
+        new() {
+            acknowledgement_no = "FSD/2026/20002",
+            application_no = "APP/FSD/2026/202",
+            service_name = "Ration Card Modification",
+            office_name = "Food & Supplies District Office Hooghly",
+            official_email = "dfso.hgl.fsd@wb.gov.in",
+            department_name = "Food and Supplies Department",
+            applicant_name = "Prabha Devi",
+            date_of_birth = "1992-11-03",
+            applicant_mobile = "9600500002",
+            applicant_email = "prabha.d@example.com",
+            present_status = "IN_PROGRESS",
+            applied_date = "2026-04-12",
+            last_updated_date = "2026-04-20",
+            NumberOfDaysBeyondDepartmentScope = null 
+        },
+        new() {
+            acknowledgement_no = "FSD/2026/20003",
+            application_no = "APP/FSD/2026/203",
+            service_name = "Ration Card Issuance",
+            office_name = "Food & Supplies State Office West Bengal",
+            official_email = "commissioner.fsd@wb.gov.in",
+            department_name = "Food and Supplies Department",
+            applicant_name = "Mousumi Das",
+            date_of_birth = "1985-06-21",
+            applicant_mobile = "9600500003",
+            applicant_email = "mousumi.d@example.com",
+            present_status = "PENDING",
+            applied_date = "2026-04-15",
+            last_updated_date = "2026-04-21",
+            NumberOfDaysBeyondDepartmentScope = 1 
+        },
+        new() {
+            acknowledgement_no = "202603",
+            application_no = "364644",
+            service_name = "Food Ration Card Registration",
+            office_name = "Barasat Municipal Office",
+            official_email = "officer1.bcw@wb.gov.in",
+            department_name = "Food and Supplies Department",
+            applicant_name = "Sample Applicant",
+            date_of_birth = "1990-07-14",
+            applicant_mobile = "9800000000",
+            applicant_email = "applicant@example.com",
+            present_status = "IN_PROGRESS",
+            applied_date = "2026-03-24",
+            last_updated_date = "2026-03-24",
+            NumberOfDaysBeyondDepartmentScope = 5 
+        },
     ];
 
     [HttpGet("offices")]

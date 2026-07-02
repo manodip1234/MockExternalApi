@@ -38,9 +38,33 @@ public sealed class BcwApiController : ControllerBase
 
     private static readonly List<BcwOfficeDto> Offices =
     [
-        new() { office_name = "BCW State Office West Bengal", department_name = "Backward Classes Welfare Department", office_level = "STATE", district_name = "Kolkata", parent_office_name = null, jurisdiction_mode = "LGD", is_active = true },
-        new() { office_name = "BCW District Office Bankura", department_name = "Backward Classes Welfare Department", office_level = "DISTRICT", district_name = "Bankura", parent_office_name = "BCW State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
-        new() { office_name = "BCW District Office Murshidabad", department_name = "Backward Classes Welfare Department", office_level = "DISTRICT", district_name = "Murshidabad", parent_office_name = "BCW State Office West Bengal", jurisdiction_mode = "LGD", is_active = true },
+        new() {
+            office_name = "BCW State Office West Bengal",
+            department_name = "Backward Classes Welfare Department",
+            office_level = "STATE",
+            district_name = "Kolkata",
+            parent_office_name = null,
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
+        new() {
+            office_name = "BCW District Office Bankura",
+            department_name = "Backward Classes Welfare Department",
+            office_level = "DISTRICT",
+            district_name = "Bankura",
+            parent_office_name = "BCW State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
+        new() {
+            office_name = "BCW District Office Murshidabad",
+            department_name = "Backward Classes Welfare Department",
+            office_level = "DISTRICT",
+            district_name = "Murshidabad",
+            parent_office_name = "BCW State Office West Bengal",
+            jurisdiction_mode = "LGD",
+            is_active = true 
+        },
     ];
 
     private static readonly List<BcwServiceDto> Services =
@@ -87,16 +111,88 @@ public sealed class BcwApiController : ControllerBase
 
     private static readonly List<BcwOfficerDto> Officers =
     [
-        new() { official_email = "acs.bcw@wb.gov.in", full_name = "Ayan Chakraborty", mobile_no = "9800000001", designation = "Additional Chief Secretary", role_key = "DESIGNATED_OFFICER", office_name = "BCW State Office West Bengal", department_name = "Backward Classes Welfare Department", is_active = true },
-        new() { official_email = "dwo.bankura.bcw@wb.gov.in", full_name = "Ritabrata Saha", mobile_no = "9800000002", designation = "District Welfare Officer", role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Bankura", department_name = "Backward Classes Welfare Department", is_active = true },
-        new() { official_email = "dwo.murshidabad.bcw@wb.gov.in", full_name = "Farhana Ali", mobile_no = "9800000003", designation = "District Welfare Officer", role_key = "DESIGNATED_OFFICER", office_name = "BCW District Office Murshidabad", department_name = "Backward Classes Welfare Department", is_active = true }
+        new() {
+            official_email = "acs.bcw@wb.gov.in",
+            full_name = "Ayan Chakraborty",
+            mobile_no = "9800000001",
+            designation = "Additional Chief Secretary",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "BCW State Office West Bengal",
+            department_name = "Backward Classes Welfare Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "dwo.bankura.bcw@wb.gov.in",
+            full_name = "Ritabrata Saha",
+            mobile_no = "9800000002",
+            designation = "District Welfare Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "BCW District Office Bankura",
+            department_name = "Backward Classes Welfare Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "dwo.murshidabad.bcw@wb.gov.in",
+            full_name = "Farhana Ali",
+            mobile_no = "9800000003",
+            designation = "District Welfare Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "BCW District Office Murshidabad",
+            department_name = "Backward Classes Welfare Department",
+            is_active = true 
+        }
     ];
 
     private static readonly List<BcwAcknowledgementDto> Acknowledgements =
     [
-        new() { acknowledgement_no = "BCW/2026/10001", application_no = "APP/BCW/2026/101", service_name = "OBC Certificate Issuance", office_name = "BCW District Office Bankura", official_email = "dwo.bankura.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Ratan Bauri", date_of_birth = "1989-05-11", applicant_mobile = "9400500001", applicant_email = "ratan.b@example.com", present_status = "RESOLVED", applied_date = "2026-04-01", last_updated_date = "2026-04-20", NumberOfDaysBeyondDepartmentScope = 5 },
-        new() { acknowledgement_no = "BCW/2026/10002", application_no = "APP/BCW/2026/102", service_name = "Minority Welfare Scholarship", office_name = "BCW District Office Murshidabad", official_email = "dwo.murshidabad.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Farida Khatun", date_of_birth = "1994-01-19", applicant_mobile = "9400500002", applicant_email = "farida.k@example.com", present_status = "IN_PROGRESS", applied_date = "2026-04-10", last_updated_date = "2026-04-22", NumberOfDaysBeyondDepartmentScope = null },
-        new() { acknowledgement_no = "BCW/2026/10003", application_no = "APP/BCW/2026/103", service_name = "OBC Certificate Issuance", office_name = "BCW State Office West Bengal", official_email = "acs.bcw@wb.gov.in", department_name = "Backward Classes Welfare Department", applicant_name = "Subhash Mondal", date_of_birth = "1980-08-02", applicant_mobile = "9400500003", applicant_email = "subhash.m@example.com", present_status = "PENDING", applied_date = "2026-04-15", last_updated_date = "2026-04-25", NumberOfDaysBeyondDepartmentScope = 1 },
+        new() {
+            acknowledgement_no = "BCW/2026/10001",
+            application_no = "APP/BCW/2026/101",
+            service_name = "OBC Certificate Issuance",
+            office_name = "BCW District Office Bankura",
+            official_email = "dwo.bankura.bcw@wb.gov.in",
+            department_name = "Backward Classes Welfare Department",
+            applicant_name = "Ratan Bauri",
+            date_of_birth = "1989-05-11",
+            applicant_mobile = "9400500001",
+            applicant_email = "ratan.b@example.com",
+            present_status = "RESOLVED",
+            applied_date = "2026-04-01",
+            last_updated_date = "2026-04-20",
+            NumberOfDaysBeyondDepartmentScope = 5 
+        },
+        new() {
+            acknowledgement_no = "BCW/2026/10002",
+            application_no = "APP/BCW/2026/102",
+            service_name = "Minority Welfare Scholarship",
+            office_name = "BCW District Office Murshidabad",
+            official_email = "dwo.murshidabad.bcw@wb.gov.in",
+            department_name = "Backward Classes Welfare Department",
+            applicant_name = "Farida Khatun",
+            date_of_birth = "1994-01-19",
+            applicant_mobile = "9400500002",
+            applicant_email = "farida.k@example.com",
+            present_status = "IN_PROGRESS",
+            applied_date = "2026-04-10",
+            last_updated_date = "2026-04-22",
+            NumberOfDaysBeyondDepartmentScope = null 
+        },
+        new() {
+            acknowledgement_no = "BCW/2026/10003",
+            application_no = "APP/BCW/2026/103",
+            service_name = "OBC Certificate Issuance",
+            office_name = "BCW State Office West Bengal",
+            official_email = "acs.bcw@wb.gov.in",
+            department_name = "Backward Classes Welfare Department",
+            applicant_name = "Subhash Mondal",
+            date_of_birth = "1980-08-02",
+            applicant_mobile = "9400500003",
+            applicant_email = "subhash.m@example.com",
+            present_status = "PENDING",
+            applied_date = "2026-04-15",
+            last_updated_date = "2026-04-25",
+            NumberOfDaysBeyondDepartmentScope = 1 
+        },
     ];
 
     [HttpGet("offices")]
