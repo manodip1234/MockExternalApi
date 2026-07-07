@@ -423,3 +423,7 @@ Rtpswb.Api/appsettings.*.json
 Datasets/current/
 Datasets/archive/
 
+# Temporary bin and obj directories
+.tmpbin/
+.tmpobj/
+
