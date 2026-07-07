@@ -22,4 +22,5 @@ app.MapGet("/health", () => Results.Ok(new { status = "healthy", utc = DateTime.
 
 app.MapControllers();
 
-app.Run();
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3001";
+app.Run($"http://0.0.0.0:{port}");
