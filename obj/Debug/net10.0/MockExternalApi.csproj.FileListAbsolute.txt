@@ -72,3 +72,40 @@ D:\NIC\Mock api\MockExternalApi\obj\Debug\net10.0\refint\MockExternalApi.dll
 D:\NIC\Mock api\MockExternalApi\obj\Debug\net10.0\MockExternalApi.pdb
 D:\NIC\Mock api\MockExternalApi\obj\Debug\net10.0\MockExternalApi.genruntimeconfig.cache
 D:\NIC\Mock api\MockExternalApi\obj\Debug\net10.0\ref\MockExternalApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\appsettings.json
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.staticwebassets.endpoints.json
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.exe
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.deps.json
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.runtimeconfig.json
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\MockExternalApi.pdb
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\cad-w\source\repos\MockExternalApi\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.csproj.AssemblyReference.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.AssemblyInfoInputs.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.AssemblyInfo.cs
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.csproj.CoreCompileInputs.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.sourcelink.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\scopedcss\bundle\MockExternalApi.styles.css
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExte.39B90A53.Up2Date
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\refint\MockExternalApi.dll
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.pdb
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\MockExternalApi.genruntimeconfig.cache
+C:\Users\cad-w\source\repos\MockExternalApi\obj\Debug\net10.0\ref\MockExternalApi.dll

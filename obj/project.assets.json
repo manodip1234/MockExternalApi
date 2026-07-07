@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "Microsoft.AspNetCore.OpenApi/10.0.5": {
@@ -498,23 +498,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\manod\\.nuget\\packages\\": {},
+    "C:\\Users\\cad-w\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj",
+      "projectUniqueName": "C:\\Users\\cad-w\\source\\repos\\MockExternalApi\\MockExternalApi.csproj",
       "projectName": "MockExternalApi",
-      "projectPath": "D:\\NIC\\Mock api\\MockExternalApi\\MockExternalApi.csproj",
-      "packagesPath": "C:\\Users\\manod\\.nuget\\packages\\",
-      "outputPath": "D:\\NIC\\Mock api\\MockExternalApi\\obj\\",
+      "projectPath": "C:\\Users\\cad-w\\source\\repos\\MockExternalApi\\MockExternalApi.csproj",
+      "packagesPath": "C:\\Users\\cad-w\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cad-w\\source\\repos\\MockExternalApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\manod\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cad-w\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -527,6 +527,7 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -541,10 +542,11 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "10.0.300"
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": {
@@ -575,7 +577,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

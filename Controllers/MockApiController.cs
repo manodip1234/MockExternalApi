@@ -915,16 +915,27 @@ namespace MockExternalApi.Controllers
             // index ΓåÆ form_type: 0,1 = A  |  2 = B  |  3 = C
             var fixtures = new[]
             {
-                // Names must exactly match rtps_wb.service.service_name for promotion
-                new { Form = "A", Service = "OBC Certificate Issuance", Office = "BCW District Office Bankura", Officer = "dwo.bnk.bcw@wb.gov.in" },
-                new { Form = "A", Service = "SC Certificate Issuance", Office = "BCW District Office Birbhum", Officer = "dwo.brb.bcw@wb.gov.in" },
-                new { Form = "B", Service = "Minority Welfare Scholarship", Office = "BCW District Office Murshidabad", Officer = "dwo.mur.bcw@wb.gov.in" },
-                new { Form = "C", Service = "Pre-Matric Scholarship for OBC Students", Office = "BCW District Office Purulia", Officer = "dwo.prl.bcw@wb.gov.in" }
+                // Names must exactly match rtps_wb.office.office_name, rtps_wb.officer.official_email, rtps_wb.service.service_name
+                new { Form = "A", Service = "BCW Caste Certificate Service",            Office = "BCW State Office", Officer = "bcwnodal1@gmail.com" },
+                new { Form = "A", Service = "BCW Welfare Scheme Service",               Office = "BCW State Office", Officer = "bcwnodal1@gmail.com" },
+                new { Form = "B", Service = "BCW Scholarship Grant Service",            Office = "BCW State Office", Officer = "bcwnodal1@gmail.com" },
+                new { Form = "C", Service = "Issuance of Caste Certificates (SC/ST/OBC)", Office = "BCW State Office", Officer = "bcwnodal1@gmail.com" }
             };
 
             var all = new List<AbcSubmissionMisDto>();
 
-            foreach (var (month, year) in new[] { (5, 2026), (6, 2026) })
+            // Always serve the two most recently completed months relative to today.
+            // (Current month is in-progress and excluded — MIS data is reported after month-end.)
+            var today      = DateTime.UtcNow;
+            var prevMonth1 = today.AddMonths(-1);   // most recent completed month
+            var prevMonth2 = today.AddMonths(-2);   // month before that
+            var periods    = new[]
+            {
+                (prevMonth2.Month, prevMonth2.Year),
+                (prevMonth1.Month, prevMonth1.Year)
+            };
+
+            foreach (var (month, year) in periods)
             {
                 foreach (var (fixture, idx) in fixtures.Select((value, index) => (value, index)))
                 {
@@ -1378,15 +1389,9 @@ namespace MockExternalApi.Controllers
     }
 
     /// <summary>
-    /// ABC monthly MIS aggregate record.
-    /// One record per service per period.
-    /// AbcSyncService maps this to FormSubmissionRecordDto and calls
-    /// IApplicationRecordService.AddBatchAsync ├óΓé¼ΓÇ¥ same as Form A portal.
-    /// </summary>
-    /// <summary>
     /// ABC monthly MIS aggregate record sent by the upstream ABC API.
-    /// Uses integer IDs (service_id, office_id) matching rtps_wb.service and rtps_wb.office.
-    /// AbcSyncService maps this directly to FormSubmissionRecordDto via IApplicationRecordService.AddBatchAsync.
+    /// Uses names (office_name, service_name, officer_email) matching rtps_wb.office, rtps_wb.service, and rtps_wb.officer.
+    /// AbcSyncService resolves these names to IDs before mapping to FormSubmissionRecordDto.
     /// </summary>
     public class AbcSubmissionMisDto
     {
@@ -1423,9 +1428,9 @@ namespace MockExternalApi.Controllers
 
     public class CallbackError
     {
-        [JsonPropertyName("reference_id")]   public string ReferenceId   { get; set; } = string.Empty;
-        [JsonPropertyName("error_code")]     public string ErrorCode     { get; set; } = string.Empty;
-        [JsonPropertyName("error_message")]  public string ErrorMessage  { get; set; } = string.Empty;
+        [JsonPropertyName("referenceId")]   public string ReferenceId   { get; set; } = string.Empty;
+        [JsonPropertyName("errorCode")]     public string ErrorCode     { get; set; } = string.Empty;
+        [JsonPropertyName("errorMessage")]  public string ErrorMessage  { get; set; } = string.Empty;
     }
 
     /// <summary>

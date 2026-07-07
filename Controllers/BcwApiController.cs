@@ -157,8 +157,8 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500001",
             applicant_email = "ratan.b@example.com",
             present_status = "RESOLVED",
-            applied_date = "2026-04-01",
-            last_updated_date = "2026-04-20",
+            applied_date = "2026-06-01",
+            last_updated_date = "2026-07-01",
             NumberOfDaysBeyondDepartmentScope = 5 
         },
         new() {
@@ -173,8 +173,8 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500002",
             applicant_email = "farida.k@example.com",
             present_status = "IN_PROGRESS",
-            applied_date = "2026-04-10",
-            last_updated_date = "2026-04-22",
+            applied_date = "2026-06-16",
+            last_updated_date = "2026-07-05",
             NumberOfDaysBeyondDepartmentScope = null 
         },
         new() {
@@ -189,8 +189,8 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500003",
             applicant_email = "subhash.m@example.com",
             present_status = "PENDING",
-            applied_date = "2026-04-15",
-            last_updated_date = "2026-04-25",
+            applied_date = "2026-06-25",
+            last_updated_date = "2026-07-08",
             NumberOfDaysBeyondDepartmentScope = 1 
         },
     ];
