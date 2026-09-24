@@ -1,9 +1,9 @@
-﻿// =============================================================================
+// =============================================================================
 // FILE:      FoodApiController.cs
 // DEPT:      FSD (Food & Supplies Department, West Bengal)
-// AUTH:      HMAC / API_KEY (X-API-KEY + optional HMAC headers)
-// FLOW:      NAME-BASED â€” RTPS resolves codes from names (uses_name_mapping=true)
-// BASE PATH: /food and aliases /api/WBRTPS
+// AUTH:      HMAC  (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE + X-API-VERSION)
+// FLOW:      NAME-BASED  — RTPS resolves codes from names (uses_name_mapping=true)
+// BASE PATH: /food
 // =============================================================================
 
 using System.Globalization;
@@ -30,8 +30,8 @@ public sealed class FoodApiController : ControllerBase
 
     public FoodApiController(IConfiguration config, ILogger<FoodApiController> logger)
     {
-        _apiKey           = config["FoodApi:ApiKey"]     ?? "food-test-api-key-001";
-        _hmacSecret       = config["FoodApi:HmacSecret"] ?? "food-test-api-key-001";
+        _apiKey           = config["FoodApi:ApiKey"]     ?? "food-api-key-001";
+        _hmacSecret       = config["FoodApi:HmacSecret"] ?? "food-hmac-secret-001";
         _toleranceMinutes = config.GetValue("FoodApi:TimestampToleranceMinutes", 5);
         _logger           = logger;
     }
@@ -39,42 +39,103 @@ public sealed class FoodApiController : ControllerBase
     private static readonly List<OfficeDto> Offices =
     [
         new() {
-            office_name = "Food State Office West Bengal",
+            office_name = "Food & Supplies State Office West Bengal",
             department_name = "Food and Supplies Department",
             office_level = "STATE",
             district_name = "Kolkata",
             parent_office_name = null,
             jurisdiction_mode = "LGD",
-            jurisdiction_scope = "OFFICE",
-            jurisdiction_groups = [ new() { group_name = "State Wide", jurisdiction = [ new() { state_name = "West Bengal" } ] } ],
             is_active = true 
         },
         new() {
-            office_name = "Food District Office Bankura",
+            office_name = "Food & Supplies District Office Howrah",
             department_name = "Food and Supplies Department",
             office_level = "DISTRICT",
-            district_name = "Bankura",
-            parent_office_name = "Food State Office West Bengal",
+            district_name = "Howrah",
+            parent_office_name = "Food & Supplies State Office West Bengal",
             jurisdiction_mode = "LGD",
-            jurisdiction_scope = "OFFICE",
-            jurisdiction_groups = [ new() { group_name = "District Wide", jurisdiction = [ new() { state_name = "West Bengal", district_name = "Bankura" } ] } ],
             is_active = true 
         },
         new() {
-            office_name = "Food District Office Murshidabad",
+            office_name = "Food & Supplies District Office Hooghly",
             department_name = "Food and Supplies Department",
             office_level = "DISTRICT",
-            district_name = "Murshidabad",
-            parent_office_name = "Food State Office West Bengal",
+            district_name = "Hooghly",
+            parent_office_name = "Food & Supplies State Office West Bengal",
             jurisdiction_mode = "LGD",
-            jurisdiction_scope = "OFFICE",
-            jurisdiction_groups = [ new() { group_name = "District Wide", jurisdiction = [ new() { state_name = "West Bengal", district_name = "Murshidabad" } ] } ],
+            is_active = true 
+        },
+        new() {
+            office_name = "Barasat Municipal Office",
+            department_name = "Food and Supplies Department",
+            office_level = "MUNICIPALITY",
+            district_name = "24 PARAGANAS NORTH",
+            municipality_name = "Barasat",
+            parent_office_name = "Food & Supplies State Office West Bengal",
+            jurisdiction_mode = "LGD",
             is_active = true 
         },
     ];
 
     private static readonly List<ServiceDto> Services =
     [
+        new() {
+            service_name = "Ration Card Issuance",
+            department_name = "Food and Supplies Department",
+            service_type = "HYBRID",
+            stipulated_days = 30,
+            stipulated_hours = 0,
+            stipulated_text = "Standard processing",
+            resolution_days = 30,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "LGD",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "State Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = true 
+        },
+        new() {
+            service_name = "Ration Card Modification",
+            department_name = "Food and Supplies Department",
+            service_type = "HYBRID",
+            stipulated_days = 15,
+            stipulated_hours = 0,
+            stipulated_text = "Custom processing",
+            resolution_days = 15,
+            resolution_hours = 0,
+            appeal_days = 30,
+            appeal_hours = 0,
+            reappeal_days = 60,
+            reappeal_hours = 0,
+            jurisdiction_mode = "CUSTOM",
+            jurisdiction_groups = [
+                new() {
+                    group_name = "Zone A",
+                    jurisdiction = [
+                        new() {
+                            district_name = "Howrah" 
+                        },
+                        new() {
+                            district_name = "Hooghly" 
+                        } 
+                    ] 
+                } 
+            ],
+            is_active = true,
+            has_external_dependency = false 
+        },
         new() {
             service_name = "Food Ration Card Registration",
             department_name = "Food and Supplies Department",
@@ -89,27 +150,16 @@ public sealed class FoodApiController : ControllerBase
             reappeal_days = 60,
             reappeal_hours = 0,
             jurisdiction_mode = "LGD",
-            jurisdiction_scope = "SERVICE",
-            jurisdiction_groups = null,
-            is_active = true,
-            has_external_dependency = true 
-        },
-        new() {
-            service_name = "Food Dealer License Application",
-            department_name = "Food and Supplies Department",
-            service_type = "HYBRID",
-            stipulated_days = 45,
-            stipulated_hours = 0,
-            stipulated_text = "Standard processing",
-            resolution_days = 45,
-            resolution_hours = 0,
-            appeal_days = 30,
-            appeal_hours = 0,
-            reappeal_days = 60,
-            reappeal_hours = 0,
-            jurisdiction_mode = "LGD",
-            jurisdiction_scope = "SERVICE",
-            jurisdiction_groups = null,
+            jurisdiction_groups = [
+                new() {
+                    group_name = "State Wide",
+                    jurisdiction = [
+                        new() {
+                            state_name = "West Bengal" 
+                        } 
+                    ] 
+                } 
+            ],
             is_active = true,
             has_external_dependency = true 
         },
@@ -118,32 +168,42 @@ public sealed class FoodApiController : ControllerBase
     private static readonly List<OfficerDto> Officers =
     [
         new() {
-            official_email = "ps.food@wb.gov.in",
-            full_name = "Debashis Sen",
-            mobile_no = "9800000001",
-            designation = "Principal Secretary",
+            official_email = "commissioner.fsd@wb.gov.in",
+            full_name = "Biswanath Dutta",
+            mobile_no = "9600100001",
+            designation = "Commissioner",
             role_key = "DESIGNATED_OFFICER",
-            office_name = "Food State Office West Bengal",
+            office_name = "Food & Supplies State Office West Bengal",
             department_name = "Food and Supplies Department",
             is_active = true 
         },
         new() {
-            official_email = "dc.bankura.food@wb.gov.in",
-            full_name = "Somnath Roy",
-            mobile_no = "9800000002",
-            designation = "District Controller",
+            official_email = "dfso.how.fsd@wb.gov.in",
+            full_name = "Ashok Kumar Panda",
+            mobile_no = "9600100003",
+            designation = "District Food & Supplies Officer",
             role_key = "DESIGNATED_OFFICER",
-            office_name = "Food District Office Bankura",
+            office_name = "Food & Supplies District Office Howrah",
             department_name = "Food and Supplies Department",
             is_active = true 
         },
         new() {
-            official_email = "dc.murshidabad.food@wb.gov.in",
-            full_name = "Ananya Mukherjee",
-            mobile_no = "9800000003",
-            designation = "District Controller",
+            official_email = "dfso.hgl.fsd@wb.gov.in",
+            full_name = "Dipika Bose",
+            mobile_no = "9600100004",
+            designation = "District Food & Supplies Officer",
             role_key = "DESIGNATED_OFFICER",
-            office_name = "Food District Office Murshidabad",
+            office_name = "Food & Supplies District Office Hooghly",
+            department_name = "Food and Supplies Department",
+            is_active = true 
+        },
+        new() {
+            official_email = "officer1.bcw@wb.gov.in",
+            full_name = "Barasat Officer",
+            mobile_no = "9800000000",
+            designation = "Municipal Officer",
+            role_key = "DESIGNATED_OFFICER",
+            office_name = "Barasat Municipal Office",
             department_name = "Food and Supplies Department",
             is_active = true 
         },
@@ -152,100 +212,75 @@ public sealed class FoodApiController : ControllerBase
     private static readonly List<AckDto> Acknowledgements =
     [
         new() {
-            acknowledgement_no = "202603",
-            application_no = "364644",
-            service_name = "Food Ration Card Registration",
-            service_code = 1,
-            office_name = "Barasat Municipal Office",
-            office_code = "OFF-FOOD-001",
-            official_email = "officer1.bcw@wb.gov.in",
-            user_id = "OFFICER_01",
+            acknowledgement_no = "FSD/2026/20001",
+            application_no = "APP/FSD/2026/201",
+            service_name = "Ration Card Issuance",
+            office_name = "Food & Supplies District Office Howrah",
+            official_email = "dfso.how.fsd@wb.gov.in",
             department_name = "Food and Supplies Department",
-            department_code = "FSD",
-            applicant_name = "Sample Applicant",
-            date_of_birth = "1990-01-01",
-            applicant_mobile = "9800000001",
-            applicant_email = "applicant1@example.com",
-            present_status = "IN_PROGRESS",
-            applied_date = "2026-03-24",
-            assign_date = "2026-03-24",
-            pending_with_designation = "Barasat Municipal Office",
-            last_updated_date = "2026-03-24",
-            NumberOfDaysBeyondDepartmentScope = 5 
-        },
-        new() {
-            acknowledgement_no = "FOOD/2026/20001",
-            application_no = "APP/FOOD/2026/201",
-            service_name = "Food Ration Card Registration",
-            service_code = 1,
-            office_name = "Food District Office Bankura",
-            office_code = "OFF-FOOD-002",
-            official_email = "dc.bankura.food@wb.gov.in",
-            user_id = "OFFICER_02",
-            department_name = "Food and Supplies Department",
-            department_code = "FSD",
-            applicant_name = "Bikram Soren",
-            date_of_birth = "1985-03-15",
+            applicant_name = "Subrata Mondal",
+            date_of_birth = "1988-02-10",
             applicant_mobile = "9600500001",
-            applicant_email = "bikram.s@example.com",
+            applicant_email = "subrata.m@example.com",
             present_status = "RESOLVED",
             applied_date = "2026-04-02",
-            assign_date = "2026-04-02",
-            pending_with_designation = "Food District Office Bankura",
-            last_updated_date = "2026-04-18",
-            NumberOfDaysBeyondDepartmentScope = 3 
+            last_updated_date = "2026-04-28",
+            NumberOfDaysBeyondDepartmentScope = 2 
         },
         new() {
-            acknowledgement_no = "FOOD/2026/20002",
-            application_no = "APP/FOOD/2026/202",
-            service_name = "Food Dealer License Application",
-            service_code = 2,
-            office_name = "Food District Office Murshidabad",
-            office_code = "OFF-FOOD-003",
-            official_email = "dc.murshidabad.food@wb.gov.in",
-            user_id = "OFFICER_03",
+            acknowledgement_no = "FSD/2026/20002",
+            application_no = "APP/FSD/2026/202",
+            service_name = "Ration Card Modification",
+            office_name = "Food & Supplies District Office Hooghly",
+            official_email = "dfso.hgl.fsd@wb.gov.in",
             department_name = "Food and Supplies Department",
-            department_code = "FSD",
-            applicant_name = "Meherun Nissa",
-            date_of_birth = "1991-07-22",
+            applicant_name = "Prabha Devi",
+            date_of_birth = "1992-11-03",
             applicant_mobile = "9600500002",
-            applicant_email = "meherun.n@example.com",
+            applicant_email = "prabha.d@example.com",
             present_status = "IN_PROGRESS",
-            applied_date = "2026-04-05",
-            assign_date = "2026-04-05",
-            pending_with_designation = "Food District Office Murshidabad",
+            applied_date = "2026-04-12",
             last_updated_date = "2026-04-20",
             NumberOfDaysBeyondDepartmentScope = null 
         },
         new() {
-            acknowledgement_no = "FOOD/2026/20003",
-            application_no = "APP/FOOD/2026/203",
-            service_name = "Food Ration Card Registration",
-            service_code = 1,
-            office_name = "Food State Office West Bengal",
-            office_code = "OFF-FOOD-001",
-            official_email = "ps.food@wb.gov.in",
-            user_id = "OFFICER_01",
+            acknowledgement_no = "FSD/2026/20003",
+            application_no = "APP/FSD/2026/203",
+            service_name = "Ration Card Issuance",
+            office_name = "Food & Supplies State Office West Bengal",
+            official_email = "commissioner.fsd@wb.gov.in",
             department_name = "Food and Supplies Department",
-            department_code = "FSD",
-            applicant_name = "Tapas Karmakar",
-            date_of_birth = "1978-11-30",
+            applicant_name = "Mousumi Das",
+            date_of_birth = "1985-06-21",
             applicant_mobile = "9600500003",
-            applicant_email = "tapas.k@example.com",
+            applicant_email = "mousumi.d@example.com",
             present_status = "PENDING",
-            applied_date = "2026-04-12",
-            assign_date = "2026-04-12",
-            pending_with_designation = "Food State Office West Bengal",
-            last_updated_date = "2026-04-22",
-            NumberOfDaysBeyondDepartmentScope = 2 
+            applied_date = "2026-04-15",
+            last_updated_date = "2026-04-21",
+            NumberOfDaysBeyondDepartmentScope = 1 
+        },
+        new() {
+            acknowledgement_no = "202603",
+            application_no = "364644",
+            service_name = "Food Ration Card Registration",
+            office_name = "Barasat Municipal Office",
+            official_email = "officer1.bcw@wb.gov.in",
+            department_name = "Food and Supplies Department",
+            applicant_name = "Sample Applicant",
+            date_of_birth = "1990-07-14",
+            applicant_mobile = "9800000000",
+            applicant_email = "applicant@example.com",
+            present_status = "IN_PROGRESS",
+            applied_date = "2026-03-24",
+            last_updated_date = "2026-03-24",
+            NumberOfDaysBeyondDepartmentScope = 5 
         },
     ];
 
     [HttpGet("offices")]
-    [HttpGet("/api/WBRTPS/office")]
     public IActionResult GetOffices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Offices, page, page_size);
@@ -253,10 +288,9 @@ public sealed class FoodApiController : ControllerBase
     }
 
     [HttpGet("services")]
-    [HttpGet("/api/WBRTPS/Service")]
     public IActionResult GetServices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Services, page, page_size);
@@ -265,10 +299,9 @@ public sealed class FoodApiController : ControllerBase
 
     [HttpGet("users")]
     [HttpGet("officers")]
-    [HttpGet("/api/WBRTPS/officers")]
     public IActionResult GetOfficers([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Officers.Select(o => new
@@ -290,30 +323,24 @@ public sealed class FoodApiController : ControllerBase
     [HttpGet("acknowledgements")]
     public IActionResult GetAcknowledgements([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Acknowledgements.Select(a => new
         {
             acknowledgement_no = a.acknowledgement_no,
             application_no = a.application_no,
-            application_number = a.application_no ?? a.acknowledgement_no,
             applicant_name = a.applicant_name,
             applicant_mobile = a.applicant_mobile,
             applicant_email = a.applicant_email,
             service_name = a.service_name,
-            service_code = a.service_code ?? 1,
             office_name = a.office_name,
-            office_code = a.office_code ?? "OFF-FOOD-001",
             official_email = a.official_email,
-            officer_email = a.official_email,
-            user_id = a.user_id ?? "OFFICER_01",
             department_name = a.department_name,
-            department_code = a.department_code,
             present_status = NormalizeStatus(a.present_status),
             applied_date = a.applied_date,
             last_updated_date = a.last_updated_date,
-            number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
+            NumberOfDaysBeyondDepartmentScope = a.NumberOfDaysBeyondDepartmentScope
         }).Select(x => (object)x).ToList();
 
         var (paged, total) = Paginate(projected, page, page_size);
@@ -321,157 +348,85 @@ public sealed class FoodApiController : ControllerBase
     }
 
     [HttpGet("acknowledgement/verify")]
-    [HttpGet("acknowledgement")]
-    [HttpGet("/api/WBRTPS/Acknowledgement")]
-    [HttpGet("/food/acknowledgement/verify")]
     public IActionResult VerifyAcknowledgement(
-        [FromQuery(Name = "application_no")] string? applicationNo,
         [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
-        [FromQuery(Name = "service_name")] string? serviceName,
-        [FromQuery(Name = "date_of_birth")] string? dateOfBirth,
-        [FromQuery(Name = "dob")] string? dob,
-        [FromQuery(Name = "applid")] string? applid)
+        [FromQuery(Name = "date_of_birth")] string? dateOfBirth)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
-        var identifier = (applicationNo ?? acknowledgementNo ?? applid)?.Trim();
-        var birthDate = (dateOfBirth ?? dob)?.Trim();
-        var svcName = serviceName?.Trim();
-
-        if (string.IsNullOrWhiteSpace(identifier))
+        if (string.IsNullOrWhiteSpace(acknowledgementNo) ||
+            string.IsNullOrWhiteSpace(dateOfBirth) ||
+            !DateOnly.TryParseExact(dateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
         {
             return Ok(new
             {
-                status = new
-                {
-                    success = false,
-                    error = "0",
-                    msg = "application_no or acknowledgement_no must be supplied",
-                    payload_id = PayloadId("ACK-VERIFY"),
-                    data = Array.Empty<object>()
-                },
                 success = false,
                 error_code = "VALIDATION_INVALID_FIELD_VALUE",
-                error_message = "application_no or acknowledgement_no must be supplied",
-                data = (object?)null
+                error_message = "acknowledgement_no and date_of_birth must be supplied; date_of_birth must be in YYYY-MM-DD format"
             });
         }
 
         var match = Acknowledgements.FirstOrDefault(a =>
-            (string.Equals(a.acknowledgement_no, identifier, StringComparison.OrdinalIgnoreCase) ||
-             string.Equals(a.application_no, identifier, StringComparison.OrdinalIgnoreCase)));
+            string.Equals(a.acknowledgement_no, acknowledgementNo.Trim(), StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(a.date_of_birth, dateOfBirth.Trim(), StringComparison.Ordinal));
 
         if (match == null)
         {
-            _logger.LogInformation("[FSD] Verify: generating dynamic mock for {Identifier}", identifier);
-            match = new AckDto
+            _logger.LogInformation("[FSD] GET /food/acknowledgement/verify -> no match");
+            return Ok(new
             {
-                acknowledgement_no = identifier,
-                application_no = identifier.StartsWith("36") ? identifier : "364644",
-                service_name = !string.IsNullOrWhiteSpace(svcName) ? svcName : "Food Ration Card Registration",
-                service_code = 1,
-                office_name = "Barasat Municipal Office",
-                office_code = "OFF-FOOD-001",
-                official_email = "officer1.bcw@wb.gov.in",
-                user_id = "OFFICER_01",
-                department_name = "Food and Supplies Department",
-                department_code = "FSD",
-                applicant_name = "Sample Applicant",
-                date_of_birth = !string.IsNullOrWhiteSpace(birthDate) ? birthDate : "1990-01-01",
-                applicant_mobile = "9800000001",
-                applicant_email = "applicant@example.com",
-                present_status = "IN_PROGRESS",
-                applied_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                assign_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                pending_with_designation = "Barasat Municipal Office",
-                last_updated_date = DateTime.UtcNow.ToString("yyyy-MM-dd"),
-                NumberOfDaysBeyondDepartmentScope = 0
-            };
+                success = false,
+                message = "No matching acknowledgement found for the supplied details",
+                data = (object?)null
+            });
         }
 
-        var record = ToVerifyRecord(match);
-        _logger.LogInformation("[FSD] GET Acknowledgement verified for Id={Id}", identifier);
-
+        _logger.LogInformation("[FSD] GET /food/acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
         return Ok(new
         {
-            status = new
-            {
-                success = true,
-                error = "1",
-                msg = "Acknowledgement verified",
-                payload_id = PayloadId("ACK-VERIFY"),
-                data = new[] { record }
-            },
             success = true,
             message = "Acknowledgement verified",
-            data = record
+            data = ToVerifyRecord(match)
         });
     }
 
-    private static object ToVerifyRecord(AckDto a) => new
-    {
-        acknowledgement_no = a.acknowledgement_no,
-        application_no = a.application_no ?? a.acknowledgement_no,
-        application_number = a.application_no ?? a.acknowledgement_no,
-        applicant_name = a.applicant_name ?? "Sample Applicant",
-        service_name = a.service_name,
-        service_code = a.service_code ?? 1,
-        office_name = a.office_name,
-        office_code = a.office_code ?? "OFF-FOOD-001",
-        official_email = a.official_email ?? "officer1.food@wb.gov.in",
-        officer_email = a.official_email ?? "officer1.food@wb.gov.in",
-        user_id = a.user_id ?? a.official_email ?? "OFFICER_01",
-        department_name = a.department_name,
-        department_code = a.department_code,
-        present_status = NormalizeStatus(a.present_status),
-        applied_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assign_date = a.assign_date ?? a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assigned_date = a.assign_date ?? a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        pending_with_designation = a.pending_with_designation ?? a.office_name,
-        officer_name = Officers.FirstOrDefault(o =>
-            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name ?? "Food Officer",
-        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope ?? 0
-    };
-
-    private IActionResult? ValidateAuth()
+    private IActionResult? ValidateHmac()
     {
         var pathAndQuery = Request.Path + Request.QueryString;
-        var hasApiKey = Request.Headers.TryGetValue("X-API-KEY", out var apiKey);
 
-        if (Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) && !string.IsNullOrWhiteSpace(incoming))
-        {
-            if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
-                return Unauthorized(new { error = "FSD: X-TIMESTAMP missing" });
+        if (!Request.Headers.TryGetValue("X-API-KEY", out var apiKey) || apiKey != _apiKey)
+            return Unauthorized(new { error = "FSD: Invalid or missing X-API-KEY" });
 
-            if (!DateTime.TryParseExact(
-                    timestamp.ToString(),
-                    TimestampFormat,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
-                    out var parsedTimestamp))
-                return Unauthorized(new { error = "FSD: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
+        if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
+            return Unauthorized(new { error = "FSD: X-TIMESTAMP missing" });
 
-            var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
-            if (skewMinutes > _toleranceMinutes)
-                return StatusCode(403, new { error = "FSD: Timestamp expired" });
+        if (!DateTime.TryParseExact(
+                timestamp.ToString(),
+                TimestampFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out var parsedTimestamp))
+            return Unauthorized(new { error = "FSD: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
 
-            var raw = $"GET|{pathAndQuery}|{timestamp}|";
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
-            var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+        var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
+        if (skewMinutes > _toleranceMinutes)
+            return StatusCode(403, new { error = "FSD: Timestamp expired" });
 
-            if (!CryptographicOperations.FixedTimeEquals(
-                    Encoding.UTF8.GetBytes(expected),
-                    Encoding.UTF8.GetBytes(incoming.ToString())))
-                return Unauthorized(new { error = "FSD: Signature mismatch" });
-        }
-        else if (hasApiKey)
-        {
-            if (apiKey != _apiKey && apiKey != "food-test-api-key-001" && apiKey != "rtps-demo-key-001" && apiKey != "test-api-key")
-            {
-                _logger.LogWarning("[FSD] API Key provided but does not match default: {Key}", (object)apiKey.ToString());
-            }
-        }
+        if (!Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) || string.IsNullOrWhiteSpace(incoming))
+            return Unauthorized(new { error = "FSD: X-HMAC-SIGNATURE missing" });
+
+        if (!Request.Headers.TryGetValue("X-API-VERSION", out var apiVersion) || string.IsNullOrWhiteSpace(apiVersion))
+            return Unauthorized(new { error = "FSD: X-API-VERSION missing" });
+
+        var raw = $"GET|{pathAndQuery}|{timestamp}|";
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
+        var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+
+        if (!CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(expected),
+                Encoding.UTF8.GetBytes(incoming.ToString())))
+            return Unauthorized(new { error = "FSD: Signature mismatch" });
 
         return null;
     }
@@ -499,7 +454,6 @@ public sealed class FoodApiController : ControllerBase
         return (all.Skip((page - 1) * pageSize).Take(pageSize).ToList(), all.Count);
     }
 
-    // DTOs
     public sealed class OfficeDto
     {
         [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
@@ -521,7 +475,7 @@ public sealed class FoodApiController : ControllerBase
     {
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_name")]  public string  department_name  { get; set; } = default!;
-        [JsonPropertyName("service_type")]     public string?  service_type     { get; set; }
+        [JsonPropertyName("service_type")]     public string? service_type     { get; set; }
         [JsonPropertyName("stipulated_days")]  public int?    stipulated_days  { get; set; }
         [JsonPropertyName("stipulated_text")]  public string? stipulated_text  { get; set; }
         [JsonPropertyName("stipulated_hours")] public int?    stipulated_hours { get; set; }
@@ -555,24 +509,34 @@ public sealed class FoodApiController : ControllerBase
         [JsonPropertyName("acknowledgement_no")] public string acknowledgement_no { get; set; } = default!;
         [JsonPropertyName("application_no")] public string? application_no { get; set; }
         [JsonPropertyName("service_name")] public string service_name { get; set; } = default!;
-        [JsonPropertyName("service_code")] public int? service_code { get; set; }
         [JsonPropertyName("office_name")] public string office_name { get; set; } = default!;
-        [JsonPropertyName("office_code")] public string? office_code { get; set; }
         [JsonPropertyName("official_email")] public string? official_email { get; set; }
-        [JsonPropertyName("user_id")] public string? user_id { get; set; }
         [JsonPropertyName("department_name")] public string department_name { get; set; } = default!;
-        [JsonPropertyName("department_code")] public string department_code { get; set; } = "FSD";
         [JsonPropertyName("applicant_name")] public string? applicant_name { get; set; }
         [JsonPropertyName("date_of_birth")] public string? date_of_birth { get; set; }
         [JsonPropertyName("applicant_mobile")] public string? applicant_mobile { get; set; }
         [JsonPropertyName("applicant_email")] public string? applicant_email { get; set; }
         [JsonPropertyName("present_status")] public string present_status { get; set; } = "PENDING";
         [JsonPropertyName("applied_date")] public string? applied_date { get; set; }
-        [JsonPropertyName("assign_date")] public string? assign_date { get; set; }
-        [JsonPropertyName("pending_with_designation")] public string? pending_with_designation { get; set; }
         [JsonPropertyName("last_updated_date")] public string? last_updated_date { get; set; }
         [JsonPropertyName("number_of_days_beyond_department_scope")] public int? NumberOfDaysBeyondDepartmentScope { get; set; }
     }
+
+    private static object ToVerifyRecord(AckDto a) => new
+    {
+        acknowledgement_no = a.acknowledgement_no,
+        application_no = a.application_no,
+        applicant_name = a.applicant_name,
+        service_name = a.service_name,
+        office_name = a.office_name,
+        official_email = a.official_email,
+        department_name = a.department_name,
+        present_status = NormalizeStatus(a.present_status),
+        applied_date = a.applied_date,
+        officer_name = Officers.FirstOrDefault(o =>
+            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name,
+        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
+    };
 
     private sealed class ApiEnvelope<T>
     {
@@ -596,9 +560,7 @@ public sealed class FoodApiController : ControllerBase
             };
 
             var raw = JsonSerializer.Serialize(without, JsonHelpers.WithoutNulls);
-            var checksum = JsonHelpers.Base64Sha256(raw);
-
-            without.checksum = checksum;
+            without.checksum = JsonHelpers.Base64Sha256(raw);
             return without;
         }
     }

@@ -1,8 +1,8 @@
-﻿// =============================================================================
+// =============================================================================
 // FILE:      TransApiController.cs
 // DEPT:      HFW (Health & Family Welfare Department, West Bengal)
-// AUTH:      HMAC / API_KEY (X-API-KEY + optional HMAC headers)
-// FLOW:      NAME-BASED â€” RTPS resolves codes from names (uses_name_mapping=true)
+// AUTH:      HMAC  (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE + X-API-VERSION)
+// FLOW:      NAME-BASED  — RTPS resolves codes from names (uses_name_mapping=true)
 // BASE PATH: /hfw
 // =============================================================================
 
@@ -324,7 +324,7 @@ public sealed class TransApiController : ControllerBase
     [HttpGet("offices")]
     public IActionResult GetOffices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Offices, page, page_size);
@@ -334,7 +334,7 @@ public sealed class TransApiController : ControllerBase
     [HttpGet("services")]
     public IActionResult GetServices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Services, page, page_size);
@@ -345,7 +345,7 @@ public sealed class TransApiController : ControllerBase
     [HttpGet("officers")]
     public IActionResult GetOfficers([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Officers.Select(o => new
@@ -367,25 +367,20 @@ public sealed class TransApiController : ControllerBase
     [HttpGet("acknowledgements")]
     public IActionResult GetAcknowledgements([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Acknowledgements.Select(a => new
         {
             acknowledgement_no = a.acknowledgement_no,
             application_no = a.application_no,
-            application_number = a.application_no ?? a.acknowledgement_no,
             applicant_name = a.applicant_name,
             applicant_mobile = a.applicant_mobile,
             applicant_email = a.applicant_email,
             service_name = a.service_name,
-            service_code = 1,
             office_name = a.office_name,
-            office_code = "HFW_OFFICE_01",
             official_email = a.official_email,
-            officer_email = a.official_email,
             department_name = a.department_name,
-            department_code = "HFW",
             present_status = NormalizeStatus(a.present_status),
             applied_date = a.applied_date,
             last_updated_date = a.last_updated_date,
@@ -396,139 +391,42 @@ public sealed class TransApiController : ControllerBase
         return Ok(ApiEnvelope<object>.Ok("Acknowledgement data", PayloadId("ACK"), total, paged));
     }
 
-    [HttpGet("acknowledgement/verify")]
-    [HttpGet("/hfw/acknowledgement/verify")]
-    public IActionResult VerifyAcknowledgement(
-        [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
-        [FromQuery(Name = "application_no")] string? applicationNo,
-        [FromQuery(Name = "applid")] string? applid,
-        [FromQuery(Name = "date_of_birth")] string? dateOfBirth,
-        [FromQuery(Name = "dob")] string? dob,
-        [FromQuery(Name = "service_name")] string? serviceName)
-    {
-        var auth = ValidateAuth();
-        if (auth != null) return auth;
-
-        var targetNo = (acknowledgementNo ?? applicationNo ?? applid)?.Trim();
-        var targetDob = (dateOfBirth ?? dob)?.Trim();
-
-        if (string.IsNullOrWhiteSpace(targetNo))
-        {
-            return Ok(new
-            {
-                success = false,
-                error_code = "VALIDATION_INVALID_FIELD_VALUE",
-                error_message = "acknowledgement_no, application_no, or applid must be supplied"
-            });
-        }
-
-        var match = Acknowledgements.FirstOrDefault(a =>
-            string.Equals(a.acknowledgement_no, targetNo, StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(a.application_no, targetNo, StringComparison.OrdinalIgnoreCase));
-
-        if (match == null)
-        {
-            _logger.LogInformation("[HFW] Verify: generating dynamic mock for {TargetNo}", targetNo);
-            match = new AckDto
-            {
-                acknowledgement_no = targetNo,
-                application_no = targetNo.StartsWith("APP/") ? targetNo : $"APP/{targetNo}",
-                service_name = !string.IsNullOrWhiteSpace(serviceName) ? serviceName : "Birth Certificate Issuance",
-                office_name = "Health & Family Welfare District Office Nadia",
-                official_email = "cmoh.nadia.hfw@wb.gov.in",
-                department_name = "Health & Family Welfare Department",
-                applicant_name = "Sample Applicant",
-                applicant_mobile = "9700500001",
-                applicant_email = "applicant@example.com",
-                present_status = "IN_PROGRESS",
-                applied_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                last_updated_date = DateTime.UtcNow.ToString("yyyy-MM-dd"),
-                NumberOfDaysBeyondDepartmentScope = 0
-            };
-        }
-
-        var verifyRecord = ToVerifyRecord(match);
-        _logger.LogInformation("[HFW] GET acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
-
-        return Ok(new
-        {
-            success = true,
-            message = "Acknowledgement verified",
-            data = verifyRecord,
-            status = new
-            {
-                success = true,
-                error = "1",
-                msg = "Acknowledgement verified",
-                payload_id = PayloadId("ACK-VERIFY"),
-                data = new[] { verifyRecord }
-            }
-        });
-    }
-
-    private static object ToVerifyRecord(AckDto a) => new
-    {
-        acknowledgement_no = a.acknowledgement_no,
-        application_no = a.application_no ?? a.acknowledgement_no,
-        application_number = a.application_no ?? a.acknowledgement_no,
-        applicant_name = a.applicant_name ?? "Sample Applicant",
-        service_name = a.service_name,
-        service_code = 1,
-        office_name = a.office_name,
-        office_code = "HFW_OFFICE_01",
-        official_email = a.official_email ?? "cmoh.nadia.hfw@wb.gov.in",
-        officer_email = a.official_email ?? "cmoh.nadia.hfw@wb.gov.in",
-        user_id = a.official_email ?? "cmoh.nadia.hfw@wb.gov.in",
-        department_name = a.department_name,
-        department_code = "HFW",
-        present_status = NormalizeStatus(a.present_status),
-        applied_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assign_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assigned_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        pending_with_designation = a.office_name,
-        officer_name = Officers.FirstOrDefault(o =>
-            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name ?? "HFW Officer",
-        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope ?? 0
-    };
-
-    private IActionResult? ValidateAuth()
+    private IActionResult? ValidateHmac()
     {
         var pathAndQuery = Request.Path + Request.QueryString;
-        var hasApiKey = Request.Headers.TryGetValue("X-API-KEY", out var apiKey);
 
-        if (Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) && !string.IsNullOrWhiteSpace(incoming))
-        {
-            if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
-                return Unauthorized(new { error = "HFW: X-TIMESTAMP missing" });
+        if (!Request.Headers.TryGetValue("X-API-KEY", out var apiKey) || apiKey != _apiKey)
+            return Unauthorized(new { error = "HFW: Invalid or missing X-API-KEY" });
 
-            if (!DateTime.TryParseExact(
-                    timestamp.ToString(),
-                    TimestampFormat,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
-                    out var parsedTimestamp))
-                return Unauthorized(new { error = "HFW: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
+        if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
+            return Unauthorized(new { error = "HFW: X-TIMESTAMP missing" });
 
-            var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
-            if (skewMinutes > _toleranceMinutes)
-                return StatusCode(403, new { error = "HFW: Timestamp expired" });
+        if (!DateTime.TryParseExact(
+                timestamp.ToString(),
+                TimestampFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out var parsedTimestamp))
+            return Unauthorized(new { error = "HFW: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
 
-            var raw = $"GET|{pathAndQuery}|{timestamp}|";
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
-            var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+        var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
+        if (skewMinutes > _toleranceMinutes)
+            return StatusCode(403, new { error = "HFW: Timestamp expired" });
 
-            if (!CryptographicOperations.FixedTimeEquals(
-                    Encoding.UTF8.GetBytes(expected),
-                    Encoding.UTF8.GetBytes(incoming.ToString())))
-                return Unauthorized(new { error = "HFW: Signature mismatch" });
-        }
-        else if (hasApiKey)
-        {
-            if (apiKey != _apiKey && apiKey != "rtps-demo-key-001" && apiKey != "test-api-key")
-            {
-                _logger.LogWarning("[HFW] API Key provided: {Key}", (object)apiKey.ToString());
-            }
-        }
+        if (!Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) || string.IsNullOrWhiteSpace(incoming))
+            return Unauthorized(new { error = "HFW: X-HMAC-SIGNATURE missing" });
+
+        if (!Request.Headers.TryGetValue("X-API-VERSION", out var apiVersion) || string.IsNullOrWhiteSpace(apiVersion))
+            return Unauthorized(new { error = "HFW: X-API-VERSION missing" });
+
+        var raw = $"GET|{pathAndQuery}|{timestamp}|";
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
+        var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+
+        if (!CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(expected),
+                Encoding.UTF8.GetBytes(incoming.ToString())))
+            return Unauthorized(new { error = "HFW: Signature mismatch" });
 
         return null;
     }
@@ -556,7 +454,6 @@ public sealed class TransApiController : ControllerBase
         return (all.Skip((page - 1) * pageSize).Take(pageSize).ToList(), all.Count);
     }
 
-    // DTOs
     public sealed class OfficeDto
     {
         [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
@@ -568,17 +465,17 @@ public sealed class TransApiController : ControllerBase
         [JsonPropertyName("gram_panchayat_name")] public string? gram_panchayat_name { get; set; }
         [JsonPropertyName("ward_name")]          public string? ward_name          { get; set; }
         [JsonPropertyName("parent_office_name")] public string? parent_office_name { get; set; }
+        [JsonPropertyName("is_active")]          public bool    is_active          { get; set; } = true;
         [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode  { get; set; }
         [JsonPropertyName("jurisdiction_scope")] public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
-        [JsonPropertyName("is_active")]          public bool    is_active          { get; set; } = true;
     }
 
     public sealed class ServiceDto
     {
         [JsonPropertyName("service_name")]     public string  service_name     { get; set; } = default!;
         [JsonPropertyName("department_name")]  public string  department_name  { get; set; } = default!;
-        [JsonPropertyName("service_type")]     public string?  service_type     { get; set; }
+        [JsonPropertyName("service_type")]     public string? service_type     { get; set; }
         [JsonPropertyName("stipulated_days")]  public int?    stipulated_days  { get; set; }
         [JsonPropertyName("stipulated_text")]  public string? stipulated_text  { get; set; }
         [JsonPropertyName("stipulated_hours")] public int?    stipulated_hours { get; set; }
@@ -588,10 +485,11 @@ public sealed class TransApiController : ControllerBase
         [JsonPropertyName("appeal_hours")]     public int?    appeal_hours     { get; set; }
         [JsonPropertyName("reappeal_days")]    public int?    reappeal_days    { get; set; }
         [JsonPropertyName("reappeal_hours")]   public int?    reappeal_hours   { get; set; }
+        [JsonPropertyName("is_active")]        public bool    is_active        { get; set; } = true;
         [JsonPropertyName("jurisdiction_mode")]  public string? jurisdiction_mode  { get; set; }
         [JsonPropertyName("jurisdiction_scope")] public string? jurisdiction_scope { get; set; }
         [JsonPropertyName("jurisdiction_groups")] [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public List<JurisdictionGroupDto>? jurisdiction_groups { get; set; }
-        [JsonPropertyName("is_active")]        public bool    is_active               { get; set; } = true;
+        [JsonPropertyName("beyond_department_days")]   [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] public int?  beyond_department_days  { get; set; }
         [JsonPropertyName("has_external_dependency")] public bool   has_external_dependency { get; set; } = false;
     }
 
@@ -646,9 +544,7 @@ public sealed class TransApiController : ControllerBase
             };
 
             var raw = JsonSerializer.Serialize(without, JsonHelpers.WithoutNulls);
-            var checksum = JsonHelpers.Base64Sha256(raw);
-
-            without.checksum = checksum;
+            without.checksum = JsonHelpers.Base64Sha256(raw);
             return without;
         }
     }

@@ -1,4 +1,4 @@
-﻿// =============================================================================
+// =============================================================================
 // FILE:      MockApiController.cs
 // PROJECT:   MockExternalApi
 // =============================================================================
@@ -1279,64 +1279,6 @@ namespace MockExternalApi.Controllers
             _  => $"Applicant {i}"
         };
 
-
-        // Generic Acknowledgement Verification for Mock APIs
-        [HttpGet("/mock-api/acknowledgement/verify")]
-        [HttpGet("/mock-api/{departmentCode}/acknowledgement/verify")]
-        [HttpGet("/{departmentCode}/acknowledgement/verify")]
-        public IActionResult VerifyAcknowledgementGeneric(
-            [FromRoute] string? departmentCode,
-            [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
-            [FromQuery(Name = "application_no")] string? applicationNo,
-            [FromQuery(Name = "applid")] string? applid,
-            [FromQuery(Name = "date_of_birth")] string? dateOfBirth,
-            [FromQuery(Name = "dob")] string? dob,
-            [FromQuery(Name = "service_name")] string? serviceName)
-        {
-            var targetNo = (acknowledgementNo ?? applicationNo ?? applid)?.Trim() ?? "MOCK-ACK-001";
-            var targetDob = (dateOfBirth ?? dob)?.Trim() ?? "1990-01-01";
-            var dept = (departmentCode ?? "MOCK").ToUpperInvariant();
-
-            var record = new
-            {
-                acknowledgement_no = targetNo,
-                application_no = targetNo.StartsWith("APP/") ? targetNo : $"APP/{dept}/{targetNo}",
-                application_number = targetNo.StartsWith("APP/") ? targetNo : $"APP/{dept}/{targetNo}",
-                applicant_name = "Sample Applicant",
-                service_name = serviceName ?? $"{dept} Standard Service",
-                service_code = 1,
-                office_name = $"{dept} State Office",
-                office_code = $"OFF-{dept}-001",
-                official_email = $"officer1.{dept.ToLowerInvariant()}@wb.gov.in",
-                officer_email = $"officer1.{dept.ToLowerInvariant()}@wb.gov.in",
-                user_id = $"officer1.{dept.ToLowerInvariant()}@wb.gov.in",
-                department_name = $"{dept} Department",
-                department_code = dept,
-                present_status = "IN_PROGRESS",
-                applied_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                assign_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                assigned_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                pending_with_designation = $"{dept} Officer",
-                officer_name = "Demo Officer",
-                number_of_days_beyond_department_scope = 0
-            };
-
-            return Ok(new
-            {
-                success = true,
-                message = "Acknowledgement verified",
-                data = record,
-                status = new
-                {
-                    success = true,
-                    error = "1",
-                    msg = "Acknowledgement verified",
-                    payload_id = $"P-{dept}-ACK-VERIFY-{DateTime.UtcNow:yyyyMMddHH}",
-                    data = new[] { record }
-                }
-            });
-        }
-
         private record OfficeRef(
             string Code, int LevelId, string Name, string DistrictName);
 
@@ -1422,18 +1364,13 @@ namespace MockExternalApi.Controllers
     {
         [JsonPropertyName("acknowledgement_no")] public string  acknowledgement_no { get; set; } = default!;
         [JsonPropertyName("application_no")]     public string? application_no     { get; set; }
-        [JsonPropertyName("application_number")] public string? application_number { get; set; }
         [JsonPropertyName("applicant_name")]     public string  applicant_name     { get; set; } = default!;
         [JsonPropertyName("applicant_mobile")]   public string? applicant_mobile   { get; set; }
         [JsonPropertyName("applicant_email")]    public string? applicant_email    { get; set; }
         [JsonPropertyName("service_name")]       public string  service_name       { get; set; } = default!;
-        [JsonPropertyName("service_code")]       public int     service_code       { get; set; } = 1;
         [JsonPropertyName("office_name")]        public string  office_name        { get; set; } = default!;
-        [JsonPropertyName("office_code")]        public string  office_code        { get; set; } = "MOCK_OFF_001";
         [JsonPropertyName("official_email")]     public string? official_email     { get; set; }
-        [JsonPropertyName("officer_email")]      public string? officer_email      { get; set; }
         [JsonPropertyName("department_code")]    public string  department_code    { get; set; } = default!;
-        [JsonPropertyName("department_name")]    public string? department_name    { get; set; }
         [JsonPropertyName("present_status")]     public string  present_status     { get; set; } = default!;
         [JsonPropertyName("applied_date")]       public string? applied_date       { get; set; }
         [JsonPropertyName("last_updated_date")]  public string? last_updated_date  { get; set; }

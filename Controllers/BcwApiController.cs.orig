@@ -1,8 +1,8 @@
 // =============================================================================
 // FILE:      BcwApiController.cs
 // DEPT:      BCW (Backward Classes Welfare, West Bengal)
-// AUTH:      HMAC / API_KEY (X-API-KEY + optional HMAC headers)
-// FLOW:      NAME-BASED — RTPS resolves codes from names (uses_name_mapping=true)
+// AUTH:      HMAC  (X-API-KEY + X-TIMESTAMP + X-HMAC-SIGNATURE + X-API-VERSION)
+// FLOW:      NAME-BASED  — RTPS resolves codes from names (uses_name_mapping=true)
 // BASE PATH: /bcw
 // =============================================================================
 
@@ -48,7 +48,7 @@ public sealed class BcwApiController : ControllerBase
             is_active = true 
         },
         new() {
-            office_name = "Bankura Sub-division Office",
+            office_name = "BCW District Office Bankura",
             department_name = "Backward Classes Welfare Department",
             office_level = "DISTRICT",
             district_name = "Bankura",
@@ -122,12 +122,12 @@ public sealed class BcwApiController : ControllerBase
             is_active = true 
         },
         new() {
-            official_email = "sdosadarbankura@gmail.com",
-            full_name = "PROLAY MONDAL",
+            official_email = "dwo.bankura.bcw@wb.gov.in",
+            full_name = "Ritabrata Saha",
             mobile_no = "9800000002",
-            designation = "Sub-divisional Officer",
+            designation = "District Welfare Officer",
             role_key = "DESIGNATED_OFFICER",
-            office_name = "Bankura Sub-division Office",
+            office_name = "BCW District Office Bankura",
             department_name = "Backward Classes Welfare Department",
             is_active = true 
         },
@@ -148,9 +148,9 @@ public sealed class BcwApiController : ControllerBase
         new() {
             acknowledgement_no = "BCW/2026/10001",
             application_no = "APP/BCW/2026/101",
-            service_name = "Issuance of Caste Certificate (SC/ST/OBC)",
-            office_name = "Bankura Sub-division Office",
-            official_email = "sdosadarbankura@gmail.com",
+            service_name = "OBC Certificate Issuance",
+            office_name = "BCW District Office Bankura",
+            official_email = "dwo.bankura.bcw@wb.gov.in",
             department_name = "Backward Classes Welfare Department",
             applicant_name = "Ratan Bauri",
             date_of_birth = "1989-05-11",
@@ -198,7 +198,7 @@ public sealed class BcwApiController : ControllerBase
     [HttpGet("offices")]
     public IActionResult GetOffices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Offices, page, page_size);
@@ -209,7 +209,7 @@ public sealed class BcwApiController : ControllerBase
     [HttpGet("services")]
     public IActionResult GetServices([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var (paged, total) = Paginate(Services, page, page_size);
@@ -220,7 +220,7 @@ public sealed class BcwApiController : ControllerBase
     [HttpGet("officers")]
     public IActionResult GetOfficers([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Officers.Select(o => new
@@ -243,29 +243,25 @@ public sealed class BcwApiController : ControllerBase
     [HttpGet("acknowledgements")]
     public IActionResult GetAcknowledgements([FromQuery] int page = 1, [FromQuery] int page_size = 100)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
         var projected = Acknowledgements.Select(a => new
         {
             acknowledgement_no = a.acknowledgement_no,
             application_no = a.application_no,
-            application_number = a.application_no ?? a.acknowledgement_no,
             applicant_name = a.applicant_name,
             applicant_mobile = a.applicant_mobile,
             applicant_email = a.applicant_email,
             service_name = a.service_name,
-            service_code = 1,
             office_name = a.office_name,
-            office_code = "BCW_OFFICE_01",
             officer_email = a.official_email,
             official_email = a.official_email,
             department_name = a.department_name,
-            department_code = "BCW",
             present_status = NormalizeStatus(a.present_status),
             applied_date = a.applied_date,
             last_updated_date = a.last_updated_date,
-            number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
+            NumberOfDaysBeyondDepartmentScope = a.NumberOfDaysBeyondDepartmentScope
         }).Select(x => (object)x).ToList();
 
         var (paged, total) = Paginate(projected, page, page_size);
@@ -274,117 +270,85 @@ public sealed class BcwApiController : ControllerBase
     }
 
     [HttpGet("acknowledgement/verify")]
-    [HttpGet("/wb/bcwd/wbrtps_ack/wbrtps_ack")]
-    [HttpGet("/bcw/acknowledgement/verify")]
     public IActionResult VerifyAcknowledgement(
         [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
-        [FromQuery(Name = "application_no")] string? applicationNo,
-        [FromQuery(Name = "applid")] string? applid,
-        [FromQuery(Name = "date_of_birth")] string? dateOfBirth,
-        [FromQuery(Name = "dob")] string? dob,
-        [FromQuery(Name = "service_name")] string? serviceName)
+        [FromQuery(Name = "date_of_birth")] string? dateOfBirth)
     {
-        var auth = ValidateAuth();
+        var auth = ValidateHmac();
         if (auth != null) return auth;
 
-        var targetNo = (acknowledgementNo ?? applicationNo ?? applid)?.Trim();
-        var targetDob = (dateOfBirth ?? dob)?.Trim();
-
-        if (string.IsNullOrWhiteSpace(targetNo))
+        if (string.IsNullOrWhiteSpace(acknowledgementNo) ||
+            string.IsNullOrWhiteSpace(dateOfBirth) ||
+            !DateOnly.TryParseExact(dateOfBirth, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
         {
             return Ok(new
             {
                 success = false,
                 error_code = "VALIDATION_INVALID_FIELD_VALUE",
-                error_message = "acknowledgement_no, application_no, or applid must be supplied"
+                error_message = "acknowledgement_no and date_of_birth must be supplied; date_of_birth must be in YYYY-MM-DD format"
             });
         }
 
         var match = Acknowledgements.FirstOrDefault(a =>
-            string.Equals(a.acknowledgement_no, targetNo, StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(a.application_no, targetNo, StringComparison.OrdinalIgnoreCase));
+            string.Equals(a.acknowledgement_no, acknowledgementNo.Trim(), StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(a.date_of_birth, dateOfBirth.Trim(), StringComparison.Ordinal));
 
-        // If not statically found, generate a dynamic mock record for flexible integration testing
         if (match == null)
         {
-            _logger.LogInformation("[BCW] Verify: generating dynamic mock for {TargetNo}", targetNo);
-            match = new BcwAcknowledgementDto
+            _logger.LogInformation("[BCW] GET /bcw/acknowledgement/verify -> no match");
+            return Ok(new
             {
-                acknowledgement_no = targetNo,
-                application_no = targetNo.StartsWith("APP/") ? targetNo : $"APP/{targetNo}",
-                service_name = !string.IsNullOrWhiteSpace(serviceName) ? serviceName : "Issuance of Caste Certificate (SC/ST/OBC)",
-                office_name = "Bankura Sub-division Office",
-                official_email = "sdosadarbankura@gmail.com",
-                department_name = "Backward Classes Welfare Department",
-                applicant_name = "Sample Applicant",
-                date_of_birth = !string.IsNullOrWhiteSpace(targetDob) ? targetDob : "1990-01-01",
-                applicant_mobile = "9400500001",
-                applicant_email = "applicant@example.com",
-                present_status = "IN_PROGRESS",
-                applied_date = DateTime.UtcNow.AddDays(-10).ToString("yyyy-MM-dd"),
-                last_updated_date = DateTime.UtcNow.ToString("yyyy-MM-dd"),
-                NumberOfDaysBeyondDepartmentScope = 0
-            };
+                success = false,
+                message = "No matching acknowledgement found for the supplied details",
+                data = (object?)null
+            });
         }
 
-        var verifyRecord = ToVerifyRecord(match);
-        _logger.LogInformation("[BCW] GET acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
-
+        _logger.LogInformation("[BCW] GET /bcw/acknowledgement/verify -> matched AckNo={AckNo}", match.acknowledgement_no);
         return Ok(new
         {
             success = true,
             message = "Acknowledgement verified",
-            data = verifyRecord,
-            status = new
-            {
-                success = true,
-                error = "1",
-                msg = "Acknowledgement verified",
-                payload_id = PayloadId("ACK-VERIFY"),
-                data = new[] { verifyRecord }
-            }
+            data = ToVerifyRecord(match)
         });
     }
 
-    private IActionResult? ValidateAuth()
+    private IActionResult? ValidateHmac()
     {
         var pathAndQuery = Request.Path + Request.QueryString;
-        var hasApiKey = Request.Headers.TryGetValue("X-API-KEY", out var apiKey);
 
-        // If HMAC signature is present, validate HMAC
-        if (Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) && !string.IsNullOrWhiteSpace(incoming))
-        {
-            if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
-                return Unauthorized(new { error = "BCW: X-TIMESTAMP missing" });
+        if (!Request.Headers.TryGetValue("X-API-KEY", out var apiKey) || apiKey != _apiKey)
+            return Unauthorized(new { error = "BCW: Invalid or missing X-API-KEY" });
 
-            if (!DateTime.TryParseExact(
-                    timestamp.ToString(),
-                    TimestampFormat,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
-                    out var parsedTimestamp))
-                return Unauthorized(new { error = "BCW: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
+        if (!Request.Headers.TryGetValue("X-TIMESTAMP", out var timestamp) || string.IsNullOrWhiteSpace(timestamp))
+            return Unauthorized(new { error = "BCW: X-TIMESTAMP missing" });
 
-            var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
-            if (skewMinutes > _toleranceMinutes)
-                return StatusCode(403, new { error = "BCW: Timestamp expired" });
+        if (!DateTime.TryParseExact(
+                timestamp.ToString(),
+                TimestampFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal,
+                out var parsedTimestamp))
+            return Unauthorized(new { error = "BCW: Invalid X-TIMESTAMP format (expected UTC 'Z')" });
 
-            var raw = $"GET|{pathAndQuery}|{timestamp}|";
-            using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
-            var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+        var skewMinutes = Math.Abs((DateTime.UtcNow - parsedTimestamp.ToUniversalTime()).TotalMinutes);
+        if (skewMinutes > _toleranceMinutes)
+            return StatusCode(403, new { error = "BCW: Timestamp expired" });
 
-            if (!CryptographicOperations.FixedTimeEquals(
-                    Encoding.UTF8.GetBytes(expected),
-                    Encoding.UTF8.GetBytes(incoming.ToString())))
-                return Unauthorized(new { error = "BCW: Signature mismatch" });
-        }
-        else if (hasApiKey)
-        {
-            if (apiKey != _apiKey && apiKey != "rtps-demo-key-001" && apiKey != "test-api-key")
-            {
-                _logger.LogWarning("[BCW] API Key provided but does not match default keys: {Key}", (object)apiKey.ToString());
-            }
-        }
+        if (!Request.Headers.TryGetValue("X-HMAC-SIGNATURE", out var incoming) || string.IsNullOrWhiteSpace(incoming))
+            return Unauthorized(new { error = "BCW: X-HMAC-SIGNATURE missing" });
+
+        if (!Request.Headers.TryGetValue("X-API-VERSION", out var apiVersion) || string.IsNullOrWhiteSpace(apiVersion))
+            return Unauthorized(new { error = "BCW: X-API-VERSION missing" });
+
+        var raw = $"GET|{pathAndQuery}|{timestamp}|";
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(_hmacSecret));
+        var expected = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(raw)));
+
+        if (!CryptographicOperations.FixedTimeEquals(
+                Encoding.UTF8.GetBytes(expected),
+                Encoding.UTF8.GetBytes(incoming.ToString())))
+            return Unauthorized(new { error = "BCW: Signature mismatch" });
 
         return null;
     }
@@ -484,26 +448,17 @@ public sealed class BcwApiController : ControllerBase
     private static object ToVerifyRecord(BcwAcknowledgementDto a) => new
     {
         acknowledgement_no = a.acknowledgement_no,
-        application_no = a.application_no ?? a.acknowledgement_no,
-        application_number = a.application_no ?? a.acknowledgement_no,
-        applicant_name = a.applicant_name ?? "Sample Applicant",
+        application_no = a.application_no,
+        applicant_name = a.applicant_name,
         service_name = a.service_name,
-        service_code = 1,
         office_name = a.office_name,
-        office_code = a.office_name == "Bankura Sub-division Office" ? "OFF-DBFFD2BEC8AB" : "BCW_OFFICE_01",
-        official_email = a.official_email ?? "sdosadarbankura@gmail.com",
-        officer_email = a.official_email ?? "sdosadarbankura@gmail.com",
-        user_id = a.official_email ?? "sdosadarbankura@gmail.com",
+        official_email = a.official_email,
         department_name = a.department_name,
-        department_code = "BCW",
         present_status = NormalizeStatus(a.present_status),
-        applied_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assign_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        assigned_date = a.applied_date ?? DateTime.UtcNow.ToString("yyyy-MM-dd"),
-        pending_with_designation = a.office_name,
+        applied_date = a.applied_date,
         officer_name = Officers.FirstOrDefault(o =>
-            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name ?? "BCW Officer",
-        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope ?? 0
+            string.Equals(o.official_email, a.official_email, StringComparison.OrdinalIgnoreCase))?.full_name,
+        number_of_days_beyond_department_scope = a.NumberOfDaysBeyondDepartmentScope
     };
 
     private sealed class ApiEnvelope<T>
