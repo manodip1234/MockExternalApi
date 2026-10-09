@@ -157,9 +157,9 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500001",
             applicant_email = "ratan.b@example.com",
             present_status = "RESOLVED",
-            applied_date = "2026-04-01",
+            applied_date = "2026-08-20",
             last_updated_date = "2026-04-20",
-            NumberOfDaysBeyondDepartmentScope = 5 
+            NumberOfDaysBeyondDepartmentScope = 15 
         },
         new() {
             acknowledgement_no = "BCW/2026/10002",
@@ -173,9 +173,9 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500002",
             applicant_email = "farida.k@example.com",
             present_status = "IN_PROGRESS",
-            applied_date = "2026-04-10",
+            applied_date = "2026-08-20",
             last_updated_date = "2026-04-22",
-            NumberOfDaysBeyondDepartmentScope = null 
+            NumberOfDaysBeyondDepartmentScope = 35 
         },
         new() {
             acknowledgement_no = "BCW/2026/10003",
@@ -189,9 +189,9 @@ public sealed class BcwApiController : ControllerBase
             applicant_mobile = "9400500003",
             applicant_email = "subhash.m@example.com",
             present_status = "PENDING",
-            applied_date = "2026-04-15",
+            applied_date = "2026-08-20",
             last_updated_date = "2026-04-25",
-            NumberOfDaysBeyondDepartmentScope = 1 
+            NumberOfDaysBeyondDepartmentScope = 15 
         },
     ];
 
@@ -275,7 +275,6 @@ public sealed class BcwApiController : ControllerBase
 
     [HttpGet("acknowledgement/verify")]
     [HttpGet("/wb/bcwd/wbrtps_ack/wbrtps_ack")]
-    [HttpGet("/bcw/acknowledgement/verify")]
     public IActionResult VerifyAcknowledgement(
         [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,
         [FromQuery(Name = "application_no")] string? applicationNo,

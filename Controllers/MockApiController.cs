@@ -1283,7 +1283,6 @@ namespace MockExternalApi.Controllers
         // Generic Acknowledgement Verification for Mock APIs
         [HttpGet("/mock-api/acknowledgement/verify")]
         [HttpGet("/mock-api/{departmentCode}/acknowledgement/verify")]
-        [HttpGet("/{departmentCode}/acknowledgement/verify")]
         public IActionResult VerifyAcknowledgementGeneric(
             [FromRoute] string? departmentCode,
             [FromQuery(Name = "acknowledgement_no")] string? acknowledgementNo,

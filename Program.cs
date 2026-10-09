@@ -5,7 +5,12 @@ builder.Logging.AddConsole();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    // Several legacy aliases resolve to the same HTTP method and path.
+    // Swagger can publish only one operation for each method/path pair.
+    options.ResolveConflictingActions(actions => actions.First());
+});
 
 var app = builder.Build();
 
